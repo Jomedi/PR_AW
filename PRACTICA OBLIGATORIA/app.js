@@ -92,15 +92,41 @@ app.post("/login", function(request, response) {
 });
 
 app.get("/index", function(request, response) {
-    daoU.getUserImageName(request.session.currentUser, function(err, result) {
+    daoU.getUserImageName(request.session.currentUser, function(err, result) { // sustituir por un get avisos
         if (err)
             console.log("Se ha producido un error al cargar la imagen del usuario");
         else {
-            console.log("Se ha leído la imagen del usuario con éxito");
-            response.render("user", { image: result, email: request.session.currentUser }); //{result: es la imagen que le pasas a image de la base de datos}
+            console.log("Se ha leído la imagen del usuario con éxito", result);
+            response.render("index", { image: result, email: request.session.currentUser }); //{result: es la imagen que le pasas a image de la base de datos}
         }
     });
 });
+
+const viewLogin = function(request, response, next) {
+    if (!request.session.currentUser) {
+        response.redirect("login");
+    } else {
+        response.locals.userEmail = request.session.currentUser;
+        next();
+    }
+}
+
+app.get("/imagenUsuario", viewLogin, function(request, response) {
+    let urlImg;
+    daoU.getUserImageName(request.session.currentUser, function(err, result) {
+        if (err) {
+            console.log("Error al obtener la imagen de usuario");
+        } else if (!result || result === "") {
+            urlImg = path.join(__dirname, "public/img/", "NoPerfil.jpg");
+            response.sendFile(urlImg);
+        } else {
+            urlImg = path.join(__dirname, "public/img/", result);
+            response.sendFile(urlImg);
+        }
+    });
+});
+
+
 
 //-------------------------------------------------------------------------------------manejador para index.ejs y indexAdmin.ejs
 
