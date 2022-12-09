@@ -7,6 +7,25 @@ class DAOUsers {
         this.pool = pool;
     }
 
+    //INSERTAR USUARIO
+    insertUser(nombre, email, password, callback) {
+        this.pool.getConnection(function(err, connection) {
+            if (err) {
+                callback(new Error("Error de conexión a la base de datos"));
+            } else {
+                connection.query("INSERT INTO ucm_aw_cau_usu_usuarios(nombre, email, password) VALUES(?,?,?)", [nombre, email, password],
+                    function(err) {
+                        connection.release();
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"));
+                        } else {
+                            callback(null);
+                        }
+                    });
+            }
+        });
+    }
+
     //USUARIO Y CONTRASEÑA CORRECTOS
     isUserCorrect(email, password, callback) {
         this.pool.getConnection(function(err, connection) {
