@@ -91,6 +91,22 @@ app.post("/login", function(request, response) {
     });
 });
 
+app.get("/logout", function (request, response) {
+    response.status(200);
+    request.session.destroy();
+    response.redirect("login");
+  });
+
+const viewLogin = function(request, response, next) {
+    if (!request.session.currentUser) {
+        response.redirect("login");
+    } else {
+        response.locals.userEmail = request.session.currentUser;
+        next();
+    }
+}
+
+//-------------------------------------------------------------------------------------manejador para index.ejs y indexAdmin.ejs
 
 app.get("/index", function(request, response) {
     daoU.getUserImageName(request.session.currentUser, function(err, result) { // sustituir por un get avisos
@@ -104,27 +120,23 @@ app.get("/index", function(request, response) {
 }); //{result: es la imagen que le pasas a image de la base de datos}
 
 app.post("/sign-in", function(request, response) {
-    console.log(request.body.nombre, request.body.email, request.body.password)
-    daoU.insertUser(request.body.nombre, request.body.email, request.body.password, function(err, ok) {
-        if (err) {
-            console.log("Se ha producido un error al insertar el usuario");
-        } else {
-            console.log("Se ha insertado el usuario con exito");
-            response.redirect("login");
-
-        }
-    });
+    console.log(request.body.nombre, request.body.email, request.body.password, request.body.tipo);
+    if(request.body.password != request.body.passwordConfirm){
+        console.log("Contraseñas diferentes");
+    }else{
+        daoU.insertUser(request.body.nombre, request.body.email, request.body.password, request.body.tipo, function(err, ok) {
+            if (err) {
+                console.log("Se ha producido un error al insertar el usuario");
+            } else {
+                console.log("Se ha insertado el usuario con exito");
+                response.redirect("login");
+    
+            }
+        });
+    }
+    
 });
 
-
-const viewLogin = function(request, response, next) {
-    if (!request.session.currentUser) {
-        response.redirect("login");
-    } else {
-        response.locals.userEmail = request.session.currentUser;
-        next();
-    }
-}
 
 app.get("/imagenUsuario", viewLogin, function(request, response) {
     let urlImg;
@@ -141,16 +153,6 @@ app.get("/imagenUsuario", viewLogin, function(request, response) {
     });
 });
 
-//-------------------------------------------------------------------------------------manejador para index.ejs y indexAdmin.ejs
-
-// app.get("/index", function(request, response) {
-//     response.status(200);
-//     response.redirect("index");
-// });
 
 
-//   app.get("/logout", function (request, response) {
-//     response.status(200);
-//     request.session.destroy();
-//     response.redirect("login");
-//   });
+  
