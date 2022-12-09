@@ -81,7 +81,7 @@ app.post("/login", function(request, response) {
             });
         } else if (ok) {
             request.session.currentUser = request.body.email;
-            response.redirect("login");
+            response.redirect("index");
         } else {
             response.status(200);
             response.render("login", {
