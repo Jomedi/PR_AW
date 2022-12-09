@@ -91,16 +91,28 @@ app.post("/login", function(request, response) {
     });
 });
 
-app.get("/index", function(request, response) {
-    daoU.getUserImageName(request.session.currentUser, function(err, result) {
-        if (err)
-            console.log("Se ha producido un error al cargar la imagen del usuario");
-        else {
-            console.log("Se ha leído la imagen del usuario con éxito");
-            response.render("user", { image: result, email: request.session.currentUser }); //{result: es la imagen que le pasas a image de la base de datos}
+app.post("/sign-in", function(request, response){
+    console.log(request.body.nombre, request.body.email, request.body.password)
+    daoU.insertUser(request.body.nombre, request.body.email, request.body.password, function(err,ok) {
+        if(err){
+            console.log("Se ha producido un error al insertar el usuario");
+        } else {
+            console.log("Se ha insertado el usuario con exito");
+            response.redirect("login"); 
         }
     });
 });
+
+// app.get("/index", function(request, response) {
+//     daoU.getUserImageName(request.session.currentUser, function(err, result) {
+//         if (err)
+//             console.log("Se ha producido un error al cargar la imagen del usuario");
+//         else {
+//             console.log("Se ha leído la imagen del usuario con éxito");
+//             response.render("user", { image: result, email: request.session.currentUser }); //{result: es la imagen que le pasas a image de la base de datos}
+//         }
+//     });
+// });
 
 //-------------------------------------------------------------------------------------manejador para index.ejs y indexAdmin.ejs
 

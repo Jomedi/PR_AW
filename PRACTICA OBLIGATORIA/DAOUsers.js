@@ -32,6 +32,26 @@ class DAOUsers {
         });
     }
 
+    //INSERTAR USUARIO
+    insertUser(nombre, email, password, callback) {
+		this.pool.getConnection(function (err, connection) {
+			if (err) {
+				callback(new Error("Error de conexión a la base de datos"));
+			} else {
+				connection.query("INSERT INTO ucm_aw_cau_usu_usuarios(nombre, email, password) VALUES(?,?,?)", 
+                [nombre, email, password], 
+                function (err) {
+					connection.release();
+					if(err){
+						callback(new Error("Error de acceso a la base de datos"));
+                    }else{
+                        callback(null);
+                    }
+				});
+			}
+		});
+	}
+
     //IMAGEN DE PERFIN DE USUARIO
     //obtiene el nombre de fichero que contiene la imagen de perfil de un usuario cuyo identificador en la base de datos es email.
     getUserImageName(email, callback) {

@@ -65,7 +65,7 @@
         
 
         <div class="tab-content" id="myTabContent">
-          <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+          <div class="tab-pane fade " id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
             <form action="/login" method="POST">
               <div class="offset-1 offset-sm-2 offset-lg-3 offset-xl-4 col-10 col-sm-8 col-lg-6 col-xl-4 colorBlanco" id="contenido">
                 <div class="row padngFila">
@@ -109,22 +109,22 @@
               </div>
             </form>
           </div>
-          <div class="tab-pane fade " id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+          <div class="tab-pane fade show active" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
             <div class="offset-1 offset-sm-1 offset-lg-3 offset-xl-2 col-10 col-sm-10 col-lg-6 col-xl-8 colorBlanco" id="contenido">
               <form action="/sign-in" method="POST" class="row g-3">
                 <div class="col-md-6">
                   <label for="inputEmail4" class="form-label">Email</label>
                   <div class="input-group">
-                    <input type="email" class="form-control item"><span class="input-group-text" id="basic-addon1">@ucm.es</span>
+                    <input type="email" name="email" class="form-control item"><span class="input-group-text" id="basic-addon1">@ucm.es</span>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <label for="inputAddress" class="form-label">Nombre</label>
-                  <input type="text" class="form-control" id="inputAddress">
+                  <input type="text" name="nombre" class="form-control" id="inputAddress">
                 </div>
                 <div class="col-md-6">
                   <label for="inputPassword4" class="form-label">Contraseña</label>
-                  <input type="password" class="form-control" id="inputPassword4">
+                  <input type="password" name="password" class="form-control" id="inputPassword4">
                 </div>
                 <div class="col-md-6">
                   <label for="inputPassword4" class="form-label">Confirmar contraseña</label>
@@ -150,7 +150,7 @@
                 </div>
                 <div class="mb-3">
                   <label for="formFile" class="form-label">Imagen de perfil</label>
-                  <input class="form-control" type="file" id="formFile">
+                  <input name="imagen" class="form-control" type="file" id="formFile">
                 </div>
               
                 <div class="col-12 d-grid">
