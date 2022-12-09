@@ -1,0 +1,49 @@
+#bodyy{
+    background-color: gainsboro;
+}
+#logoUcm{
+    border: 0;
+    width: 4.5em;
+}
+
+.container{
+    margin-top: 3em;
+    margin-bottom: 3em;
+}
+
+.textoCentrado{
+    text-align: center;
+}
+
+#boxContenido{
+    margin-top: 5em;
+    margin-bottom: 2em;
+}
+#contenido{
+    padding-top: 1.25em;
+    padding-bottom: 1.25em;
+    padding-left: 2em;
+    padding-right: 2em;
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+}
+
+.contenidoAvisos{
+    padding-top: 1.25em;
+    padding-bottom: 1.25em;
+}
+
+.colorBlanco{
+    background-color: white;
+}
+
+.padngFila{
+    padding-top: 0.75em;
+    padding-bottom: 0.75em;
+}
+
+
+
+
+
+

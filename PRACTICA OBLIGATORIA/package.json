@@ -1,0 +1,19 @@
+{
+  "name": "practica-obligatoria",
+  "version": "1.0.0",
+  "description": "Practica Obligatoria de la Asignatura AW de la UCM",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jorge Medina Carretero y Daniela Valera Fuentes",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "express-mysql-session": "^2.1.8",
+    "express-session": "^1.17.3",
+    "mysql": "^2.18.1"
+  }
+}

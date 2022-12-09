@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pagina Principal - Admin</title>
+    <link rel="stylesheet" href="css/estilos.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
+      integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+    />
+  </head>
+  <body id="bodyy">
+    <div class="container">
+        <div class="row" >
+            <nav class=" navbar navbar-dark bg-danger fixed-top">
+                <div class="container-fluid">
+                    <a href="/"><img src="img/logoUcm.png" alt="Logo de la UCM" id="logoUcm"></a>
+                    <span class="navbar-text">
+                        <h2>UCM - CAU</h2>
+                Centro de atención al usuario
+                    </span>
+                    <div>
+                        <img src="img/steve.jpg" class="img-thumbnail"  width="35"alt="foto de perfil"/>
+                        <span id="labelident" class="navbar-text">email</span>
+                        <a href="/logout" class="btn btn-sm btn-outline-light" data-title="desconectar"><i class="bi bi-box-arrow-right"></i></a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <div class="row colorBlanco" id="boxContenido">
+            <div class="row">
+                <div class="col-5 contenidoAvisos">
+                    <form class="d-flex" role="search">
+                      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                      <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+            <div class="row contenidoAvisos">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                      <button class="nav-link active" id="nav-avisosEntr-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Avisos entrantes</button>
+                      <button class="nav-link" id="nav-misAvisos-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Mis Avisos</button>
+                      <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Histórico de avisos</button>
+                      <button class="nav-link" id="nav-disabled-tab" data-bs-toggle="tab" data-bs-target="#nav-disabled" type="button" role="tab" aria-controls="nav-disabled" aria-selected="false">Gestión de usuarios</button>
+                    </div>
+                  </nav>
+                  <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-avisosEntr-tab" tabindex="0">
+                        <br>
+                        <table class="table">
+                            <thead class="table-warning">
+                              <tr>
+                                <th scope="col">Tipo</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Texto</th>
+                                <th scope="col">Acciones</th>
+                              </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                              <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>
+                                  <i class="bi bi-arrow-left-square" data-bs-toggle="modal" data-bs-target="#modalAsignacion"></i>
+                                  <i class="bi bi-trash-fill" data-bs-toggle="modal" data-bs-target="#modalEliminarAviso"></i>
+                                </td>
+                              </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        
+                        
+                    </div>
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-misAvisos-tab" tabindex="0">
+                        <br>
+                        <table class="table">
+                            <thead class="table-success">
+                              <tr>
+                                <th scope="col">Tipo</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Texto</th>
+                                <th scope="col">Acciones</th>
+                              </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                              <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>
+                                  <i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="#modalVisualizacion"></i>
+                                  <i class="bi bi-trash-fill"></i>
+                                </td>
+                              </tr>
+                              
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
+                        <br>
+                        <table class="table">
+                            <thead class="table-secondary">
+                              <tr>
+                                <th scope="col">Tipo</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Texto</th>
+                                <th scope="col">Acciones</th>
+                              </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                              <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td><i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="#modalVisualizacionCERRARADMIN"></i></td>
+                              </tr>
+                              
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">
+                        <br>
+                        <table class="table">
+                            <thead class="table-info">
+                              <tr>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Rol</th>
+                                <th scope="col">Acciones</th>
+                              </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                              <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td><i class="bi bi-trash-fill"></i></td>
+                              </tr>
+                              
+                            </tbody>
+                        </table>
+                    </div>
+                  </div>
+            </div>
+        </div>
+
+        
+<!-- Modal -->
+<div class="modal fade" id="modalVisualizacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Aviso NºXAVISO: Sugerencia</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h4>Nombre Usuario</h4>
+        <h6>Fecha: </h6>
+        <h6>Comunicaciones: </h6>
+        <h6>Perfil: </h6>
+        <br>
+        <h6>Observaciones: </h6>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <br>
+        <h6>Comentarios del Técnico: </h6>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      </div>         
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Terminar Aviso</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalAsignacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Aviso NºXAVISO: Sugerencia</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h4>Nombre Usuario</h4>
+        <h6>Fecha: </h6>
+        <h6>Comunicaciones: </h6>
+        <h6>Perfil: </h6>
+        <br>
+        <h6>Observaciones: </h6>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <br><h6>Técnico asignado: </h6>
+        <select class="form-select" aria-label="Default select example">
+          <option selected>Seleccione un técnico</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Asignar Técnico</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalEliminarAviso" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Aviso NºXAVISO: Sugerencia</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h4>Nombre Usuario</h4>
+        <h6>Fecha: </h6>
+        <h6>Comunicaciones: </h6>
+        <h6>Perfil: </h6>
+        <br>
+        <h6>Observaciones: </h6>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <br>
+        <h6>Comentarios del Técnico: </h6>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Eliminar Aviso</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal -->
+<div class="modal fade" id="modalVisualizacionCERRAR" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Aviso NºXAVISO: Sugerencia</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h4>Nombre Usuario</h4>
+        <h6>Fecha: </h6>
+        <h6>Comunicaciones: </h6>
+        <h6>Perfil: </h6>
+        <br>
+        <h6>Observaciones: </h6>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <br>
+        <h6>Comentarios del Técnico: </h6>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      </div>         
+      <div class="modal-footer">
+        </div>
+    </div>
+  </div>
+</div>
+
+    </div>
+  </body>
+</html>
