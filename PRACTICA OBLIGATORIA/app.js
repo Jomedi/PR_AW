@@ -87,14 +87,6 @@ app.post("/login", function(request, response) {
     });
 });
 
-
-/*
-  PRUEBA de commit versión 2 DANIELA
-
-  ssubo otra cosayijykjtkj435tjk4
-
-*/
-
 //-------------------------------------------------------------------------------------manejador para index.ejs y indexAdmin.ejs
 
 app.get("/index", function(request, response) {
