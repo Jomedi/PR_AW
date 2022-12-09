@@ -69,22 +69,27 @@ app.get("/login", function (request, response) {
     response.render("login", { errorMsg: null });
   });
   
-  app.post("/login", function (request, response) {
-    daoU.isUserCorrect(request.body.email, request.body.password, function (err, ok) {
-      if (err) {
-        response.status(500);
-        response.render("login", {errorMsg: "Se ha producido un error de acceso a la base de datos",
-        });
-      } else if (ok) {
-        request.session.currentUser = request.body.email;
-        response.redirect("login");
-      } else {
-        response.status(200);
-        response.render("login", {errorMsg: "Dirección de correo y/o contraseña no válidos",
-        });
-      }
-    });
+app.post("/login", function (request, response) {
+  daoU.isUserCorrect(request.body.email, request.body.password, function (err, ok) {
+    if (err) {
+      response.status(500);
+      response.render("login", {errorMsg: "Se ha producido un error de acceso a la base de datos",
+      });
+    } else if (ok) {
+      request.session.currentUser = request.body.email;
+      response.redirect("login");
+    } else {
+      response.status(200);
+      response.render("login", {errorMsg: "Dirección de correo y/o contraseña no válidos",
+      });
+    }
   });
+});
+
+
+/*
+  PRUEBA
+*/
 
 //-------------------------------------------------------------------------------------manejador para index.ejs y indexAdmin.ejs
 
