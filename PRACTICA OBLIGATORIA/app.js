@@ -92,6 +92,12 @@ app.post("/login", function (request, response) {
 
 
   otra pruebaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+
+  otro
+  otro
+  otro
+  
 */
 
 //-------------------------------------------------------------------------------------manejador para index.ejs y indexAdmin.ejs
