@@ -88,7 +88,7 @@ app.post("/login", function (request, response) {
 
 
 /*
-  PRUEBA
+  PRUEBA de commit DANIELA
 */
 
 //-------------------------------------------------------------------------------------manejador para index.ejs y indexAdmin.ejs
