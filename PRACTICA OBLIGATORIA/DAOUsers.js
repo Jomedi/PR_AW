@@ -1,7 +1,9 @@
 //CREANDO UN POOL SÍNCRONAMENTE
 const mysql = require("mysql");
 
-
+/*
+comentario DAOUSER
+*/
 
 class DAOUsers {
   pool;
