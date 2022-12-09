@@ -62,6 +62,10 @@ app.set("view engine", "ejs");
 // Definir el directorio de plantillas, reconocer el directorio de views
 app.set("views", path.join(__dirname, "views"));
 
+//------------------------------------------------------------------------------------para body-parser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 //-------------------------------------------------------------------------------------manejador para login y logout
 app.get("/login", function(request, response) {
     response.status(200);
