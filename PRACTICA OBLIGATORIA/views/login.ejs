@@ -81,6 +81,16 @@
                   <label for="inputPassword4" class="form-label">Confirmar contraseña</label>
                   <input type="password" name="passwordConfirm" class="form-control" >
                 </div>
+
+                <% if(errorPass){ %>
+                  <div class="row">
+                        <p class="text-danger"><%= errorPass %></p>
+                  </div>
+                  <% } else{%>
+                    <br>
+                <%}%>
+
+                
                 <div class="col-md-6">
                   <label for="inputState" class="form-label">Perfil Universitario</label>
                   <select name="tipo" id="inputState" class="form-select">
