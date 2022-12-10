@@ -42,7 +42,7 @@ class DAOUsers {
                             if (rows.length === 0)
                                 callback(null, false); //no está el usuario con el password proporcionado
                             else
-                                callback(null, true);
+                                callback(null, rows);
                         }
                     }
                 );

@@ -73,15 +73,21 @@ app.get("/login", function(request, response) {
 });
 
 app.post("/login", function(request, response) {
-    daoU.isUserCorrect(request.body.email, request.body.password, function(err, ok) {
+    daoU.isUserCorrect(request.body.email, request.body.password, function(err, row) {
         if (err) {
             response.status(500);
             response.render("login", {
                 errorMsg: "Se ha producido un error de acceso a la base de datos",
             });
-        } else if (ok) {
-            request.session.currentUser = request.body.email;
-            response.redirect("index");
+        } else if (row) {
+            request.session.currentUser = row[0].email
+            request.session.tecnico = row[0].tecnico
+            if (request.session.tecnico === 0) {
+                response.redirect("index")
+            } else {
+                response.redirect("indexAdmin")
+            }
+
         } else {
             response.status(200);
             response.render("login", {
@@ -91,11 +97,11 @@ app.post("/login", function(request, response) {
     });
 });
 
-app.get("/logout", function (request, response) {
+app.get("/logout", function(request, response) {
     response.status(200);
     request.session.destroy();
     response.redirect("login");
-  });
+});
 
 //método para que nav.ejs coja el usuario actual en el nav
 const viewLogin = function(request, response, next) {
@@ -120,22 +126,33 @@ app.get("/index", function(request, response) {
     });
 }); //{result: es la imagen que le pasas a image de la base de datos}
 
+app.get("/indexAdmin", function(request, response) {
+    daoU.getUserImageName(request.session.currentUser, function(err, result) { // sustituir por un get avisos
+        if (err)
+            console.log("Se ha producido un error al cargar la imagen del usuario");
+        else {
+            console.log("Se ha leído la imagen del usuario con éxito", result);
+            response.render("indexAdmin", { image: result, email: request.session.currentUser });
+        }
+    });
+}); //{result: es la imagen que le pasas a image de la base de datos}
+
 app.post("/sign-in", function(request, response) {
     console.log(request.body.nombre, request.body.email, request.body.password, request.body.tipo);
-    if(request.body.password != request.body.passwordConfirm){
+    if (request.body.password != request.body.passwordConfirm) {
         console.log("Contraseñas diferentes");
-    }else{
+    } else {
         daoU.insertUser(request.body.nombre, request.body.email, request.body.password, request.body.tipo, function(err, ok) {
             if (err) {
                 console.log("Se ha producido un error al insertar el usuario");
             } else {
                 console.log("Se ha insertado el usuario con exito");
                 response.redirect("login");
-    
+
             }
         });
     }
-    
+
 });
 
 
@@ -153,7 +170,3 @@ app.get("/imagenUsuario", viewLogin, function(request, response) {
         }
     });
 });
-
-
-
-  
