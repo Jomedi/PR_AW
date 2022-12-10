@@ -1,0 +1,71 @@
+<%- include("head", {tituloWeb: "Inicio de Sesión"})%>
+
+<body id="bodyy">
+    <div class="container">
+        
+        <%- include("login")%>
+        <div class="offset-1 offset-sm-1 offset-lg-3 offset-xl-2 col-10 col-sm-10 col-lg-6 col-xl-8 colorBlanco" id="contenido">
+        <form action="/sign-in" method="POST" onsubmit="verificarPasswords(); return false" class="row g-3">
+            <div class="col-md-6">
+            <label for="inputEmail4" class="form-label">Email</label>
+            <div class="input-group">
+                <input type="email" name="email" class="form-control item"><span class="input-group-text" id="basic-addon1">@ucm.es</span>
+            </div>
+            </div>
+            <div class="col-md-6">
+            <label for="inputAddress" class="form-label">Nombre</label>
+            <input type="text" name="nombre" class="form-control" id="inputAddress">
+            </div>
+            <div class="col-md-6">
+            <label for="inputPassword4" class="form-label">Contraseña</label>
+            <input type="password" name="password" class="form-control">
+            </div>
+            <div class="col-md-6">
+            <label for="inputPassword4" class="form-label">Confirmar contraseña</label>
+            <input type="password" name="passwordConfirm" class="form-control" >
+            </div>
+
+            <% if(errorPass){ %>
+            <div class="row">
+                    <p class="text-danger"><%= errorPass %></p>
+            </div>
+            <% } else{%>
+                <br>
+            <%}%>
+
+            
+            <div class="col-md-6">
+            <label for="inputState" class="form-label">Perfil Universitario</label>
+            <select name="tipo" id="inputState" class="form-select">
+                <option value="alumno" selected>Alumno</option>
+                <option value="PAS">Personal de Administración y Servicios (PAS)</option>
+                <option value="PDI">Personal Docente e Investigador (PDI)</option>
+                <option value="antiguoAlumno">Antiguo Alumno</option>
+            </select>
+            </div>
+            <div class="col-md-6">
+            <div class="form-switch">
+                <input data-bs-toggle="collapse" data-bs-target="#hrefCollapse" aria-expanded="false" aria-controls="collapseExample"class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                <label class="form-label" for="flexSwitchCheckDefault">Técnico</label>
+                <div class="collapse" id="hrefCollapse">
+                <input type="text" class="form-control" placeholder="Nº de Empleado">
+                </div>
+            </div>
+
+            </div>
+            <div class="mb-3">
+            <label for="formFile" class="form-label">Imagen de perfil</label>
+            <input name="imagen" class="form-control" type="file" id="formFile">
+            </div>
+        
+            <div class="col-12 d-grid">
+            <button type="submit" class="btn btn-danger">Sign in</button>
+            </div>
+        </form>
+        </div>
+            
+            
+    </div>
+</div>
+</body>
+</html>

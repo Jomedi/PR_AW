@@ -69,7 +69,11 @@ app.get("/", function(request, response) {
 //-------------------------------------------------------------------------------------manejador para login y logout
 app.get("/login", function(request, response) {
     response.status(200);
-    response.render("login", { errorMsg: null, errorPass: null });
+    response.render("login", { errorMsg: null, errorPass: null});
+});
+app.get("/sign-in", function(request, response) {
+    response.status(200);
+    response.render("signin", { errorMsg: null, errorPass: null});
 });
 
 app.post("/login", function(request, response) {
@@ -140,7 +144,7 @@ app.get("/indexAdmin", function(request, response) {
 app.post("/sign-in", function(request, response) {
     console.log(request.body.nombre, request.body.email, request.body.password, request.body.tipo);
     if (request.body.password != request.body.passwordConfirm) {
-        response.render("login", {errorPass: "Las contraseñas no coinciden", errorMsg: null});
+        response.render("signin", {errorPass: "Las contraseñas no coinciden"});
         console.log("Contraseñas diferentes");
     } else {
         daoU.insertUser(request.body.nombre, request.body.email, request.body.password, request.body.tipo, function(err, ok) {
@@ -148,7 +152,7 @@ app.post("/sign-in", function(request, response) {
                 console.log("Se ha producido un error al insertar el usuario");
             } else {
                 console.log("Se ha insertado el usuario con exito");
-                response.redirect("login");
+                response.redirect("sigin");
 
             }
         });
