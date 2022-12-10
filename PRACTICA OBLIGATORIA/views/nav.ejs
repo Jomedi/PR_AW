@@ -1,0 +1,16 @@
+<div class="row">
+    <nav class=" navbar navbar-dark bg-danger fixed-top">
+        <div class="container-fluid">
+            <!--el HREF hay que cambiarlo xq tiene que ser general para la pagina actual en la que esté-->
+            <a href="/index"><img src="img/logoUcm.png" alt="Logo de la UCM" id="logoUcm"></a> 
+            <span class="navbar-text textoCentrado">
+                <h2>UCM - CAU</h2> <h5>Centro de atención al usuario</h5>
+            </span>
+            <div>
+                <img src="/imagenUsuario" id="imgUser" class="img-thumbnail" alt="foto de perfil" data-bs-toggle="modal" data-bs-target="#modalUsuario" />
+                <span id="labelident" class="navbar-text" data-bs-toggle="modal" data-bs-target="#modalUsuario"><%= email %></span>
+                <a href="/logout" class="btn btn-sm btn-outline-light" data-title="desconectar"><i class="bi bi-box-arrow-right"></i></a>
+            </div>
+        </div>
+    </nav>
+</div>

@@ -26,6 +26,16 @@ app.listen(config.port, function(err) {
     }
 });
 
+//------------------------------------------------------------------------------------para ejs
+// Configurar ejs como motor de plantillas
+app.set("view engine", "ejs");
+// Definir el directorio de plantillas, reconocer el directorio de views
+app.set("views", path.join(__dirname, "views"));
+
+//------------------------------------------------------------------------------------para body-parser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 //--------------------------------------------------------------------Middleware express-session y express-mysql-session
 const session = require("express-session");
 const mysqlSession = require("express-mysql-session");
@@ -55,16 +65,6 @@ app.get("/", function(request, response) {
     response.status(200);
     response.redirect("/login");
 });
-
-//------------------------------------------------------------------------------------para ejs
-// Configurar ejs como motor de plantillas
-app.set("view engine", "ejs");
-// Definir el directorio de plantillas, reconocer el directorio de views
-app.set("views", path.join(__dirname, "views"));
-
-//------------------------------------------------------------------------------------para body-parser
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 //-------------------------------------------------------------------------------------manejador para login y logout
 app.get("/login", function(request, response) {
@@ -97,6 +97,7 @@ app.get("/logout", function (request, response) {
     response.redirect("login");
   });
 
+//método para que nav.ejs coja el usuario actual en el nav
 const viewLogin = function(request, response, next) {
     if (!request.session.currentUser) {
         response.redirect("login");
