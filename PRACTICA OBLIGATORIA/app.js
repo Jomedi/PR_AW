@@ -148,18 +148,35 @@ app.get("/sign-in", function(request, response) {
     response.status(200);
     response.render("signin", { errorPass: null });
 });
+
 app.post("/sign-in", function(request, response) {
-    if (request.body.password != request.body.passwordConfirm) {
+    // if (request.body.password.length < 8) {
+    //     response.render("signin", { errorPass: "La contraseña debe tener entre 8 y 16 carácteres" });
+    // }
+    // else
+    //  if(!request.body.password.match("/[A-z]/")){
+    //     response.render("signin", {errorPass: "La contraseña debe tener al menos un carácter alfanumérico"});
+    // }
+    // else 
+    if(request.body.password.match("/\d/")){
+        response.render("signin", {errorPass: "La contraseña debe tener al menos un dígito"});
+    }
+    else if(request.body.password.match("/[A-Z]/")){
+        response.render("signin", {errorPass: "La contraseña debe tener al menos una letra minúscula"});
+    }
+    else if(request.body.password.match("/[a-z]/")){
+        response.render("signin", {errorPass: "La contraseña debe tener al menos una letra mayúscula"});
+    }
+    else if (request.body.password != request.body.passwordConfirm) {
         response.render("signin", { errorPass: "Las contraseñas no coinciden" });
-    } else if (request.body.password.length < 8) {
-        response.render("signin", { errorPass: "no tiene tamaño" });
-    } else {
+    } 
+    else {
         daoU.insertUser(request.body.nombre, request.body.email, request.body.password, request.body.tipo, function(err, ok) {
             if (err) {
                 console.log("Se ha producido un error al insertar el usuario");
             } else {
                 console.log("Se ha insertado el usuario con exito");
-                response.redirect("sigin");
+                response.redirect("/sign-in");
 
             }
         });
