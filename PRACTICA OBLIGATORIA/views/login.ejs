@@ -5,63 +5,43 @@
 
       <div class="row" >
         <div class="col-2">
-          <a href="/">
-            <img src="img/logoUcm.png" alt="Logo de la UCM" id="logoUcm">
-          </a>
-          </div>
+          <a href="/"><img src="img/logoUcm.png" alt="Logo de la UCM" id="logoUcm"></a>
+        </div>
         <div class="col-8 textoCentrado">
-            <br>
-            <h2>UCM - CAU</h2>
-            <H3>Centro de atención al usuario</H3>
+            <br><h2>UCM - CAU</h2><H3>Centro de atención al usuario</H3>
         </div>
       </div>
-
-      
       
       <div class="row" id="boxContenido">
-
         <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
           <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Inicio de Sesión</button>
+            <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login-tab-pane" type="button" role="tab" aria-controls="login-tab-pane" aria-selected="true">Inicio de Sesión</button>
           </li>
           <li class="nav-item" role="presentation">
-            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Registro</button>
+            <button class="nav-link" id="signin-tab" data-bs-toggle="tab" data-bs-target="#signin-tab-pane" type="button" role="tab" aria-controls="signin-tab-pane" aria-selected="false">Registro</button>
           </li>
-          
         </ul>
 
         
 
         <div class="tab-content" id="myTabContent">
-          <div class="tab-pane fade " id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+          <div class="tab-pane fade show active" id="login-tab-pane" role="tabpanel" aria-labelledby="login-tab" tabindex="0">
             <form action="/login" method="POST">
               <div class="offset-1 offset-sm-2 offset-lg-3 offset-xl-4 col-10 col-sm-8 col-lg-6 col-xl-4 colorBlanco" id="contenido">
                 <div class="row padngFila">
                   <div class="input-group">
-                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-fill"></i></span>
-                    <input
-                      type="text"
-                      name="email"
-                      class="form-control item"
-                      id="email"
-                      placeholder="Email"
-                      required
-                    />
+                    <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                    <input type="email" name="email" class="form-control item" id="email" placeholder="email" required />
                   </div>
                 </div>
                 <div class="row padngFila">
                   <div class="input-group">
-                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-lock-fill"></i></span>
-                    <input
-                      type="password"
-                      name="password"
-                      class="form-control item"
-                      id="password"
-                      placeholder="Password"
-                      required
-                    />
+                    <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                    <input type="password" name="password" class="form-control item" id="password" placeholder="password" required />
                   </div>
                 </div>
+
+
                 <% if(errorMsg){ %>
                   <div class="row">
                         <p class="text-danger"><%= errorMsg %></p>
@@ -69,15 +49,18 @@
                   <% } else{%>
                     <br>
                 <%}%>
+
+
+
                 <div class="row">
                   <div class="offset-2 offset-sm-4 col-8 col-sm-4 d-grid padngFila">
-                    <button type="submit" class="btn btn-danger" id="boton">Log In</button>
+                    <button type="submit" class="btn btn-danger">Log In</button>
                   </div>
                 </div>
               </div>
             </form>
           </div>
-          <div class="tab-pane fade show active" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+          <div class="tab-pane fade" id="signin-tab-pane" role="tabpanel" aria-labelledby="signin-tab" tabindex="0">
             <div class="offset-1 offset-sm-1 offset-lg-3 offset-xl-2 col-10 col-sm-10 col-lg-6 col-xl-8 colorBlanco" id="contenido">
               <form action="/sign-in" method="POST" onsubmit="verificarPasswords(); return false" class="row g-3">
                 <div class="col-md-6">
