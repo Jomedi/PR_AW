@@ -3,7 +3,7 @@
 <body id="bodyy">
     <div class="container">
         
-        <%- include("cabeceraIndex", {ref: "/sign-in"})%>
+        <%- include("cabeceraIndex", {ref: "/signin"})%>
         <div class="offset-1 offset-sm-1 offset-lg-3 offset-xl-2 col-10 col-sm-10 col-lg-6 col-xl-8 colorBlanco" id="contenido">
         <form action="/sign-in" method="POST" onsubmit="verificarPasswords(); return false" class="row g-3">
             <div class="col-md-6">
@@ -13,7 +13,7 @@
             </div>
             </div>
             <div class="col-md-6">
-            <label for="inputAddress" class="form-label">Nombre</label>
+            <label for="inputAddress" class="form-label">Nombre para mostrar</label>
             <input type="text" name="nombre" class="form-control" id="inputAddress">
             </div>
             <div class="col-md-6">
@@ -58,11 +58,18 @@
             <input name="imagen" class="form-control" type="file" id="formFile">
             </div>
         
-            <div class="col-12 d-grid">
+            <div class="offset-xl-4 col-xl-4 d-grid">
             <button type="submit" class="btn btn-danger">Sign in</button>
             </div>
         </form>
         </div>
+
+        <div class="offset-1 offset-sm-1 offset-lg-3 offset-xl-2 col-10 col-sm-10 col-lg-6 col-xl-8" id="contenido">
+            <div class="offset-xl-10 col-xl-2 d-grid">
+                <a href="/login" role="button" class="btn btn-primary">Log in</a>
+            </div>
+        </div>
+        
             
             
     </div>
