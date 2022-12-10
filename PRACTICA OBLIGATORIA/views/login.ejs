@@ -1,130 +1,48 @@
-<%- include("cabecera", {tituloWeb: "Inicio de Sesión"})%>
+<%- include("head", {tituloWeb: "Inicio de Sesión"})%>
 
-  <body id="bodyy">
+<body id="bodyy">
     <div class="container">
-
-      <div class="row" >
-        <div class="col-2">
-          <a href="/"><img src="img/logoUcm.png" alt="Logo de la UCM" id="logoUcm"></a>
-        </div>
-        <div class="col-8 textoCentrado">
-            <br><h2>UCM - CAU</h2><H3>Centro de atención al usuario</H3>
-        </div>
-      </div>
-      
-      <div class="row" id="boxContenido">
-        <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
-          <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login-tab-pane" type="button" role="tab" aria-controls="login-tab-pane" aria-selected="true">Inicio de Sesión</button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link" id="signin-tab" data-bs-toggle="tab" data-bs-target="#signin-tab-pane" type="button" role="tab" aria-controls="signin-tab-pane" aria-selected="false">Registro</button>
-          </li>
-        </ul>
-
         
-
-        <div class="tab-content" id="myTabContent">
-          <div class="tab-pane fade show active" id="login-tab-pane" role="tabpanel" aria-labelledby="login-tab" tabindex="0">
-            <form action="/login" method="POST">
-              <div class="offset-1 offset-sm-2 offset-lg-3 offset-xl-4 col-10 col-sm-8 col-lg-6 col-xl-4 colorBlanco" id="contenido">
-                <div class="row padngFila">
-                  <div class="input-group">
-                    <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
-                    <input type="email" name="email" class="form-control item" id="email" placeholder="email" required />
-                  </div>
-                </div>
-                <div class="row padngFila">
-                  <div class="input-group">
-                    <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
-                    <input type="password" name="password" class="form-control item" id="password" placeholder="password" required />
-                  </div>
-                </div>
-
-
-                <% if(errorMsg){ %>
-                  <div class="row">
-                        <p class="text-danger"><%= errorMsg %></p>
-                  </div>
-                  <% } else{%>
-                    <br>
-                <%}%>
-
-
-
-                <div class="row">
-                  <div class="offset-2 offset-sm-4 col-8 col-sm-4 d-grid padngFila">
-                    <button type="submit" class="btn btn-danger">Log In</button>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-          <div class="tab-pane fade" id="signin-tab-pane" role="tabpanel" aria-labelledby="signin-tab" tabindex="0">
-            <div class="offset-1 offset-sm-1 offset-lg-3 offset-xl-2 col-10 col-sm-10 col-lg-6 col-xl-8 colorBlanco" id="contenido">
-              <form action="/sign-in" method="POST" onsubmit="verificarPasswords(); return false" class="row g-3">
-                <div class="col-md-6">
-                  <label for="inputEmail4" class="form-label">Email</label>
-                  <div class="input-group">
-                    <input type="email" name="email" class="form-control item"><span class="input-group-text" id="basic-addon1">@ucm.es</span>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <label for="inputAddress" class="form-label">Nombre</label>
-                  <input type="text" name="nombre" class="form-control" id="inputAddress">
-                </div>
-                <div class="col-md-6">
-                  <label for="inputPassword4" class="form-label">Contraseña</label>
-                  <input type="password" name="password" class="form-control">
-                </div>
-                <div class="col-md-6">
-                  <label for="inputPassword4" class="form-label">Confirmar contraseña</label>
-                  <input type="password" name="passwordConfirm" class="form-control" >
-                </div>
-
-                <% if(errorPass){ %>
-                  <div class="row">
-                        <p class="text-danger"><%= errorPass %></p>
-                  </div>
-                  <% } else{%>
-                    <br>
-                <%}%>
-
-                
-                <div class="col-md-6">
-                  <label for="inputState" class="form-label">Perfil Universitario</label>
-                  <select name="tipo" id="inputState" class="form-select">
-                    <option value="alumno" selected>Alumno</option>
-                    <option value="PAS">Personal de Administración y Servicios (PAS)</option>
-                    <option value="PDI">Personal Docente e Investigador (PDI)</option>
-                    <option value="antiguoAlumno">Antiguo Alumno</option>
-                  </select>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-switch">
-                    <input data-bs-toggle="collapse" data-bs-target="#hrefCollapse" aria-expanded="false" aria-controls="collapseExample"class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                    <label class="form-label" for="flexSwitchCheckDefault">Técnico</label>
-                    <div class="collapse" id="hrefCollapse">
-                      <input type="text" class="form-control" placeholder="Nº de Empleado">
-                    </div>
-                  </div>
-
-                </div>
-                <div class="mb-3">
-                  <label for="formFile" class="form-label">Imagen de perfil</label>
-                  <input name="imagen" class="form-control" type="file" id="formFile">
-                </div>
+        <%- include("cabeceraIndex", {ref: "/login"})%>
+        
               
-                <div class="col-12 d-grid">
-                  <button type="submit" class="btn btn-danger">Sign in</button>
-                </div>
-              </form>
+            <div class="offset-1 offset-sm-2 offset-lg-3 offset-xl-4 col-10 col-sm-8 col-lg-6 col-xl-4 colorBlanco" id="contenido">
+                <form action="/login" method="POST">
+                    <div class="row padngFila">
+                        <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                        <input type="email" name="email" class="form-control item" id="email" placeholder="email" required />
+                        </div>
+                    </div>
+                    <div class="row padngFila">
+                        <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                        <input type="password" name="password" class="form-control item" id="password" placeholder="password" required />
+                        </div>
+                    </div>
+                
+                
+                    <% if(errorMsg){ %>
+                        <div class="row">
+                            <p class="text-danger"><%= errorMsg %></p>
+                        </div>
+                        <% } else{%>
+                        <br>
+                    <%}%>
+                
+                    ¿No tienes cuenta? <a href="/sign-in">Regístrate!</a>
+                
+                    <div class="row">
+                        <div class="offset-2 offset-sm-4 col-8 col-sm-4 d-grid padngFila">
+                        <button type="submit" class="btn btn-danger">Log In</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-          </div>
+                
+            
+            
         </div>
-      </div>
-
-
     </div>
-  </body>
+</body>
 </html>

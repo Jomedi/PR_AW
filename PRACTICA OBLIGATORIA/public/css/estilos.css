@@ -28,8 +28,7 @@
     padding-bottom: 1.25em;
     padding-left: 2em;
     padding-right: 2em;
-    border-bottom-left-radius: 1em;
-    border-bottom-right-radius: 1em;
+    border-radius: 1em;
 }
 
 .contenidoAvisos{
