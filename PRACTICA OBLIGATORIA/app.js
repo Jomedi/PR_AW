@@ -150,20 +150,21 @@ app.get("/sign-in", function(request, response) {
 });
 
 app.post("/sign-in", function(request, response) {
-    // if (request.body.password.length < 8) {
-    //     response.render("signin", { errorPass: "La contraseña debe tener entre 8 y 16 carácteres" });
-    // }
-    // else
-    //  if(!request.body.password.match("/[A-z]/")){
-    //     response.render("signin", {errorPass: "La contraseña debe tener al menos un carácter alfanumérico"});
-    // }
-    // else 
-    if (request.body.password.match("/\d/")) {
+    var number = /[0-9]/
+    var alphaNumeric = /^[a-z0-9]+$/i
+    var upper = /[A-Z]/
+    var lower = /[a-z]/
+
+    if (request.body.password.length < 8 || request.body.password.length > 16) {
+        response.render("signin", { errorPass: "La contraseña debe tener entre 8 y 16 carácteres" });
+    } else if (!number.test(request.body.password)) {
         response.render("signin", { errorPass: "La contraseña debe tener al menos un dígito" });
-    } else if (request.body.password.match("/[A-Z]/")) {
-        response.render("signin", { errorPass: "La contraseña debe tener al menos una letra minúscula" });
-    } else if (request.body.password.match("/[a-z]/")) {
+    } else if (!upper.test(request.body.password)) {
         response.render("signin", { errorPass: "La contraseña debe tener al menos una letra mayúscula" });
+    } else if (!lower.test(request.body.password)) {
+        response.render("signin", { errorPass: "La contraseña debe tener al menos una letra minúscula" });
+    } else if (alphaNumeric.test(request.body.password)) {
+        response.render("signin", { errorPass: "La contraseña debe contener al menos un carácter no alfanumérico" })
     } else if (request.body.password != request.body.passwordConfirm) {
         response.render("signin", { errorPass: "Las contraseñas no coinciden" });
     } else {
@@ -179,7 +180,6 @@ app.post("/sign-in", function(request, response) {
     }
 
 });
-
 
 //-------------------------------------------------------------------------------------manejador para la imagen del usuario
 
