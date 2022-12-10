@@ -36,7 +36,7 @@
             
             <div class="col-md-6">
             <label for="inputState" class="form-label">Perfil Universitario</label>
-            <select name="tipo" id="inputState" class="form-select">
+            <select name="tipo" id="inputState" class="form-select" onchange="showInp()">
                 <option value="alumno" selected>Alumno</option>
                 <option value="PAS">Personal de Administración y Servicios (PAS)</option>
                 <option value="PDI">Personal Docente e Investigador (PDI)</option>
@@ -76,4 +76,4 @@
             
     </div>
 </div>
-<%- include("footer")%>
+    <%- include("footer")%>
