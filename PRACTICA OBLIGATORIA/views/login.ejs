@@ -3,11 +3,11 @@
 <body id="bodyy">
     <div class="container">
         
-        <%- include("cabeceraIndex")%>
+        <%- include("cabeceraIndex", {ref: "/login"})%>
         
               
             <div class="offset-1 offset-sm-2 offset-lg-3 offset-xl-4 col-10 col-sm-8 col-lg-6 col-xl-4 colorBlanco" id="contenido">
-                <form action="/indexPrimero" method="POST">
+                <form action="/login" method="POST">
                     <div class="row padngFila">
                         <div class="input-group">
                         <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
