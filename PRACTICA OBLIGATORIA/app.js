@@ -6,6 +6,7 @@ const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
 const DAOUsers = require("./DAOUsers");
+const DAOAlerts = require("./DAOAlerts");
 const fs = require("fs");
 
 // Crear un servidor Express.js
@@ -16,6 +17,9 @@ const pool = mysql.createPool(config.mysqlConfig);
 
 // Crear una instancia de DAOUsers
 const daoU = new DAOUsers(pool);
+
+// Crea una instancia de DAOAlerts
+const daoA = new DAOAlerts(pool);
 
 // Arrancar el servidor
 app.listen(config.port, function(err) {
@@ -116,13 +120,14 @@ const viewLogin = function(request, response, next) {
 //-------------------------------------------------------------------------------------manejador para index.ejs y indexAdmin.ejs
 
 app.get("/index", function(request, response) {
-    daoU.getUserImageName(request.session.currentUser, function(err, result) { // sustituir por un get avisos
+    daoA.getAlertsFromUser(request.session.currentUser, function(err, result) { // sustituir por un get avisos
         if (err)
-            console.log("Se ha producido un error al cargar la imagen del usuario");
+            console.log("Se ha producido un error al leer las alertas del usuario");
         else {
-            console.log("Se ha leído la imagen del usuario con éxito", result);
-            response.render("index", { image: result, email: request.session.currentUser });
+            console.log("Se han leído las alertas del usuario con éxito ", result);
+            response.render("index", { email: request.session.currentUser, alerts: result });
         }
+
     });
 }); //{result: es la imagen que le pasas a image de la base de datos}
 
@@ -132,7 +137,7 @@ app.get("/indexAdmin", function(request, response) {
             console.log("Se ha producido un error al cargar la imagen del usuario");
         else {
             console.log("Se ha leído la imagen del usuario con éxito", result);
-            response.render("indexAdmin", { image: result, email: request.session.currentUser });
+            response.render("indexAdmin", { email: request.session.currentUser });
         }
     });
 }); //{result: es la imagen que le pasas a image de la base de datos}
@@ -140,7 +145,7 @@ app.get("/indexAdmin", function(request, response) {
 app.post("/sign-in", function(request, response) {
     console.log(request.body.nombre, request.body.email, request.body.password, request.body.tipo);
     if (request.body.password != request.body.passwordConfirm) {
-        response.render("login", {errorPass: "Las contraseñas no coinciden", errorMsg: null});
+        response.render("login", { errorPass: "Las contraseñas no coinciden", errorMsg: null });
         console.log("Contraseñas diferentes");
     } else {
         daoU.insertUser(request.body.nombre, request.body.email, request.body.password, request.body.tipo, function(err, ok) {

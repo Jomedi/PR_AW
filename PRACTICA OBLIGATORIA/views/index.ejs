@@ -32,15 +32,24 @@
                                             <th scope="col">Técnico</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="table-group-divider">
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td data-bs-toggle="modal" data-bs-target="#exampleModal">Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-
-                                    </tbody>
+                                    <% alerts.forEach(a => {%>
+                                        <tbody class="table-group-divider">
+                                            <tr>
+                                                <th scope="row">
+                                                    <%=a.fecha%>
+                                                </th>
+                                                <td data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                    <%=a.texto%>
+                                                </td>
+                                                <td>
+                                                    <%=a.tipo%>
+                                                </td>
+                                                <td>
+                                                    <%=a.email_tecnico%>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <% }) %>
                                 </table>
                             </div>
                             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
@@ -139,10 +148,10 @@
                             <div class="modal-body">
                                 <h6>Tipo: </h6>
                                 <select class="form-select" aria-label="Default select example">
-          <option selected value="1">Sugerencia</option>
-          <option value="2">Incidencia</option>
-          <option value="3">Felicitación</option>
-        </select>
+                                    <option selected value="1">Sugerencia</option>
+                                    <option value="2">Incidencia</option>
+                                    <option value="3">Felicitación</option>
+                                </select>
                                 <h6>Observaciones: </h6>
                                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                             </div>
