@@ -34,17 +34,25 @@
                                             <th scope="col">Acciones</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="table-group-divider">
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>
-                                                <i class="bi bi-arrow-left-square" data-bs-toggle="modal" data-bs-target="#modalAsignacion"></i>
-                                                <i class="bi bi-trash-fill" data-bs-toggle="modal" data-bs-target="#modalEliminarAviso"></i>
-                                            </td>
-                                        </tr>
-                                    </tbody>
+                                    <% alerts.forEach(a => {%>
+                                        <tbody class="table-group-divider">
+                                            <tr>
+                                                <th scope="row">
+                                                    <%=a.tipo%>
+                                                </th>
+                                                <td data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                    <%=a.texto%>
+                                                </td>
+                                                <td>
+                                                    <%=a.tipo%>
+                                                </td>
+                                                <td>
+                                                    <i class="bi bi-arrow-left-square" data-bs-toggle="modal" data-bs-target="#modalAsignacion"></i>
+                                                    <i class="bi bi-trash-fill" data-bs-toggle="modal" data-bs-target="#modalEliminarAviso"></i>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <% }) %>
                                 </table>
 
 
@@ -62,18 +70,23 @@
                                             <th scope="col">Acciones</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="table-group-divider">
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>
-                                                <i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="#modalVisualizacion"></i>
-                                                <i class="bi bi-trash-fill"></i>
-                                            </td>
-                                        </tr>
-
-                                    </tbody>
+                                    <% alerts.forEach(a => {%>
+                                        <tbody class="table-group-divider">
+                                            <tr>
+                                                <th scope="row">
+                                                    <%=a.tipo%>
+                                                </th>
+                                                <td data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                    <%=a.texto%>
+                                                </td>
+                                                <td>
+                                                    <%=a.tipo%>
+                                                </td>
+                                                <td><i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="#modalVisualizacion"></i>
+                                                    <i class="bi bi-trash-fill"></i></td>
+                                            </tr>
+                                        </tbody>
+                                        <% }) %>
                                 </table>
                             </div>
                             <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
@@ -87,15 +100,22 @@
                                             <th scope="col">Acciones</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="table-group-divider">
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td><i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="#modalVisualizacionCERRARADMIN"></i></td>
-                                        </tr>
-
-                                    </tbody>
+                                    <% alerts.forEach(a => {%>
+                                        <tbody class="table-group-divider">
+                                            <tr>
+                                                <th scope="row">
+                                                    <%=a.tipo%>
+                                                </th>
+                                                <td data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                    <%=a.texto%>
+                                                </td>
+                                                <td>
+                                                    <%=a.tipo%>
+                                                </td>
+                                                <td><i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="#modalVisualizacionCERRARADMIN"></i></td>
+                                            </tr>
+                                        </tbody>
+                                        <% }) %>
                                 </table>
                             </div>
                             <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">

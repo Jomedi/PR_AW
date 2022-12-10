@@ -132,12 +132,12 @@ app.get("/index", function(request, response) {
 }); //{result: es la imagen que le pasas a image de la base de datos}
 
 app.get("/indexAdmin", function(request, response) {
-    daoU.getUserImageName(request.session.currentUser, function(err, result) { // sustituir por un get avisos
+    daoA.getAllAlerts(function(err, result) { // sustituir por un get avisos
         if (err)
-            console.log("Se ha producido un error al cargar la imagen del usuario");
+            console.log("Se ha producido un error al leer las alertas del usuario");
         else {
-            console.log("Se ha leído la imagen del usuario con éxito", result);
-            response.render("indexAdmin", { email: request.session.currentUser });
+            console.log("Se han leído las alertas del usuario con éxito ", result);
+            response.render("indexAdmin", { email: request.session.currentUser, alerts: result });
         }
     });
 }); //{result: es la imagen que le pasas a image de la base de datos}
@@ -158,19 +158,15 @@ app.post("/sign-in", function(request, response) {
     //     response.render("signin", {errorPass: "La contraseña debe tener al menos un carácter alfanumérico"});
     // }
     // else 
-    if(request.body.password.match("/\d/")){
-        response.render("signin", {errorPass: "La contraseña debe tener al menos un dígito"});
-    }
-    else if(request.body.password.match("/[A-Z]/")){
-        response.render("signin", {errorPass: "La contraseña debe tener al menos una letra minúscula"});
-    }
-    else if(request.body.password.match("/[a-z]/")){
-        response.render("signin", {errorPass: "La contraseña debe tener al menos una letra mayúscula"});
-    }
-    else if (request.body.password != request.body.passwordConfirm) {
+    if (request.body.password.match("/\d/")) {
+        response.render("signin", { errorPass: "La contraseña debe tener al menos un dígito" });
+    } else if (request.body.password.match("/[A-Z]/")) {
+        response.render("signin", { errorPass: "La contraseña debe tener al menos una letra minúscula" });
+    } else if (request.body.password.match("/[a-z]/")) {
+        response.render("signin", { errorPass: "La contraseña debe tener al menos una letra mayúscula" });
+    } else if (request.body.password != request.body.passwordConfirm) {
         response.render("signin", { errorPass: "Las contraseñas no coinciden" });
-    } 
-    else {
+    } else {
         daoU.insertUser(request.body.nombre, request.body.email, request.body.password, request.body.tipo, function(err, ok) {
             if (err) {
                 console.log("Se ha producido un error al insertar el usuario");
