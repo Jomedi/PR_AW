@@ -138,7 +138,6 @@ app.get("/indexAdmin", function(request, response) {
         if (err)
             console.log("Se ha producido un error al leer las alertas del usuario");
         else {
-            console.log("Se han leído Avisos Entrantes con éxito ");
             daoA.getAdminAlerts(request.session.currentUser, function(err2, result2) {
                 if (err2)
                     console.log(err2)
@@ -225,7 +224,7 @@ app.post("/searchAlertsAdmin", function(request, response) {
                             if (err3)
                                 console.log(err3)
                             else {
-                                response.render("indexAdmin", { email: request.session.currentUser, allAlerts: rows, alerts: rows2, tecnicos: rows3 });
+                                response.render("indexAdmin", { nombre: request.session.currentName, email: request.session.currentUser, allAlerts: rows, alerts: rows2, tecnicos: rows3 });
                             }
                         })
                     }

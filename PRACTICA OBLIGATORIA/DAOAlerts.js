@@ -51,7 +51,7 @@ class DAOAlerts {
             if (err)
                 callback(err)
             else {
-                connection.query("SELECT * FROM `ucm_aw_cau_avi_avisos` AS avi WHERE avi.texto LIKE ? ", [text],
+                connection.query("SELECT usu.*,avi.*,usu.id as id_usuario,avi.id as id_aviso,avus.estado FROM ucm_aw_cau_avi_avisos as avi, ucm_aw_cau_usu_usuarios AS usu, ucm_aw_cau_avus_avisosusuarios AS avus where avi.id = avus.id_aviso AND avus.id_usuario = usu.id AND avi.texto LIKE ? ", [text],
                     function(err, rows) {
                         if (err)
                             callback("Error en SELECT * FROM `ucm_aw_cau_avi_avisos`")
