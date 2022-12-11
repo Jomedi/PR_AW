@@ -87,7 +87,7 @@ app.post("/login", function(request, response) {
             request.session.currentUser = row[0].email
             request.session.tecnico = row[0].tecnico
             request.session.currentName = row[0].nombre
-            request.session.perfilUniversitario = row[0].tipo
+            request.session.perfilUniversitario = row[0].tipo_usuario
             if (request.session.tecnico === 0) {
                 response.redirect("index")
             } else {
