@@ -16,14 +16,15 @@
 
     <script laguage="javascript">
         function activar(elemento){
-        if(elemento.tipo.options[elemento.tipo.selectedIndex].text=="Sugerencia" || elemento.tipo.options[elemento.tipo.selectedIndex].text=="Incidencia"){
-            document.getElementById("suginc").style.display = "inline";
-            document.getElementById("felic").style.display = "none";
-        }else{
-            document.getElementById("felic").style.display = "inline";
-            document.getElementById("suginc").style.display = "none";
+            if(elemento.tipo.options[elemento.tipo.selectedIndex].text=="Sugerencia" || elemento.tipo.options[elemento.tipo.selectedIndex].text=="Incidencia"){
+                document.getElementById("suginc").style.display = "inline";
+                document.getElementById("felic").style.display = "none";
+                document.getElementById("defecto").style.display = "none";
+            }else{
+                document.getElementById("felic").style.display = "inline";
+                document.getElementById("suginc").style.display = "none";
+            }
         }
-    }
 
         function habilitar(form){
             if(form.tipo.options[0].selected || form.tipo.options[2].selected==true || form.tipo.options[3].selected==true){
