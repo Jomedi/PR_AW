@@ -136,8 +136,25 @@ app.get("/indexAdmin", function(request, response) {
         if (err)
             console.log("Se ha producido un error al leer las alertas del usuario");
         else {
-            console.log("Se han leído todas las alertas con éxito ");
-            response.render("indexAdmin", { email: request.session.currentUser, alerts: result });
+            console.log("Se han leído Avisos Entrantes con éxito ");
+            daoA.getAdminAlerts(request.session.currentUser, function(err2, result2) {
+                if (err2)
+                    console.log(err2)
+                else {
+                    console.log("Se han leído Mis Avisos con éxito")
+                    daoU.getUsersAdmin(function(err3, result3) {
+                        if (err3)
+                            console.log(err3)
+                        else {
+                            console.log("Obtención de técnicos con éxito")
+                            response.render("indexAdmin", { email: request.session.currentUser, allAlerts: result, alerts: result2, tecnicos: result3 });
+                        }
+                    })
+
+
+                }
+            })
+
         }
     });
 }); //{result: es la imagen que le pasas a image de la base de datos}
@@ -176,7 +193,7 @@ app.post("/searchAlerts", function(request, response) {
     else {
         console.log(text)
         text = '%' + text + '%'
-        daoA.getAlertsByUserAndText(text, email, function(err, rows) {
+        daoA.searchAlertsByUserAndText(text, email, function(err, rows) {
             if (err)
                 console.log(err)
             else {
@@ -194,12 +211,24 @@ app.post("/searchAlertsAdmin", function(request, response) {
         response.redirect("/indexAdmin")
     else {
         text = '%' + text + '%'
-        daoA.getAlertsByText(text, function(err, rows) {
+        daoA.searchAlertsByText(text, function(err, rows) {
             if (err)
                 console.log(err)
             else {
-                console.log(rows)
-                response.render("indexAdmin", { email: request.session.currentUser, alerts: rows });
+                daoA.searchAdminAlerts(request.session.currentUser, text, function(err2, rows2) {
+                    if (err2)
+                        console.log(err2)
+                    else {
+                        daoU.getUsersAdmin(function(err3, rows3) {
+                            if (err3)
+                                console.log(err3)
+                            else {
+                                response.render("indexAdmin", { email: request.session.currentUser, allAlerts: rows, alerts: rows2, tecnicos: rows3 });
+                            }
+                        })
+                    }
+                })
+
             }
         })
     }
@@ -253,3 +282,19 @@ app.get("/imagenUsuario", viewLogin, function(request, response) {
         }
     });
 });
+
+app.post("/updateAdmin", function(request, response) {
+    console.log(request.session.currentUser, request.body.idUsuario, request.body.idAviso)
+    daoA.updateAdminAlert(request.session.currentUser, request.body.idUsuario, request.body.idAviso, function(err, result) {
+        if (err)
+            console.log(err)
+        else
+            response.redirect("/indexAdmin")
+    })
+})
+
+app.post("/eliminateAlert", function(request, response) {
+    console.log(request.body)
+
+
+})
