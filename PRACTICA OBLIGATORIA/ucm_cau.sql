@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-12-2022 a las 22:15:12
+-- Tiempo de generación: 11-12-2022 a las 16:48:19
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -39,7 +39,7 @@ CREATE TABLE `sessions` (
 
 INSERT INTO `sessions` (`session_id`, `expires`, `data`) VALUES
 ('X1q9rdcH6Q5u7gt0BS1DvkulOwvZF7Fu', 1670780566, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"currentUser\":\"PAS-TECNICO@ucm.es\",\"tecnico\":1}'),
-('egfs3-nfnLsHfDcFzmUqNdzWMYajs4hi', 1670700849, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"currentUser\":\"prueba@ucm.es\"}');
+('j8TB5TD6BU68t2xtZncqahcXyZwRjszc', 1670857455, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"currentUser\":\"PAS-TECNICO@ucm.es\",\"tecnico\":1}');
 
 -- --------------------------------------------------------
 
@@ -52,7 +52,7 @@ CREATE TABLE `ucm_aw_cau_avi_avisos` (
   `fecha` date NOT NULL DEFAULT current_timestamp(),
   `tipo` varchar(100) NOT NULL,
   `subtipo` varchar(100) NOT NULL,
-  `texto` varchar(1000) NOT NULL
+  `texto` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -64,7 +64,9 @@ INSERT INTO `ucm_aw_cau_avi_avisos` (`id`, `fecha`, `tipo`, `subtipo`, `texto`) 
 (2, '2022-12-10', 'tipo prueba 2', 'subtipo prueba 2', 'Aviso de prueba 2'),
 (3, '2022-12-10', 'tipo prueba 3', 'subtipo prueba 3', 'Aviso de prueba 3'),
 (4, '2022-12-10', 'tipo prueba 4', 'subtipo prueba 4', 'Aviso de prueba 4'),
-(5, '2022-12-10', 'tipo prueba 5', 'subtipo prueba 5', 'Aviso de prueba 5');
+(5, '2022-12-10', 'tipo prueba 5', 'subtipo prueba 5', 'Aviso de prueba 5'),
+(34, '2022-12-11', 'incidencia', 'correo electrónico', 'tipo prueba 0'),
+(35, '2022-12-11', 'felicitacion', 'registro electrónico', 'Texto de prueba 0');
 
 -- --------------------------------------------------------
 
@@ -88,7 +90,9 @@ INSERT INTO `ucm_aw_cau_avus_avisosusuarios` (`id_usuario`, `id_aviso`, `email_t
 (1, 1, NULL, NULL, ''),
 (1, 3, 'PAS-TECNICO@ucm.es', NULL, ''),
 (7, 3, NULL, NULL, ''),
-(7, 5, 'PAS-TECNICO@ucm.es', NULL, '');
+(7, 5, 'PAS-TECNICO@ucm.es', NULL, ''),
+(7, 34, NULL, NULL, 'por asignar'),
+(7, 35, NULL, NULL, 'por asignar');
 
 -- --------------------------------------------------------
 
@@ -156,7 +160,7 @@ ALTER TABLE `ucm_aw_cau_usu_usuarios`
 -- AUTO_INCREMENT de la tabla `ucm_aw_cau_avi_avisos`
 --
 ALTER TABLE `ucm_aw_cau_avi_avisos`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `ucm_aw_cau_usu_usuarios`

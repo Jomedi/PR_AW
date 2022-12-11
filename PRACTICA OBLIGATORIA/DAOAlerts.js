@@ -44,6 +44,7 @@ class DAOAlerts {
         })
     }
 
+    //OBTENER ALERTAS QUE CONTIENEN "TEXT" DENTRO DEL TEXTO
     getAlertsByText(text, callback) {
         console.log(text)
         this.pool.getConnection(function(err, connection) {
@@ -77,11 +78,28 @@ class DAOAlerts {
 
                         } else {
                             callback(null, rows);
-
                         }
                     });
             }
         });
+    }
+
+    getAdminAlerts(email, callback) {
+        this.pool.getConnection(function(err, connection) {
+            if (err)
+                callback(err)
+            else {
+                connection.query("SELECT * FROM ucm_aw_cau_avus_avisosusuarios WHERE email_tecnico = ?", [email],
+                    function(err, rows) {
+                        connection.release()
+                        if (err)
+                            callback(err)
+                        else {
+                            callback(null, rows)
+                        }
+                    })
+            }
+        })
     }
 
     addNewAlert(email, aviso, callback) {
