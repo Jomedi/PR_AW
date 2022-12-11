@@ -63,15 +63,17 @@
                                             <th scope="col">Acciones</th>
                                         </tr>
                                     </thead>
+                                    <% historical.forEach(h => {%>
                                     <tbody class="table-group-divider">
                                         <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
+                                            <th scope="row"><%=h.tipo%></th>
+                                            <td><%=h.fecha%></td>
+                                            <td><%=h.texto%></td>
                                             <td><i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="#modalVisualizacionCERRAR"></i></td>
                                         </tr>
 
                                     </tbody>
+                                    <% }) %>
                                 </table>
                             </div>
                         </div>
