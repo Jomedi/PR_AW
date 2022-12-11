@@ -86,6 +86,8 @@ app.post("/login", function(request, response) {
         } else if (row) {
             request.session.currentUser = row[0].email
             request.session.tecnico = row[0].tecnico
+            request.session.currentName = row[0].nombre
+            request.session.perfilUniversitario = row[0].tipo
             if (request.session.tecnico === 0) {
                 response.redirect("index")
             } else {
@@ -109,10 +111,10 @@ app.get("/logout", function(request, response) {
 
 //método para que nav.ejs coja el usuario actual en el nav
 const viewLogin = function(request, response, next) {
-    if (!request.session.currentUser) {
+    if (!request.session.currentName) {
         response.redirect("login");
     } else {
-        response.locals.userEmail = request.session.currentUser;
+        response.locals.userNombre = request.session.currentName;
         next();
     }
 }
@@ -125,7 +127,7 @@ app.get("/index", function(request, response) {
             console.log("Se ha producido un error al leer las alertas del usuario");
         else {
             console.log("Se han leído las alertas del usuario con éxito ");
-            response.render("index", { email: request.session.currentUser, alerts: result });
+            response.render("index", { nombre: request.session.currentName, alerts: result, tecnico: request.session.tecnico, perfilUniv: request.session.perfilUniversitario});
         }
 
     });
@@ -137,7 +139,7 @@ app.get("/indexAdmin", function(request, response) {
             console.log("Se ha producido un error al leer las alertas del usuario");
         else {
             console.log("Se han leído todas las alertas con éxito ");
-            response.render("indexAdmin", { email: request.session.currentUser, alerts: result });
+            response.render("indexAdmin", { nombre: request.session.currentName, alerts: result });
         }
     });
 }); //{result: es la imagen que le pasas a image de la base de datos}
