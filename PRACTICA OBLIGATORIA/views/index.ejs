@@ -147,9 +147,11 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
+                                    
                                     <h6>Tipo: </h6>
-                                    <select class="form-select form-control item" aria-label="Default select example" name="tipo" id="tipo">
-                                        <option selected value="sugerencia">Sugerencia</option>
+                                    <select name="tipoSubtipo" class="form-select" aria-label="Default select example" id="tipo" onChange="habilitarSubtipos(this.form)">
+                                        <option selected disabled>Seleccione un tipo</option>
+                                        <option value="sugerencia">Sugerencia</option>
                                         <option value="incidencia">Incidencia</option>
                                         <option value="felicitacion">Felicitación</option>
                                     </select>
@@ -157,7 +159,7 @@
                                     <h6>Subtipo: </h6>
 
                                     <%if(perfilUniv == "alumno"){%>
-                                        <select class="form-select form-control item" aria-label="Default select example" name="subtipo" id="subtipo">
+                                        <select class="form-select form-control item" aria-label="Default select example" name="subtipoSubtipo" id="subtipo" disabled>
                                             <option selected value="certificado digital">Certificado digital de persona física</option>
                                             <option value="registro electronico">Registro electrónico</option>
                                             <option value="sede electronica">Sede electrónica</option>
@@ -173,7 +175,7 @@
                                             <option value="portal eventos">Portal de Eventos</option>
                                         </select>
                                     <%}else if(perfilUniv == "pas" && tecnico == "0"){%>
-                                        <select class="form-select form-control item" aria-label="Default select example" name="subtipo" id="subtipo">
+                                        <select class="form-select form-control item" aria-label="Default select example" name="subtipoSubtipo" id="subtipo" disabled>
                                             <option selected value="certificado digital">Certificado digital de persona física</option>
                                             <option  value="certificado electronico">Certificado electrónico de empleado público</option>
                                             <option value="registro electronico">Registro electrónico</option>
@@ -200,7 +202,7 @@
                                             <option value="redirecciones web">Redirecciones web</option>
                                         </select>
                                     <%}else if(perfilUniv == "pdi"){%>
-                                        <select class="form-select form-control item" aria-label="Default select example" name="subtipo" id="subtipo">
+                                        <select class="form-select form-control item" aria-label="Default select example" name="subtipoSubtipo" id="subtipo" disabled>
                                             <option selected value="certificado digital">Certificado digital de persona física</option>
                                             <option  value="certificado electronico">Certificado electrónico de empleado público</option>
                                             <option value="registro electronico">Registro electrónico</option>
@@ -227,7 +229,7 @@
                                             <option value="redirecciones web">Redirecciones web</option>
                                         </select>
                                     <%}else{%>
-                                        <select class="form-select form-control item" aria-label="Default select example" name="subtipo" id="subtipo">
+                                        <select class="form-select form-control item" aria-label="Default select example" name="subtipoSubtipo" id="subtipo" disabled>
                                             <option value="registro electronico">Registro electrónico</option>
                                             <option value="sede electronica">Sede electrónica</option>
                                             <option value="correo electronico">Correo electrónico</option>
@@ -243,6 +245,7 @@
 
                                     <h6>Observaciones: </h6>
                                     <textarea class="form-control item" rows="3" id="texto" name="texto"></textarea>
+                                
                                 </div>
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Enviar Aviso</button>

@@ -22,18 +22,24 @@
         //      document.getElementById("aparece").style.display = "none";}
         // }
 
-        function habilitar(form)
-        {
-        if(form.tipo.options[0].selected || form.tipo.options[2].selected==true || form.tipo.options[3].selected==true)
-        {
-            form.ticTec.disabled=true;
-            form.numEmpl.disabled = true;
+        function habilitar(form){
+            if(form.tipo.options[0].selected || form.tipo.options[2].selected==true || form.tipo.options[3].selected==true){
+                form.ticTec.disabled=true;
+                form.numEmpl.disabled = true;
+            }
+            else{
+                form.ticTec.disabled=false;
+                form.numEmpl.disabled = false;
+            }
         }
-        else
-        {
-            form.ticTec.disabled=false;
-            form.numEmpl.disabled = false;
-        }
+
+        function habilitarSubtipos(form){
+            if(form.tipoSubtipo.options[1].selected==true || form.tipoSubtipo.options[2].selected==true){
+                form.subtipoSubtipo.disabled=false;
+            }
+            else{
+                form.subtipoSubtipo.disabled=true;
+            }
         }
     </script>
 </body>
