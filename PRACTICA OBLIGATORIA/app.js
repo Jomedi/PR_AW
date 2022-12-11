@@ -126,12 +126,21 @@ app.get("/index", function(request, response) {
         if (err)
             console.log("Se ha producido un error al leer las alertas del usuario");
         else {
-            console.log("Se han leído las alertas del usuario con éxito ");
-            response.render("index", { nombre: request.session.currentName, alerts: result, tecnico: request.session.tecnico, perfilUniv: request.session.perfilUniversitario });
+            daoA.getHistoricalFromUser(request.session.currentUser, function(err, result1) {
+                if (err)
+                    console.log("Se ha producido un error al leer los historicos del usuario");
+                else {
+                    console.log("Se ha leido el historial de avisos del usuario con éxito ");
+                    response.render("index", { nombre: request.session.currentName, historical: result1, alerts: result, tecnico: request.session.tecnico, perfilUniv: request.session.perfilUniversitario });
+                }
+        
+            });
         }
 
     });
 }); //{result: es la imagen que le pasas a image de la base de datos}
+
+
 
 app.get("/indexAdmin", function(request, response) {
     daoA.getAllAlerts(function(err, result) { // sustituir por un get avisos
