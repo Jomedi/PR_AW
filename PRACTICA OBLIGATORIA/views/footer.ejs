@@ -1,4 +1,42 @@
 
+
+
+
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <!-- <script>
+        const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+        const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+        const popoverTecnico = document.getElementById('PAS')
+        const popover = new bootstrap.Popover(popoverTecnico, options)
+    </script> -->
+
+
+
+    <script laguage="javascript">
+        function activar(elemento){
+            if(elemento.tipo.options[elemento.tipo.selectedIndex].text=="Sugerencia" || elemento.tipo.options[elemento.tipo.selectedIndex].text=="Incidencia"){
+                document.getElementById("suginc").style.display = "inline";
+                document.getElementById("felic").style.display = "none";
+                document.getElementById("defecto").style.display = "none";
+            }else{
+                document.getElementById("felic").style.display = "inline";
+                document.getElementById("suginc").style.display = "none";
+            }
+        }
+
+        function habilitar(form){
+            if(form.tipo.options[0].selected || form.tipo.options[2].selected==true || form.tipo.options[3].selected==true){
+                form.ticTec.disabled=true;
+                form.numEmpl.disabled = true;
+            }
+            else{
+                form.ticTec.disabled=false;
+                form.numEmpl.disabled = false;
+            }
+        }
+
+    </script>
 </body>
 </html>
