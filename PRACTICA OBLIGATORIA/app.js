@@ -124,7 +124,7 @@ app.get("/index", function(request, response) {
         if (err)
             console.log("Se ha producido un error al leer las alertas del usuario");
         else {
-            console.log("Se han leído las alertas del usuario con éxito ", result);
+            console.log("Se han leído las alertas del usuario con éxito ");
             response.render("index", { email: request.session.currentUser, alerts: result });
         }
 
@@ -136,7 +136,7 @@ app.get("/indexAdmin", function(request, response) {
         if (err)
             console.log("Se ha producido un error al leer las alertas del usuario");
         else {
-            console.log("Se han leído las alertas del usuario con éxito ", result);
+            console.log("Se han leído todas las alertas con éxito ");
             response.render("indexAdmin", { email: request.session.currentUser, alerts: result });
         }
     });
@@ -148,6 +148,25 @@ app.get("/sign-in", function(request, response) {
     response.status(200);
     response.render("signin", { errorPass: null });
 });
+
+app.post("/insertAlert", function(request, response) {
+    let aviso = {
+        "tipo": request.body.tipo,
+        "subtipo": request.body.subtipo,
+        "texto": request.body.texto
+    }
+
+    let email = request.session.currentUser
+
+    daoA.addNewAlert(email, aviso, function(err, ok) {
+        if (err)
+            console.log(err)
+        else {
+            console.log("Se ha insertado el aviso con éxito")
+            response.redirect("/index")
+        }
+    })
+})
 
 app.post("/sign-in", function(request, response) {
     var number = /[0-9]/

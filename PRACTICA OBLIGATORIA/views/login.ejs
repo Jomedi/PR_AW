@@ -1,47 +1,49 @@
 <%- include("head", {tituloWeb: "Inicio de Sesión"})%>
 
-<body id="bodyy">
-    <div class="container">
-        
-        <%- include("cabecera", {ref: "/login"})%>
-        
-              
-            <div class="offset-1 offset-sm-2 offset-lg-3 offset-xl-4 col-10 col-sm-8 col-lg-6 col-xl-4 colorBlanco" id="contenido">
-                <form action="/login" method="POST">
-                    <div class="row padngFila">
-                        <div class="input-group">
-                        <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
-                        <input type="email" name="email" class="form-control item" id="email" placeholder="email" required />
+    <body id="bodyy">
+        <div class="container">
+
+            <%- include("cabecera", {ref: "/login"})%>
+
+
+                <div class="offset-1 offset-sm-2 offset-lg-3 offset-xl-4 col-10 col-sm-8 col-lg-6 col-xl-4 colorBlanco" id="contenido">
+                    <form action="/login" method="POST">
+                        <div class="row padngFila">
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                                <input type="email" name="email" class="form-control item" id="email" placeholder="email" required />
+                            </div>
                         </div>
-                    </div>
-                    <div class="row padngFila">
-                        <div class="input-group">
-                        <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
-                        <input type="password" name="password" class="form-control item" id="password" placeholder="password" required />
+                        <div class="row padngFila">
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                                <input type="password" name="password" class="form-control item" id="password" placeholder="password" required />
+                            </div>
                         </div>
-                    </div>
-                
-                
-                    <% if(errorMsg){ %>
-                        <div class="row">
-                            <p class="text-danger"><%= errorMsg %></p>
-                        </div>
-                        <% } else{%>
-                        <br>
-                    <%}%>
-                
-                    ¿No tienes cuenta? <a href="/sign-in">Regístrate!</a>
-                
-                    <div class="row">
-                        <div class="offset-2 offset-sm-4 col-8 col-sm-4 d-grid padngFila">
-                        <button type="submit" class="btn btn-danger">Log In</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-                
-            
-            
+
+
+                        <% if(errorMsg){ %>
+                            <div class="row">
+                                <p class="text-danger">
+                                    <%= errorMsg %>
+                                </p>
+                            </div>
+                            <% } else{%>
+                                <br>
+                                <%}%>
+
+                                    ¿No tienes cuenta? <a href="/sign-in">Regístrate!</a>
+
+                                    <div class="row">
+                                        <div class="offset-2 offset-sm-4 col-8 col-sm-4 d-grid padngFila">
+                                            <button type="submit" class="btn btn-danger">Log In</button>
+                                        </div>
+                                    </div>
+                    </form>
+                </div>
+
+
+
         </div>
-    </div>
-    <%- include("footer")%>
+        </div>
+        <%- include("footer")%>
