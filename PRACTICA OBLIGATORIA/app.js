@@ -176,12 +176,30 @@ app.post("/searchAlerts", function(request, response) {
     else {
         console.log(text)
         text = '%' + text + '%'
-        daoA.getAlertsByText(text, email, function(err, rows) {
+        daoA.getAlertsByUserAndText(text, email, function(err, rows) {
             if (err)
                 console.log(err)
             else {
                 console.log(rows)
                 response.render("index", { email: request.session.currentUser, alerts: rows });
+            }
+        })
+    }
+})
+
+app.post("/searchAlertsAdmin", function(request, response) {
+    let email = request.session.currentUser
+    let text = request.body.search
+    if (text == "")
+        response.redirect("/indexAdmin")
+    else {
+        text = '%' + text + '%'
+        daoA.getAlertsByText(text, function(err, rows) {
+            if (err)
+                console.log(err)
+            else {
+                console.log(rows)
+                response.render("indexAdmin", { email: request.session.currentUser, alerts: rows });
             }
         })
     }
