@@ -168,6 +168,25 @@ app.post("/insertAlert", function(request, response) {
     })
 })
 
+app.post("/searchAlerts", function(request, response) {
+    let email = request.session.currentUser
+    let text = request.body.search
+    if (text == "")
+        response.redirect("/index")
+    else {
+        console.log(text)
+        text = '%' + text + '%'
+        daoA.getAlertsByText(text, email, function(err, rows) {
+            if (err)
+                console.log(err)
+            else {
+                console.log(rows)
+                response.render("index", { email: request.session.currentUser, alerts: rows });
+            }
+        })
+    }
+})
+
 app.post("/sign-in", function(request, response) {
     var number = /[0-9]/
     var alphaNumeric = /^[a-z0-9]+$/i

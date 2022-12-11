@@ -25,6 +25,25 @@ class DAOAlerts {
         });
     }
 
+    getAlertsByText(text, email, callback) {
+        this.pool.getConnection(function(err, connection) {
+            if (err)
+                callback(err)
+            else {
+                connection.query("SELECT * FROM `ucm_aw_cau_avi_avisos` AS avi, ucm_aw_cau_avus_avisosusuarios AS avus, ucm_aw_cau_usu_usuarios AS us WHERE avi.id = avus.id_aviso AND avus.id_usuario = us.id AND us.email = ? AND avi.texto LIKE ? ", [email, text],
+                    function(err, rows) {
+                        if (err)
+                            callback("Error en SELECT * FROM `ucm_aw_cau_avi_avisos`")
+                        else {
+                            callback(null, rows)
+                        }
+
+                    }
+                )
+            }
+        })
+    }
+
     //OBTENER TODAS LAS ALERTAS
     getAllAlerts(callback) {
         this.pool.getConnection(function(err, connection) {
