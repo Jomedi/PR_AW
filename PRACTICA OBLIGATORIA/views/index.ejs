@@ -167,36 +167,32 @@
                         <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalNuevoAviso"><i class="bi bi-envelope-plus"></i></button>
                     </div>
                 </div>
-                <form>
 
+                <!-- Modal -->
+                <div class="modal fade" id="modalNuevoAviso" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
 
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Aviso NºXAVISO: Sugerencia</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form action="/insertAlert" method="POST">
+                                <div class="modal-body">
 
-
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="modalNuevoAviso" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <form action="/insertAlert" method="post">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Aviso NºXAVISO: Sugerencia</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-
-                                        <h6>Tipo: </h6>
-                                        <select name="tipo" class="form-select" aria-label="Default select example" id="tipo" onChange="activar(this.form)">
+                                    <h6>Tipo: </h6>
+                                    <select name="tipo" class="form-select" aria-label="Default select example" id="tipo" onChange="activar(this.form)">
                                         <option selected disabled>Seleccione un tipo</option>
                                         <option value="sugerencia">Sugerencia</option>
                                         <option value="incidencia">Incidencia</option>
                                         <option value="felicitacion">Felicitación</option>
                                     </select>
-                                        <br>
-                                        <h6>Subtipo: </h6>
+                                    <br>
+                                    <h6>Subtipo: </h6>
 
-                                        <div id="suginc" style="display:none;">
-                                            <%if(perfilUniv == "alumno"){%>
-                                                <select class="form-select form-control item" aria-label="Default select example" name="subtipoSubtipo" id="subtipo">
+                                    <div id="suginc" style="display:none;">
+                                        <%if(perfilUniv == "alumno"){%>
+                                            <select class="form-select form-control item" aria-label="Default select example" name="subtipoSubtipo" id="subtipo">
                                                 <option selected value="certificado digital">Certificado digital de persona física</option>
                                                 <option value="registro electronico">Registro electrónico</option>
                                                 <option value="sede electronica">Sede electrónica</option>
@@ -211,8 +207,8 @@
                                                 <option value="plataforma">Plataforma de cursos online Privados</option>
                                                 <option value="portal eventos">Portal de Eventos</option>
                                             </select>
-                                                <%}else if(perfilUniv == "pas" && tecnico == "0"){%>
-                                                    <select class="form-select form-control item" aria-label="Default select example" name="subtipoSubtipo" id="subtipo">
+                                            <%}else if(perfilUniv == "pas" && tecnico == "0"){%>
+                                                <select class="form-select form-control item" aria-label="Default select example" name="subtipoSubtipo" id="subtipo">
                                                 <option selected value="certificado digital">Certificado digital de persona física</option>
                                                 <option  value="certificado electronico">Certificado electrónico de empleado público</option>
                                                 <option value="registro electronico">Registro electrónico</option>
@@ -238,8 +234,8 @@
                                                 <option value="portal eventos">Portal de Eventos</option>
                                                 <option value="redirecciones web">Redirecciones web</option>
                                             </select>
-                                                    <%}else if(perfilUniv == "pdi"){%>
-                                                        <select class="form-select form-control item" aria-label="Default select example" name="subtipoSubtipo" id="subtipo">
+                                                <%}else if(perfilUniv == "pdi"){%>
+                                                    <select class="form-select form-control item" aria-label="Default select example" name="subtipoSubtipo" id="subtipo">
                                                 <option selected value="certificado digital">Certificado digital de persona física</option>
                                                 <option  value="certificado electronico">Certificado electrónico de empleado público</option>
                                                 <option value="registro electronico">Registro electrónico</option>
@@ -265,8 +261,8 @@
                                                 <option value="portal eventos">Portal de Eventos</option>
                                                 <option value="redirecciones web">Redirecciones web</option>
                                             </select>
-                                                        <%}else{%>
-                                                            <select class="form-select form-control item" aria-label="Default select example" name="subtipoSubtipo" id="subtipo">
+                                                    <%}else{%>
+                                                        <select class="form-select form-control item" aria-label="Default select example" name="subtipoSubtipo" id="subtipo">
                                                 <option value="registro electronico">Registro electrónico</option>
                                                 <option value="sede electronica">Sede electrónica</option>
                                                 <option value="correo electronico">Correo electrónico</option>
@@ -274,10 +270,10 @@
                                                 <option value="cuenta de alumno">Cuenta de Alumno</option>
                                                 <option value="portal eventos">Portal de Eventos</option>
                                             </select>
-                                                            <%}%>
-                                        </div>
-                                        <div id="felic" style="display:none;">
-                                            <select class="form-select form-control item" aria-label="Default select example" name="" id="">
+                                                        <%}%>
+                                    </div>
+                                    <div id="felic" style="display:none;">
+                                        <select class="form-select form-control item" aria-label="Default select example" name="subtipoSubtipoFel" id="subtipoFel">
                                             <option selected value="archivo univ">Archivo Universitario</option>
                                             <option value="asesoria juridica">Asesoría Jurídica</option>
                                             <option value="biblioteca">Biblioteca</option>
@@ -292,26 +288,27 @@
                                             <option value="servicio de cafeteria">Servicio de Cafetería</option>
                                             <option value="toda la uni">Toda la Universidad</option>
                                         </select>
-                                        </div>
-                                        <div id="defecto" style="display:inline;">
-                                            <select class="form-select form-control item" aria-label="Default select example" name="" id="" disabled>
+                                    </div>
+                                    <div id="defecto" style="display:inline;">
+                                        <select class="form-select form-control item" aria-label="Default select example" name="" id="" disabled>
                                         </select>
-                                        </div>
-
-                                        <br>
-
-                                        <h6>Observaciones: </h6>
-                                        <textarea class="form-control item" rows="3" id="texto" name="texto"></textarea>
-
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-dark" data-bs-dismiss="modal">Enviar Aviso</button>
-                                    </div>
+
+                                    <br>
+
+                                    <h6>Observaciones: </h6>
+                                    <textarea class="form-control item" rows="3" id="texto" name="texto"></textarea>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-dark" data-bs-dismiss="modal">Enviar Aviso</button>
                                 </div>
                             </form>
                         </div>
+
                     </div>
+                </div>
 
 
 
-                    <%- include("footer")%>
+                <%- include("footer")%>

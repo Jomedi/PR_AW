@@ -161,7 +161,7 @@ app.get("/indexAdmin", function(request, response) {
                                     console.log(err4)
                                 else {
                                     console.log("Obtención de técnicos, Mis Avisos, Avisos Entrantes correcta")
-                                    response.render("indexAdmin", { nombre: request.session.currentName,pass: request.session.pass, email: request.session.currentUser, allAlerts: result, alerts: result2, tecnicos: result3, users: result4, perfilUniv: request.session.perfilUniversitario });
+                                    response.render("indexAdmin", { nombre: request.session.currentName, pass: request.session.pass, email: request.session.currentUser, allAlerts: result, alerts: result2, tecnicos: result3, users: result4, perfilUniv: request.session.perfilUniversitario });
                                 }
                             })
                         }
@@ -183,12 +183,18 @@ app.get("/sign-in", function(request, response) {
 });
 
 app.post("/insertAlert", function(request, response) {
+    let subtipo;
+    if (request.body.tipo == "felicitacion")
+        subtipo = request.body.subtipoSubtipoFel
+    else
+        subtipo = request.body.subtipoSubtipo
+
     let aviso = {
         "tipo": request.body.tipo,
-        "subtipo": request.body.subtipo,
+        "subtipo": subtipo,
         "texto": request.body.texto
     }
-
+    console.log(aviso)
     let email = request.session.currentUser
 
     daoA.addNewAlert(email, aviso, function(err, ok) {
