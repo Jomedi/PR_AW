@@ -341,3 +341,14 @@ app.post("/updateEliminateAdmin", function(request, response) {
         }
     })
 })
+
+app.post("/updateEliminateUser", function(request, response) {
+    daoU.updateEliminateUser(request.body.idUsuario, function(err, result) {
+        if (err)
+            console.log(err)
+        else {
+            console.log("Se ha eliminado el usuario correctamente")
+            response.redirect("/indexAdmin")
+        }
+    })
+})

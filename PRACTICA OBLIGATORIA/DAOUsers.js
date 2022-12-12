@@ -33,7 +33,7 @@ class DAOUsers {
                 callback(new Error("Error de conexión a la base de datos"));
             } else {
                 connection.query(
-                    "SELECT * FROM ucm_aw_cau_usu_usuarios WHERE email = ? AND password = ?", [email, password],
+                    "SELECT * FROM ucm_aw_cau_usu_usuarios WHERE email = ? AND password = ? AND activo = 1", [email, password],
                     function(err, rows) {
                         connection.release(); // devolver al pool la conexión
                         if (err)
@@ -103,6 +103,22 @@ class DAOUsers {
                             callback(err)
                         else
                             callback(null, rows)
+                    })
+            }
+        })
+    }
+
+    updateEliminateUser(id, callback) {
+        this.pool.getConnection(function(err, connection) {
+            if (err)
+                callback(err)
+            else {
+                connection.query("UPDATE `ucm_aw_cau_usu_usuarios` SET `activo`=0 WHERE id = ?", [id],
+                    function(err, result) {
+                        if (err)
+                            callback(err)
+                        else
+                            callback(null, true)
                     })
             }
         })
