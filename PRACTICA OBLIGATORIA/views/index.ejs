@@ -23,153 +23,158 @@
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
                                 <br>
-                                <table class="table">
-                                    <thead class="table-success">
-                                        <tr>
-                                            <th scope="col">Fecha</th>
-                                            <th scope="col">Texto</th>
-                                            <th scope="col">Tipo</th>
-                                            <th scope="col">Técnico</th>
-                                        </tr>
-                                    </thead>
-                                    <% alerts.forEach(a => {%>
-                                        <%if(a.estado == "asignado" || a.estado == "por asignar"){%>
-                                            <tbody class="table-group-divider">
-                                                <tr>
-                                                    <th scope="row">
-                                                        <%=a.fecha%>
-                                                    </th>
-                                                    <td data-bs-toggle="modal" data-bs-target="#exampleModal<%=a.id%>" style="cursor:pointer;">
-                                                        <p class="overflow-ellipsis">
-                                                            <%=a.texto%>
-                                                        </p>
-                                                    </td>
-                                                    <td>
-                                                        <%=a.tipo%>
-                                                    </td>
-                                                    <td>
-                                                        <%=a.email_tecnico%>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="exampleModal<%=a.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Aviso
-                                                                <%= a.id_aviso%>:
-                                                                    <%=a.tipo%>
-                                                            </h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <h4>
-                                                                <%=a.nombre%>
-                                                            </h4>
-                                                            <h6>Fecha:
-                                                                <%=a.fecha%>
-                                                            </h6>
-                                                            <h6>Comunicaciones:
-                                                                <%=a.subtipo %>
-                                                            </h6>
-                                                            <h6>Perfil:
-                                                                <%=a.tipo_usuario %>
-                                                            </h6>
-                                                            <br>
-                                                            <h6>Observaciones: </h6>
-                                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled><%=a.texto %></textarea>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <h6>Comentarios del Técnico: </h6>
-                                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled><%=a.comentarioTecn %></textarea>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class="table-success">
+                                            <tr>
+                                                <th scope="col">Fecha</th>
+                                                <th scope="col">Texto</th>
+                                                <th scope="col">Tipo</th>
+                                                <th scope="col">Técnico</th>
+                                            </tr>
+                                        </thead>
+                                        <% alerts.forEach(a => {%>
+                                            <%if(a.estado == "asignado" || a.estado == "por asignar"){%>
+                                                <tbody class="table-group-divider">
+                                                    <tr>
+                                                        <th scope="row">
+                                                            <%=a.fecha%>
+                                                        </th>
+                                                        <td data-bs-toggle="modal" data-bs-target="#exampleModal<%=a.id%>" style="cursor:pointer;">
+                                                            <p class="overflow-ellipsis">
+                                                                <%=a.texto%>
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <%=a.tipo%>
+                                                        </td>
+                                                        <td>
+                                                            <%=a.email_tecnico%>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+    
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="exampleModal<%=a.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Aviso
+                                                                    <%= a.id_aviso%>:
+                                                                        <%=a.tipo%>
+                                                                </h1>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <h4>
+                                                                    <%=a.nombre%>
+                                                                </h4>
+                                                                <h6>Fecha:
+                                                                    <%=a.fecha%>
+                                                                </h6>
+                                                                <h6>Comunicaciones:
+                                                                    <%=a.subtipo %>
+                                                                </h6>
+                                                                <h6>Perfil:
+                                                                    <%=a.tipo_usuario %>
+                                                                </h6>
+                                                                <br>
+                                                                <h6>Observaciones: </h6>
+                                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled><%=a.texto %></textarea>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <h6>Comentarios del Técnico: </h6>
+                                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled><%=a.comentarioTecn %></textarea>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <%}%>
-                                                <% }) %>
-                                </table>
+                                                <%}%>
+                                                    <% }) %>
+                                    </table>
+                                </div>
+                                
 
                                 <div class="row">
                                     <div class="offset-11 col-1 d-grid">
-                                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalNuevoAviso"><i class="bi bi-envelope-plus"></i></button>
+                                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalNuevoAviso"><i class="bi bi-envelope-plus tamanio"></i></button>
                                     </div>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
                                 <br>
-                                <table class="table">
-                                    <thead class="table-secondary">
-                                        <tr>
-                                            <th scope="col">Tipo</th>
-                                            <th scope="col">Fecha</th>
-                                            <th scope="col">Texto</th>
-                                            <th scope="col">Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <% alerts.forEach(h => {%>
-                                        <%if(h.estado == "terminado" || h.estado == "eliminado"){%>
-                                            <tbody class="table-group-divider">
-                                                <tr>
-                                                    <th scope="row">
-                                                        <%=h.tipo%>
-                                                    </th>
-                                                    <td>
-                                                        <%=h.fecha%>
-                                                    </td>
-                                                    <td>
-                                                        <p class="overflow-ellipsis">
-                                                            <%=h.texto%>
-                                                        </p>
-                                                    </td>
-                                                    <td><i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="#modalVisualizacionCERRAR<%=h.id%>" style="cursor:pointer;"></i></i>
-                                                    </td>
-                                                </tr>
-
-                                            </tbody>
-
-                                            <!-- Modal Visualizar Texto -->
-                                            <div class="modal fade" id="modalVisualizacionCERRAR<%=h.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                                                Aviso
-                                                                <%=h.id_aviso%>:
-                                                                    <%=h.tipo%>
-                                                            </h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <h4>
-                                                                <%=h.nombre%>
-                                                            </h4>
-                                                            <h6>Fecha:
-                                                                <%=h.fecha %>
-                                                            </h6>
-                                                            <h6>Comunicaciones:
-                                                                <%=h.subtipo %>
-                                                            </h6>
-                                                            <h6>Perfil:
-                                                                <%=h.tipo_usuario %>
-                                                            </h6>
-                                                            <br>
-                                                            <h6>Observaciones: </h6>
-                                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled><%=h.texto %></textarea>
-                                                            <br>
-                                                            <h6>Comentarios del Técnico: </h6>
-                                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled><%=h.comentarioTecn %></textarea>
-                                                        </div>
-                                                        <div class="modal-footer">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class="table-secondary">
+                                            <tr>
+                                                <th scope="col">Tipo</th>
+                                                <th scope="col">Fecha</th>
+                                                <th scope="col">Texto</th>
+                                                <th scope="col" class="text-center">Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <% alerts.forEach(h => {%>
+                                            <%if(h.estado == "terminado" || h.estado == "eliminado"){%>
+                                                <tbody class="table-group-divider">
+                                                    <tr>
+                                                        <th scope="row">
+                                                            <%=h.tipo%>
+                                                        </th>
+                                                        <td>
+                                                            <%=h.fecha%>
+                                                        </td>
+                                                        <td>
+                                                            <p class="overflow-ellipsis">
+                                                                <%=h.texto%>
+                                                            </p>
+                                                        </td>
+                                                        <td class="text-center"><i class="bi bi-eye-fill tamanio" data-bs-toggle="modal" data-bs-target="#modalVisualizacionCERRAR<%=h.id%>" style="cursor:pointer;"></i></i>
+                                                        </td>
+                                                    </tr>
+    
+                                                </tbody>
+    
+                                                <!-- Modal Visualizar Texto -->
+                                                <div class="modal fade" id="modalVisualizacionCERRAR<%=h.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                                                    Aviso
+                                                                    <%=h.id_aviso%>:
+                                                                        <%=h.tipo%>
+                                                                </h1>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <h4>
+                                                                    <%=h.nombre%>
+                                                                </h4>
+                                                                <h6>Fecha:
+                                                                    <%=h.fecha %>
+                                                                </h6>
+                                                                <h6>Comunicaciones:
+                                                                    <%=h.subtipo %>
+                                                                </h6>
+                                                                <h6>Perfil:
+                                                                    <%=h.tipo_usuario %>
+                                                                </h6>
+                                                                <br>
+                                                                <h6>Observaciones: </h6>
+                                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled><%=h.texto %></textarea>
+                                                                <br>
+                                                                <h6>Comentarios del Técnico: </h6>
+                                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled><%=h.comentarioTecn %></textarea>
+                                                            </div>
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <%}%>
-                                                <% }) %>
-                                </table>
+                                                <%}%>
+                                                    <% }) %>
+                                    </table>
+                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -181,7 +186,7 @@
                         <div class="modal-content">
 
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Aviso NºXAVISO: Sugerencia</h1>
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo aviso</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <form action="/insertAlert" method="POST">

@@ -73,3 +73,7 @@ p {
        see the 'Browser compatibility' section below */
     text-overflow: " [..]";
 }
+
+.tamanio{
+font-size: 20px;
+}
