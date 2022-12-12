@@ -221,7 +221,7 @@ app.post("/searchAlerts", function(request, response) {
                 console.log(err)
             else {
                 console.log("Búsqueda correcta")
-                response.render("index", { email: request.session.currentUser, alerts: rows });
+                response.render("index", { nombre: request.session.currentName, email: request.session.currentUser, alerts: rows, fecha: request.session.date, perfilUniv: request.session.perfilUniversitario, pass: request.session.pass, historical: rows1 });
             }
         })
     }
