@@ -7,6 +7,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const DAOUsers = require("./DAOUsers");
 const DAOAlerts = require("./DAOAlerts");
+const dateFormater = require("./dateFormater")
 const fs = require("fs");
 
 // Crear un servidor Express.js
@@ -14,6 +15,9 @@ const app = express();
 
 // Crear un pool de conexiones a la base de datos de MySQL
 const pool = mysql.createPool(config.mysqlConfig);
+
+// Crear una instancia de dateFormater
+const dateFormat = new dateFormater();
 
 // Crear una instancia de DAOUsers
 const daoU = new DAOUsers(pool);
@@ -129,7 +133,7 @@ app.get("/index", function(request, response) {
         if (err)
             console.log("Se ha producido un error al leer las alertas del usuario");
         else {
-            result = daoU.changeDateFormat(result)
+            result = dateFormat.changeDateFormat(result)
             response.render("index", {
                 nombre: request.session.currentName,
                 pass: request.session.pass,
@@ -161,13 +165,15 @@ app.get("/indexAdmin", function(request, response) {
                                 if (err4)
                                     console.log(err4)
                                 else {
+
+                                    console.log("Obtención de técnicos, Mis Avisos, Avisos Entrantes correcta")
+                                    result = dateFormat.changeDateFormat(result)
+                                    result2 = dateFormat.changeDateFormat(result2)
+                                    result4 = dateFormat.changeDateFormat(result4)
                                     request.session.allAlerts = result
                                     request.session.alerts = result2
                                     request.session.tecnicos = result3
                                     request.session.users = result4
-                                    console.log("Obtención de técnicos, Mis Avisos, Avisos Entrantes correcta")
-                                    result = daoU.changeDateFormat(result)
-                                    result2 = daoU.changeDateFormat(result2)
                                     response.render("indexAdmin", {
                                         nombre: request.session.currentName,
                                         pass: request.session.pass,
@@ -236,7 +242,7 @@ app.post("/searchAdmin", function(request, response) {
                 console.log(err)
             } else {
                 console.log("Búsqueda correcta")
-                result = daoU.changeDateFormat(result)
+                result = dateFormat.changeDateFormat(result)
                 response.render("indexAdmin", {
                     nombre: request.session.currentName,
                     pass: request.session.pass,
@@ -270,8 +276,8 @@ app.post("/searchAdmin", function(request, response) {
                                         console.log(err4)
                                     else {
                                         console.log("Búsqueda de técnicos, Mis Avisos, Avisos Entrantes correcta")
-                                        result = daoU.changeDateFormat(result)
-                                        result2 = daoU.changeDateFormat(result2)
+                                        result = dateFormat.changeDateFormat(result)
+                                        result2 = dateFormat.changeDateFormat(result2)
                                         response.render("indexAdmin", {
                                             nombre: request.session.currentName,
                                             pass: request.session.pass,
@@ -308,7 +314,7 @@ app.post("/searchAlerts", function(request, response) {
                 console.log(err)
             else {
                 console.log("Búsqueda correcta")
-                result = daoU.changeDateFormat(result)
+                result = dateFormat.changeDateFormat(result)
                 response.render("index", {
                     nombre: request.session.currentName,
                     pass: request.session.pass,

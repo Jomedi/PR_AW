@@ -53,20 +53,26 @@
                                                         <% fel++%>
                                                             <%}}%>
                                                                 <%})%>
-                                                                    <h6>Avisos realizados:
-                                                                        <%= inc + sug + fel %>
-                                                                    </h6>
-                                                                    <h6> Incidencias:
-                                                                        <%=inc%>
-                                                                    </h6>
+                                                                    <%if(tecnico == 1){%>
+                                                                        <h6>Avisos gestionados:
+                                                                            <%= inc + sug + fel %>
+                                                                        </h6>
+                                                                        <%}else{%>
+                                                                            <h6>Avisos realizados:
+                                                                                <%= inc + sug + fel %>
+                                                                            </h6>
+                                                                            <%}%>
+                                                                                <h6> Incidencias:
+                                                                                    <%=inc%>
+                                                                                </h6>
 
-                                                                    <h6> Sugerencias:
-                                                                        <%=sug%>
-                                                                    </h6>
+                                                                                <h6> Sugerencias:
+                                                                                    <%=sug%>
+                                                                                </h6>
 
-                                                                    <h6> Felicitaciones:
-                                                                        <%=fel%>
-                                                                    </h6>
+                                                                                <h6> Felicitaciones:
+                                                                                    <%=fel%>
+                                                                                </h6>
 
                     </div>
                 </div>

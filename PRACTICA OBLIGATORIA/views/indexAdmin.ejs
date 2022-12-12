@@ -86,7 +86,7 @@
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <form class="d-flex" role="search" action="/updateAsignAdmin" method="POST">
-    
+
                                                                 <div class="modal-header">
                                                                     <h1 class="modal-title fs-5" id="exampleModalLabel">Aviso
                                                                         <%=a.id%>:
@@ -126,7 +126,7 @@
                                                                 </div>
                                                             </form>
                                                         </div>
-    
+
                                                     </div>
                                                 </div>
                                                 <!-- Modal Eliminar Aviso -->
@@ -134,7 +134,7 @@
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <form class="d-flex" role="search" action="/updateEliminateAdmin" method="POST">
-    
+
                                                                 <div class="modal-header">
                                                                     <h1 class="modal-title fs-5" id="exampleModalLabel">Aviso
                                                                         <%=a.id%>:
@@ -169,14 +169,14 @@
                                                                 </div>
                                                             </form>
                                                         </div>
-    
+
                                                     </div>
                                                 </div>
                                                 <%}%>
                                                     <% }) %>
                                     </table>
                                 </div>
-                                
+
                             </div>
 
                             <!-- MIS AVISOS-->
@@ -195,7 +195,7 @@
                                         </thead>
                                         <% alerts.forEach(a => {%>
                                             <%if(a.estado == "asignado" && a.activo == 1){%>
-    
+
                                                 <tbody class="table-group-divider">
                                                     <tr>
                                                         <th scope="row">
@@ -208,12 +208,12 @@
                                                             <p class="overflow-ellipsis">
                                                                 <%=a.texto%>
                                                             </p>
-    
+
                                                         </td>
                                                         <td class="text-center"><i class="bi bi-eye-fill tamanio" data-bs-toggle="modal" data-bs-target="#modalVisualizacion<%=a.id%>" style="cursor:pointer;color: black;"></i>
                                                             <i class="bi bi-trash-fill tamanio" data-bs-toggle="modal" data-bs-target="#modal2EliminarAviso<%=a.id%>" style="cursor:pointer;color: black;"></i></td>
-    
-    
+
+
                                                     </tr>
                                                 </tbody>
                                                 <!-- Modal Visualización -->
@@ -262,7 +262,7 @@
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <form class="d-flex" role="search" action="/updateEliminateAdmin" method="POST">
-    
+
                                                                 <div class="modal-header">
                                                                     <h1 class="modal-title fs-5" id="exampleModalLabel">Aviso
                                                                         <%=a.id%>:
@@ -297,14 +297,14 @@
                                                                 </div>
                                                             </form>
                                                         </div>
-    
+
                                                     </div>
                                                 </div>
                                                 <%}%>
                                                     <% }) %>
                                     </table>
                                 </div>
-                                
+
                             </div>
 
                             <!-- HISTÓRICO DE AVISOS -->
@@ -369,7 +369,7 @@
                                                                 <h6>Comentarios del Técnico: </h6>
                                                                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled><%=a.comentarioTecn %></textarea>
                                                             </div>
-                                                            
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -377,7 +377,7 @@
                                                     <% }) %>
                                     </table>
                                 </div>
-                                
+
                             </div>
 
                             <!-- GESTIÓN DE USUARIOS -->
@@ -412,14 +412,14 @@
                                                                             <td class="text-center"><i class="bi bi-trash-fill tamanio" style="color: rgb(182, 179, 179);"></i></td>
                                                                             <%}%>
                                                     </tr>
-    
+
                                                 </tbody>
                                                 <!-- Modal Eliminar Usuario -->
                                                 <div class="modal fade" id="modal3EliminarUsuario<%=u.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <form class="d-flex" role="search" action="/updateEliminateUser" method="POST">
-    
+
                                                                 <div class="modal-header">
                                                                     <h1 class="modal-title fs-5" id="exampleModalLabel">Usuario
                                                                         <%=u.id%>
@@ -432,11 +432,11 @@
                                                                         <%=u.nombre%>
                                                                     </h4>
                                                                     <h6>Fecha:
-    
+                                                                        <%=u.fecha%>
                                                                     </h6>
                                                                     <h6>Email:
                                                                         <%=u.email%>
-    
+
                                                                     </h6>
                                                                     <h6>Perfil:
                                                                         <%=u.tipo_usuario%>
@@ -447,24 +447,24 @@
                                                                             <%=u.num_empleado%>
                                                                         </h6>
                                                                         <%}%>
-    
+
                                                                             <br>
                                                                 </div>
-    
+
                                                                 <div class="modal-footer">
                                                                     <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Eliminar Usuario</button>
                                                                 </div>
                                                             </form>
                                                         </div>
-    
+
                                                     </div>
                                                 </div>
                                                 <%}%>
                                                     <%})%>
-    
+
                                     </table>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
