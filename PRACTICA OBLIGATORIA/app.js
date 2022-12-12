@@ -161,7 +161,7 @@ app.get("/indexAdmin", function(request, response) {
                                     console.log(err4)
                                 else {
                                     console.log("Obtención de técnicos, Mis Avisos, Avisos Entrantes correcta")
-                                    response.render("indexAdmin", { nombre: request.session.currentName, email: request.session.currentUser, allAlerts: result, alerts: result2, tecnicos: result3, users: result4 });
+                                    response.render("indexAdmin", { nombre: request.session.currentName,pass: request.session.pass, email: request.session.currentUser, allAlerts: result, alerts: result2, tecnicos: result3, users: result4, perfilUniv: request.session.perfilUniversitario });
                                 }
                             })
                         }

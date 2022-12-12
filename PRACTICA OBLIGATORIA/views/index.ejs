@@ -39,7 +39,7 @@
                                                 <th scope="row">
                                                     <%=a.fecha%>
                                                 </th>
-                                                <td data-bs-toggle="modal" data-bs-target="#exampleModal<%=a.id%>">
+                                                <td data-bs-toggle="modal" data-bs-target="#exampleModal<%=a.id%>" style="cursor:pointer;">
                                                     <%=a.texto%>
                                                 </td>
                                                 <td>
@@ -97,8 +97,8 @@
                                         <tr>
                                             <th scope="row"><%=h.tipo%></th>
                                             <td><%=h.fecha%></td>
-                                            <td><%=h.texto%></td>
-                                            <td><i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="#modalVisualizacionCERRAR<%=h.id%>"></i></td>
+                                            <td ><%=h.texto%></td>
+                                            <td><i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="#modalVisualizacionCERRAR<%=h.id%>" style="cursor:pointer;"></i></i></td>
                                         </tr>
 
                                     </tbody>
