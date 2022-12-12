@@ -64,7 +64,6 @@ class DAOAlerts {
 
     //OBTENER ALERTAS QUE CONTIENEN "TEXT" DENTRO DEL TEXTO
     searchAlertsByText(text, callback) {
-        console.log(text)
         this.pool.getConnection(function(err, connection) {
             if (err)
                 callback(err)
@@ -192,12 +191,29 @@ class DAOAlerts {
     }
 
 
-    updateAdminAlert(email, id_usuario, id_aviso, callback) {
+    updateAsignAdminAlert(email, id_usuario, id_aviso, callback) {
         this.pool.getConnection(function(err, connection) {
             if (err)
                 callback(err)
             else {
                 connection.query("UPDATE `ucm_aw_cau_avus_avisosusuarios` SET `email_tecnico`= ?, `estado`='asignado' WHERE id_usuario = ? AND id_aviso = ?", [email, id_usuario, id_aviso],
+                    function(err, row) {
+                        if (err)
+                            callback(err)
+                        else {
+                            callback(null, row)
+                        }
+                    })
+            }
+        })
+    }
+
+    updateTerminateAdminAlert(email, id_usuario, id_aviso, message, callback) {
+        this.pool.getConnection(function(err, connection) {
+            if (err)
+                callback(err)
+            else {
+                connection.query("UPDATE `ucm_aw_cau_avus_avisosusuarios` SET `email_tecnico`= ?, `comentarioTecn`= ?, `estado`='terminado' WHERE id_usuario = ? AND id_aviso = ?", [email, message, id_usuario, id_aviso],
                     function(err, row) {
                         if (err)
                             callback(err)

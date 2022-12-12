@@ -133,7 +133,7 @@ app.get("/index", function(request, response) {
                     console.log("Se ha leido el historial de avisos del usuario con éxito ");
                     response.render("index", { nombre: request.session.currentName, historical: result1, alerts: result, tecnico: request.session.tecnico, perfilUniv: request.session.perfilUniversitario });
                 }
-        
+
             });
         }
 
@@ -151,12 +151,11 @@ app.get("/indexAdmin", function(request, response) {
                 if (err2)
                     console.log(err2)
                 else {
-                    console.log("Se han leído Mis Avisos con éxito")
                     daoU.getUsersAdmin(function(err3, result3) {
                         if (err3)
                             console.log(err3)
                         else {
-                            console.log("Obtención de técnicos con éxito")
+                            console.log("Obtención de técnicos, Mis Avisos, Avisos Entrantes correcta")
                             response.render("indexAdmin", { nombre: request.session.currentName, email: request.session.currentUser, allAlerts: result, alerts: result2, tecnicos: result3 });
                         }
                     })
@@ -207,7 +206,7 @@ app.post("/searchAlerts", function(request, response) {
             if (err)
                 console.log(err)
             else {
-                console.log(rows)
+                console.log("Búsqueda correcta")
                 response.render("index", { email: request.session.currentUser, alerts: rows });
             }
         })
@@ -293,18 +292,27 @@ app.get("/imagenUsuario", viewLogin, function(request, response) {
     });
 });
 
-app.post("/updateAdmin", function(request, response) {
-    console.log(request.session.currentUser, request.body.idUsuario, request.body.idAviso)
-    daoA.updateAdminAlert(request.session.currentUser, request.body.idUsuario, request.body.idAviso, function(err, result) {
+app.post("/updateAsignAdmin", function(request, response) {
+    daoA.updateAsignAdminAlert(request.session.currentUser, request.body.idUsuario, request.body.idAviso, function(err, result) {
         if (err)
             console.log(err)
-        else
+        else {
+            console.log("Se ha asignado el aviso correctamente")
             response.redirect("/indexAdmin")
+        }
+
     })
 })
 
-app.post("/eliminateAlert", function(request, response) {
+app.post("/updateTerminateAdmin", function(request, response) {
     console.log(request.body)
+    daoA.updateTerminateAdminAlert(request.session.currentUser, request.body.idUsuario, request.body.idAviso, request.body.comentarioTecn, function(err, result) {
+        if (err)
+            console.log(err)
+        else {
+            console.log("Se ha terminado el aviso correctamente")
+            response.redirect("/indexAdmin")
+        }
 
-
+    })
 })

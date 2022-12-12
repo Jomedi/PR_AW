@@ -49,7 +49,7 @@
                                                     <%=a.texto%>
                                                 </td>
                                                 <td>
-                                                    <%if(a.estado == "asignado"){%>
+                                                    <%if(a.estado == "asignado" || a.estado == "terminado"){%>
                                                         <i class="bi bi-person-fill icon-2x" style="color: rgb(182, 179, 179);"></i>
                                                         <%}else{%>
                                                             <i class="bi bi-person-fill icon-2x" data-id="a<%=a.id%>" data-bs-toggle="modal" data-bs-target="#modalAsignacion<%=a.id%>" style="cursor:pointer;color: black;"></i>
@@ -62,7 +62,7 @@
                                         <div class="modal fade" id="modalAsignacion<%=a.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
-                                                    <form class="d-flex" role="search" action="/updateAdmin" method="POST">
+                                                    <form class="d-flex" role="search" action="/updateAsignAdmin" method="POST">
 
                                                         <div class="modal-header">
                                                             <h1 class="modal-title fs-5" id="exampleModalLabel">Aviso
@@ -112,7 +112,7 @@
                                         <div class="modal fade" id="modalEliminarAviso<%=a.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
-                                                    <form class="d-flex" role="search" action="/eliminateAlert" method="POST">
+                                                    <form class="d-flex" role="search" action="/" method="POST">
 
                                                         <div class="modal-header">
                                                             <h1 class="modal-title fs-5" id="exampleModalLabel">Aviso
@@ -170,106 +170,115 @@
                                         </tr>
                                     </thead>
                                     <% alerts.forEach(a => {%>
-                                        <tbody class="table-group-divider">
-                                            <tr>
-                                                <th scope="row">
-                                                    <%=a.tipo%>
-                                                </th>
-                                                <td data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                    <%=a.fecha%>
-                                                </td>
-                                                <td>
-                                                    <%=a.texto%>
-                                                </td>
-                                                <td><i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="#modalVisualizacion<%=a.id%>" style="cursor:pointer;color: black;"></i>
-                                                    <i class="bi bi-trash-fill" data-bs-toggle="modal" data-bs-target="#modal2EliminarAviso<%=a.id%>" style="cursor:pointer;color: black;"></i></td>
-                                            </tr>
-                                        </tbody>
-                                        <!-- Modal Visualización -->
-                                        <div class="modal fade" id="modalVisualizacion<%=a.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Aviso
-                                                            <%= a.id_aviso%>:
-                                                                <%=a.tipo%>
-                                                        </h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <h4>
-                                                            <%=a.nombre%>
-                                                        </h4>
-                                                        <h6>Fecha:
-                                                            <%=a.fecha %>
-                                                        </h6>
-                                                        <h6>Comunicaciones:
-                                                            <%=a.subtipo %>
-                                                        </h6>
-                                                        <h6>Perfil:
-                                                            <%=a.tipo_usuario %>
-                                                        </h6>
-                                                        <br>
-                                                        <h6>Observaciones: </h6>
-                                                        <div style="border: 2px solid;">
-                                                            <%=a.texto %>
-                                                        </div>
-                                                        <br>
-                                                        <h6>Comentarios del Técnico: </h6>
-                                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Terminar Aviso</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Modal Eliminar Aviso -->
-                                        <div class="modal fade" id="modal2EliminarAviso<%=a.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <form class="d-flex" role="search" action="/eliminateAlert" method="POST">
+                                        <%if(a.estado == "asignado"){%>
 
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Aviso
-                                                                <%=a.id%>:
-                                                                    <%=a.tipo%>
-                                                            </h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
+                                            <tbody class="table-group-divider">
+                                                <tr>
+                                                    <th scope="row">
+                                                        <%=a.tipo%>
+                                                    </th>
+                                                    <td data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                        <%=a.fecha%>
+                                                    </td>
+                                                    <td>
+                                                        <%=a.texto%>
+                                                    </td>
+                                                    <td><i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="#modalVisualizacion<%=a.id%>" style="cursor:pointer;color: black;"></i>
+                                                        <i class="bi bi-trash-fill" data-bs-toggle="modal" data-bs-target="#modal2EliminarAviso<%=a.id%>" style="cursor:pointer;color: black;"></i></td>
+
+
+                                                </tr>
+                                            </tbody>
+                                            <!-- Modal Visualización -->
+                                            <div class="modal fade" id="modalVisualizacion<%=a.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <form class="d-flex" role="search" action="/updateTerminateAdmin" method="POST">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Aviso
+                                                                    <%= a.id_aviso%>:
+                                                                        <%=a.tipo%>
+                                                                </h1>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
                                                             <input type="text" class="form-select" value="<%=a.id_aviso%>" style="display:none;" name="idAviso" id="idAviso">
                                                             <input type="text" class="form-select" value="<%=a.id_usuario%>" style="display:none;" name="idUsuario" id="idUsuario">
-                                                            <h4>
-                                                                <%=a.nombre%>
-                                                            </h4>
-                                                            <h6>Fecha:
-                                                                <%=a.fecha%>
-                                                            </h6>
-                                                            <h6>Comunicaciones:
-                                                                <%=a.subtipo%>
-                                                            </h6>
-                                                            <h6>Perfil:
-                                                                <%=a.tipo_usuario%>
-                                                            </h6>
-                                                            <br>
-                                                            <h6>Observaciones: </h6>
-                                                            <div style="border:2px solid;">
-                                                                <%=a.texto%>
+                                                            <div class="modal-body">
+                                                                <h4>
+                                                                    <%=a.nombre%>
+                                                                </h4>
+                                                                <h6>Fecha:
+                                                                    <%=a.fecha %>
+                                                                </h6>
+                                                                <h6>Comunicaciones:
+                                                                    <%=a.subtipo %>
+                                                                </h6>
+                                                                <h6>Perfil:
+                                                                    <%=a.tipo_usuario %>
+                                                                </h6>
+                                                                <br>
+                                                                <h6>Observaciones: </h6>
+                                                                <div style="border: 2px solid;">
+                                                                    <%=a.texto %>
+                                                                </div>
+                                                                <br>
+                                                                <h6>Comentarios del Técnico: </h6>
+                                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="comentarioTecn" id="comentarioTecn"></textarea>
                                                             </div>
-                                                            <br>
-                                                            <h6>Comentarios del técnico: </h6>
-                                                            <textarea class="form-control" rows="3" name="ComentarioTecn" id="ComentarioTecn"></textarea>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Eliminar Aviso</button>
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Terminar Aviso</button>
+                                                            </div>
                                                         </div>
                                                     </form>
                                                 </div>
-
                                             </div>
-                                        </div>
-                                        <% }) %>
+                                            <!-- Modal Eliminar Aviso -->
+                                            <div class="modal fade" id="modal2EliminarAviso<%=a.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <form class="d-flex" role="search" action="/eliminateAlert" method="POST">
+
+                                                            <div class="modal-header">
+                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Aviso
+                                                                    <%=a.id%>:
+                                                                        <%=a.tipo%>
+                                                                </h1>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <input type="text" class="form-select" value="<%=a.id_aviso%>" style="display:none;" name="idAviso" id="idAviso">
+                                                                <input type="text" class="form-select" value="<%=a.id_usuario%>" style="display:none;" name="idUsuario" id="idUsuario">
+                                                                <h4>
+                                                                    <%=a.nombre%>
+                                                                </h4>
+                                                                <h6>Fecha:
+                                                                    <%=a.fecha%>
+                                                                </h6>
+                                                                <h6>Comunicaciones:
+                                                                    <%=a.subtipo%>
+                                                                </h6>
+                                                                <h6>Perfil:
+                                                                    <%=a.tipo_usuario%>
+                                                                </h6>
+                                                                <br>
+                                                                <h6>Observaciones: </h6>
+                                                                <div style="border:2px solid;">
+                                                                    <%=a.texto%>
+                                                                </div>
+                                                                <br>
+                                                                <h6>Comentarios del técnico: </h6>
+                                                                <textarea class="form-control" rows="3" name="ComentarioTecn" id="ComentarioTecn"></textarea>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Eliminar Aviso</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <%}%>
+                                                <% }) %>
                                 </table>
                             </div>
 
@@ -286,46 +295,48 @@
                                         </tr>
                                     </thead>
                                     <% alerts.forEach(a => {%>
-                                        <tbody class="table-group-divider">
-                                            <tr>
-                                                <th scope="row">
-                                                    <%=a.tipo%>
-                                                </th>
-                                                <td data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                    <%=a.fecha%>
-                                                </td>
-                                                <td>
-                                                    <%=a.texto%>
-                                                </td>
-                                                <td><i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="#modalVisualizacionCERRARADMIN"></i></td>
-                                            </tr>
-                                        </tbody>
-                                        <!-- Modal Visualización -->
-                                        <div class="modal fade" id="modalVisualizacionCERRAR" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Aviso NºXAVISO: Sugerencia</h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <h4>Nombre Usuario</h4>
-                                                        <h6>Fecha: </h6>
-                                                        <h6>Comunicaciones: </h6>
-                                                        <h6>Perfil: </h6>
-                                                        <br>
-                                                        <h6>Observaciones: </h6>
-                                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                        <br>
-                                                        <h6>Comentarios del Técnico: </h6>
-                                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                    </div>
-                                                    <div class="modal-footer">
+                                        <%if(a.estado == "terminado"){%>
+                                            <tbody class="table-group-divider">
+                                                <tr>
+                                                    <th scope="row">
+                                                        <%=a.tipo%>
+                                                    </th>
+                                                    <td data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                        <%=a.fecha%>
+                                                    </td>
+                                                    <td>
+                                                        <%=a.texto%>
+                                                    </td>
+                                                    <td><i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="#modalVisualizacionCERRARADMIN"></i></td>
+                                                </tr>
+                                            </tbody>
+                                            <!-- Modal Visualización -->
+                                            <div class="modal fade" id="modalVisualizacionCERRAR" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Aviso NºXAVISO: Sugerencia</h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <h4>Nombre Usuario</h4>
+                                                            <h6>Fecha: </h6>
+                                                            <h6>Comunicaciones: </h6>
+                                                            <h6>Perfil: </h6>
+                                                            <br>
+                                                            <h6>Observaciones: </h6>
+                                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                            <br>
+                                                            <h6>Comentarios del Técnico: </h6>
+                                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <% }) %>
+                                            <%}%>
+                                                <% }) %>
                                 </table>
                             </div>
 

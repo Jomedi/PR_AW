@@ -84,10 +84,25 @@ class DAOUsers {
                         connection.release()
                         if (err)
                             callback(err)
-                        else {
-                            console.log("Técnico asignado correctamente")
+                        else
                             callback(null, rows)
-                        }
+                    })
+            }
+        })
+    }
+
+    getAllUsers(callback) {
+        this.pool.getConnection(function(err, connection) {
+            if (err)
+                callback(err)
+            else {
+                connection.query("SELECT * FROM ucm_aw_cau_usu_usuarios",
+                    function(err, rows) {
+                        connection.release()
+                        if (err)
+                            callback(err)
+                        else
+                            callback(null, rows)
                     })
             }
         })
