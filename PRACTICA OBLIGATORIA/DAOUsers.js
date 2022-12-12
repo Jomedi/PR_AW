@@ -33,6 +33,22 @@ class DAOUsers {
         });
     }
 
+    searchUsersByName(nombre, callback) {
+        this.pool.getConnection(function(err, connection) {
+            if (err)
+                callback(err)
+            else {
+                connection.query("SELECT * FROM ucm_aw_cau_usu_usuarios WHERE nombre LIKE ?", [nombre],
+                    function(err, row) {
+                        if (err)
+                            callback(err)
+                        else
+                            callback(null, row)
+                    })
+            }
+        })
+    }
+
     isUserDeleted(email, callback) {
         this.pool.getConnection(function(err, connection) {
             if (err)
