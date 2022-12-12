@@ -46,8 +46,9 @@
                                     </div>
 
                                     <div class="col-md-6">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                         <div class="form-switch" id="flexSwitchCheckDiv">
-                                            <input name="ticTec" data-bs-toggle="collapse" data-bs-target="#hrefCollapse" aria-expanded="false" aria-controls="collapseExample" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" disabled>
+                                            <input name="ticTec" data-bs-toggle="collapse" data-bs-target="#hrefCollapse" aria-expanded="false" aria-controls="collapseExample" class="form-check-input" type="checkbox" id="flexSwitchCheckDisabled" disabled>
                                             <label class="form-label" for="PAS">Técnico</label>
                                             <div class="collapse" id="hrefCollapse">
                                                 <input name="numEmpl" type="text" class="form-control" placeholder="Nº de Empleado" disabled>
@@ -60,7 +61,7 @@
                                     </div>
 
                                     <div class="offset-xl-4 col-xl-4 d-grid">
-                                        <button type="submit" class="btn btn-danger">Sign in</button>
+                                        <button type="submit" class="btn btn-danger" onclick="recogeTecnico()">Sign in</button>
                                     </div>
                     </form>
                 </div>
@@ -69,10 +70,9 @@
                     <div class="offset-xl-10 col-xl-2 d-grid">
                         <a href="/login" role="button" class="btn btn-primary">Log in</a>
                     </div>
+
                 </div>
 
-        </div>
 
 
-
-        <%- include("footer")%>
+                <%- include("footer")%>
