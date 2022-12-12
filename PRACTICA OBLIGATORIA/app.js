@@ -130,7 +130,14 @@ app.get("/index", function(request, response) {
             console.log("Se ha producido un error al leer las alertas del usuario");
         else {
             result = daoU.changeDateFormat(result)
-            response.render("index", { nombre: request.session.currentName, pass: request.session.pass, alerts: result, tecnico: request.session.tecnico, perfilUniv: request.session.perfilUniversitario, fecha: request.session.date });
+            response.render("index", {
+                nombre: request.session.currentName,
+                pass: request.session.pass,
+                alerts: result,
+                tecnico: request.session.tecnico,
+                perfilUniv: request.session.perfilUniversitario,
+                fecha: request.session.date
+            });
         }
     })
 }); //{result: es la imagen que le pasas a image de la base de datos}
@@ -161,7 +168,18 @@ app.get("/indexAdmin", function(request, response) {
                                     console.log("Obtención de técnicos, Mis Avisos, Avisos Entrantes correcta")
                                     result = daoU.changeDateFormat(result)
                                     result2 = daoU.changeDateFormat(result2)
-                                    response.render("indexAdmin", { nombre: request.session.currentName, pass: request.session.pass, email: request.session.currentUser, allAlerts: result, alerts: result2, tecnicos: result3, users: result4, perfilUniv: request.session.perfilUniversitario, fecha: request.session.date });
+                                    response.render("indexAdmin", {
+                                        nombre: request.session.currentName,
+                                        pass: request.session.pass,
+                                        email: request.session.currentUser,
+                                        allAlerts: result,
+                                        alerts: result2,
+                                        tecnicos: result3,
+                                        users: result4,
+                                        perfilUniv: request.session.perfilUniversitario,
+                                        fecha: request.session.date,
+                                        tecnico: request.session.tecnico
+                                    });
                                 }
                             })
                         }
@@ -228,7 +246,8 @@ app.post("/searchAdmin", function(request, response) {
                     tecnicos: request.session.tecnicos,
                     users: result,
                     perfilUniv: request.session.perfilUniversitario,
-                    fecha: request.session.date
+                    fecha: request.session.date,
+                    tecnico: request.session.tecnico
                 })
             }
         })
@@ -262,7 +281,8 @@ app.post("/searchAdmin", function(request, response) {
                                             tecnicos: result3,
                                             users: result4,
                                             perfilUniv: request.session.perfilUniversitario,
-                                            fecha: request.session.date
+                                            fecha: request.session.date,
+                                            tecnico: request.session.tecnico
                                         });
                                     }
                                 })
@@ -295,7 +315,8 @@ app.post("/searchAlerts", function(request, response) {
                     alerts: result,
                     tecnico: request.session.tecnico,
                     perfilUniv: request.session.perfilUniversitario,
-                    fecha: request.session.date
+                    fecha: request.session.date,
+                    tecnico: request.session.tecnico
                 });
             }
         })

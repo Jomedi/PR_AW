@@ -41,10 +41,33 @@
                     </div>
                     <hr class="bg-danger border-2 border-top border-danger">
                     <div class="row">
-                        <h6>Avisos realizados: </h6>
-                        <h6>Incidencia: </h6>
-                        <h6>Sugerencias: </h6>
-                        <h6>Felicitaciones: </h6>
+
+                        <% let inc = 0, sug = 0, fel = 0%>
+                            <%alerts.forEach(a=>{%>
+                                <%if(a.estado == "terminado" || a.estado == "eliminado"){%>
+                                    <%if(a.tipo == "incidencia"){%>
+                                        <% inc++ %>
+                                            <%}else if(a.tipo == "sugerencia"){%>
+                                                <% sug++ %>
+                                                    <%}else{%>
+                                                        <% fel++%>
+                                                            <%}}%>
+                                                                <%})%>
+                                                                    <h6>Avisos realizados:
+                                                                        <%= inc + sug + fel %>
+                                                                    </h6>
+                                                                    <h6> Incidencias:
+                                                                        <%=inc%>
+                                                                    </h6>
+
+                                                                    <h6> Sugerencias:
+                                                                        <%=sug%>
+                                                                    </h6>
+
+                                                                    <h6> Felicitaciones:
+                                                                        <%=fel%>
+                                                                    </h6>
+
                     </div>
                 </div>
             </div>
