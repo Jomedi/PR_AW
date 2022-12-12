@@ -267,6 +267,16 @@ app.post("/sign-in", function(request, response) {
     var upper = /[A-Z]/
     var lower = /[a-z]/
 
+    let tecnico = 0
+    let num_empleado = null
+    if (request.body.ticTec == "on") {
+        tecnico = 1
+        num_empleado = request.body.numEmpl
+    }
+
+    console.log(request.body)
+    console.log(request.body.nombre, request.body.email, request.body.password, request.body.tipo, tecnico, num_empleado, request.body.imagen)
+
     if (request.body.password.length < 8 || request.body.password.length > 16) {
         response.render("signin", { errorPass: "La contraseña debe tener entre 8 y 16 carácteres" });
     } else if (!number.test(request.body.password)) {
@@ -285,7 +295,7 @@ app.post("/sign-in", function(request, response) {
                 console.log("Error al comprobar si el usuario está dado de baja")
             else {
                 if (row.length == 0) {
-                    daoU.insertUser(request.body.nombre, request.body.email, request.body.password, request.body.tipo, function(err, ok) {
+                    daoU.insertUser(request.body.nombre, request.body.email, request.body.password, request.body.tipo, tecnico, num_empleado, request.body.imagen, function(err, ok) {
                         if (err) {
                             console.log("Se ha producido un error al insertar el usuario");
                         } else {

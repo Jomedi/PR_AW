@@ -1,29 +1,31 @@
-#bodyy{
+#bodyy {
     background-color: gainsboro;
 }
-#logoUcm{
+
+#logoUcm {
     border: 0;
     width: 4.5em;
 }
 
-#imgUser{
+#imgUser {
     width: 35px;
 }
 
-.container{
+.container {
     margin-top: 3em;
     margin-bottom: 3em;
 }
 
-.textoCentrado{
+.textoCentrado {
     text-align: center;
 }
 
-#boxContenido{
+#boxContenido {
     margin-top: 5em;
     margin-bottom: 2em;
 }
-#contenido{
+
+#contenido {
     padding-top: 1.25em;
     padding-bottom: 1.25em;
     padding-left: 2em;
@@ -31,22 +33,43 @@
     border-radius: 1em;
 }
 
-.contenidoAvisos{
+.contenidoAvisos {
     padding-top: 1.25em;
     padding-bottom: 1.25em;
 }
 
-.colorBlanco{
+.colorBlanco {
     background-color: white;
 }
 
-.padngFila{
+.padngFila {
     padding-top: 0.75em;
     padding-bottom: 0.75em;
 }
 
+p {
+    width: 700px;
+    height: 25px;
+    padding: 2px 5px;
+    /* BOTH of the following are required for text-overflow */
+    white-space: nowrap;
+    overflow: hidden;
+}
 
+.overflow-visible {
+    white-space: initial;
+}
 
+.overflow-clip {
+    text-overflow: clip;
+}
 
+.overflow-ellipsis {
+    text-overflow: ellipsis;
+}
 
-
+.overflow-string {
+    /* Not supported in most browsers,
+       see the 'Browser compatibility' section below */
+    text-overflow: " [..]";
+}

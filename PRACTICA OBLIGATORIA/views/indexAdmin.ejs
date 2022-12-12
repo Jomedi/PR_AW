@@ -38,7 +38,7 @@
                                         </tr>
                                     </thead>
                                     <% allAlerts.forEach(a => {%>
-                                        <%if(a.activo == 1){%>
+                                        <%if(a.activo == 1 && a.estado != "eliminado"){%>
                                             <tbody class="table-group-divider">
                                                 <tr>
                                                     <th scope="row">
@@ -47,8 +47,10 @@
                                                     <td data-bs-toggle="modal" data-bs-target="#exampleModal">
                                                         <%=a.fecha%>
                                                     </td>
-                                                    <td>
-                                                        <%=a.texto%>
+                                                    <td class="overflow-ellipsis">
+                                                        <p class="overflow-ellipsis">
+                                                            <%=a.texto%>
+                                                        </p>
                                                     </td>
                                                     <td>
                                                         <%if(a.estado == "asignado" || a.estado == "terminado"){%>
@@ -375,7 +377,11 @@
                                                         <%}else{%>
                                                             <td>USUARIO</td>
                                                             <%}%>
-                                                                <td><i class="bi bi-trash-fill" data-bs-toggle="modal" data-bs-target="#modal3EliminarUsuario<%=u.id%>" style="color: black;cursor: pointer;"></i></td>
+                                                                <%if(u.email != email){%>
+                                                                    <td><i class="bi bi-trash-fill" data-bs-toggle="modal" data-bs-target="#modal3EliminarUsuario<%=u.id%>" style="color: black;cursor: pointer;"></i></td>
+                                                                    <%}else{%>
+                                                                        <td><i class="bi bi-trash-fill icon-2x" style="color: rgb(182, 179, 179);"></i></td>
+                                                                        <%}%>
                                                 </tr>
 
                                             </tbody>
@@ -415,6 +421,7 @@
 
                                                                         <br>
                                                             </div>
+
                                                             <div class="modal-footer">
                                                                 <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Eliminar Usuario</button>
                                                             </div>

@@ -15,12 +15,12 @@ class DAOUsers {
     }
 
     //INSERTAR USUARIO
-    insertUser(nombre, email, password, tipo, callback) {
+    insertUser(nombre, email, password, tipo, tecnico, num_empleado, imagen, callback) {
         this.pool.getConnection(function(err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
             } else {
-                connection.query("INSERT INTO ucm_aw_cau_usu_usuarios(nombre, email, password, tipo_usuario) VALUES(?,?,?,?)", [nombre, email, password, tipo],
+                connection.query("INSERT INTO ucm_aw_cau_usu_usuarios(nombre, email, password, tipo_usuario, tecnico, num_empleado, imagen) VALUES(?,?,?,?,?,?,?)", [nombre, email, password, tipo, tecnico, num_empleado, imagen],
                     function(err) {
                         connection.release();
                         if (err) {
