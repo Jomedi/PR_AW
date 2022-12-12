@@ -155,8 +155,14 @@ app.get("/indexAdmin", function(request, response) {
                         if (err3)
                             console.log(err3)
                         else {
-                            console.log("Obtención de técnicos, Mis Avisos, Avisos Entrantes correcta")
-                            response.render("indexAdmin", { nombre: request.session.currentName, email: request.session.currentUser, allAlerts: result, alerts: result2, tecnicos: result3 });
+                            daoU.getAllUsers(function(err4, result4) {
+                                if (err4)
+                                    console.log(err4)
+                                else {
+                                    console.log("Obtención de técnicos, Mis Avisos, Avisos Entrantes correcta")
+                                    response.render("indexAdmin", { nombre: request.session.currentName, email: request.session.currentUser, allAlerts: result, alerts: result2, tecnicos: result3, users: result4 });
+                                }
+                            })
                         }
                     })
 
@@ -220,19 +226,26 @@ app.post("/searchAlertsAdmin", function(request, response) {
         response.redirect("/indexAdmin")
     else {
         text = '%' + text + '%'
-        daoA.searchAlertsByText(text, function(err, rows) {
+        daoA.searchAlertsByText(text, function(err, result) {
             if (err)
                 console.log(err)
             else {
-                daoA.searchAdminAlerts(request.session.currentUser, text, function(err2, rows2) {
+                daoA.searchAdminAlerts(request.session.currentUser, text, function(err2, result2) {
                     if (err2)
                         console.log(err2)
                     else {
-                        daoU.getUsersAdmin(function(err3, rows3) {
+                        daoU.getUsersAdmin(function(err3, result3) {
                             if (err3)
                                 console.log(err3)
                             else {
-                                response.render("indexAdmin", { nombre: request.session.currentName, email: request.session.currentUser, allAlerts: rows, alerts: rows2, tecnicos: rows3 });
+                                daoU.getAllUsers(function(err4, result4) {
+                                    if (err4)
+                                        console.log(err4)
+                                    else {
+                                        console.log("Obtención de técnicos, Mis Avisos, Avisos Entrantes correcta")
+                                        response.render("indexAdmin", { nombre: request.session.currentName, email: request.session.currentUser, allAlerts: result, alerts: result2, tecnicos: result3, users: result4 });
+                                    }
+                                })
                             }
                         })
                     }
