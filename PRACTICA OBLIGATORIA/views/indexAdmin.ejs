@@ -308,28 +308,29 @@
                                                     <td>
                                                         <%=a.texto%>
                                                     </td>
-                                                    <td><i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="#modalVisualizacionCERRARADMIN"></i></td>
+                                                    <td><i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="#modalVisualizacionCERRARADMIN<%=a.id%>"></i></td>
                                                 </tr>
                                             </tbody>
                                             <!-- Modal Visualización -->
-                                            <div class="modal fade" id="modalVisualizacionCERRAR" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal fade" id="modalVisualizacionCERRARADMIN<%=a.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Aviso NºXAVISO: Sugerencia</h1>
+                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Aviso <%=a.id_aviso%>:
+                                                                <%=a.tipo%></h1>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <h4>Nombre Usuario</h4>
-                                                            <h6>Fecha: </h6>
-                                                            <h6>Comunicaciones: </h6>
-                                                            <h6>Perfil: </h6>
+                                                            <h4><%=a.nombre%></h4>
+                                                            <h6>Fecha: <%=a.fecha %></h6>
+                                                            <h6>Comunicaciones: <%=a.subtipo %></h6>
+                                                            <h6>Perfil: <%=a.tipo_usuario %></h6>
                                                             <br>
                                                             <h6>Observaciones: </h6>
-                                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled><%=a.texto %></textarea>
                                                             <br>
                                                             <h6>Comentarios del Técnico: </h6>
-                                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"disabled><%=a.comentarioTecn %></textarea>
                                                         </div>
                                                         <div class="modal-footer">
                                                         </div>

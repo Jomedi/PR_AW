@@ -64,6 +64,7 @@ class DAOAlerts {
 
     //OBTENER ALERTAS QUE CONTIENEN "TEXT" DENTRO DEL TEXTO
     searchAlertsByText(text, callback) {
+        console.log(text)
         this.pool.getConnection(function(err, connection) {
             if (err)
                 callback(err)
@@ -124,7 +125,7 @@ class DAOAlerts {
             if (err)
                 callback(err)
             else {
-                connection.query("SELECT usu.*,avi.*,usu.id as id_usuario,avi.id as id_aviso,avus.estado FROM ucm_aw_cau_avi_avisos AS avi, ucm_aw_cau_usu_usuarios AS usu, ucm_aw_cau_avus_avisosusuarios AS avus WHERE avi.id = avus.id_aviso AND usu.id = avus.id_usuario AND email_tecnico = ?", [email],
+                connection.query("SELECT usu.*,avi.*,usu.id as id_usuario,avi.id as id_aviso,avus.estado,avus.comentarioTecn FROM ucm_aw_cau_avi_avisos AS avi, ucm_aw_cau_usu_usuarios AS usu, ucm_aw_cau_avus_avisosusuarios AS avus WHERE avi.id = avus.id_aviso AND usu.id = avus.id_usuario AND email_tecnico = ?", [email],
                     function(err, rows) {
                         connection.release()
                         if (err)
@@ -191,29 +192,12 @@ class DAOAlerts {
     }
 
 
-    updateAsignAdminAlert(email, id_usuario, id_aviso, callback) {
+    updateAdminAlert(email, id_usuario, id_aviso, callback) {
         this.pool.getConnection(function(err, connection) {
             if (err)
                 callback(err)
             else {
                 connection.query("UPDATE `ucm_aw_cau_avus_avisosusuarios` SET `email_tecnico`= ?, `estado`='asignado' WHERE id_usuario = ? AND id_aviso = ?", [email, id_usuario, id_aviso],
-                    function(err, row) {
-                        if (err)
-                            callback(err)
-                        else {
-                            callback(null, row)
-                        }
-                    })
-            }
-        })
-    }
-
-    updateTerminateAdminAlert(email, id_usuario, id_aviso, message, callback) {
-        this.pool.getConnection(function(err, connection) {
-            if (err)
-                callback(err)
-            else {
-                connection.query("UPDATE `ucm_aw_cau_avus_avisosusuarios` SET `email_tecnico`= ?, `comentarioTecn`= ?, `estado`='terminado' WHERE id_usuario = ? AND id_aviso = ?", [email, message, id_usuario, id_aviso],
                     function(err, row) {
                         if (err)
                             callback(err)
