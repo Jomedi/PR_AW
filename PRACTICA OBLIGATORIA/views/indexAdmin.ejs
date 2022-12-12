@@ -49,7 +49,7 @@
                                                 <th scope="col">Tipo</th>
                                                 <th scope="col">Fecha</th>
                                                 <th scope="col">Texto</th>
-                                                <th scope="col">Acciones</th>
+                                                <th scope="col" class="text-center">Acciones</th>
                                             </tr>
                                         </thead>
                                         <% allAlerts.forEach(a => {%>
@@ -67,16 +67,16 @@
                                                                 <%=a.texto%>
                                                             </p>
                                                         </td>
-                                                        <td>
+                                                        <td class="text-center">
                                                             <%if(a.estado == "asignado" || a.estado == "terminado"){%>
-                                                                <i class="bi bi-person-fill icon-2x" style="color: rgb(182, 179, 179);"></i>
-                                                                <i class="bi bi-trash-fill icon-large" data-id="e<%=a.id%>" data-bs-toggle="modal" data-bs-target="#modalEliminarAviso<%=a.id%>" style="cursor:pointer;color: black;"></i>
+                                                                <i class="bi bi-person-fill tamanio" style="color: rgb(182, 179, 179);"></i>
+                                                                <i class="bi bi-trash-fill tamanio" data-id="e<%=a.id%>" data-bs-toggle="modal" data-bs-target="#modalEliminarAviso<%=a.id%>" style="cursor:pointer;color: black;"></i>
                                                                 <%}else if(a.estado == "eliminado"){%>
-                                                                    <i class="bi bi-person-fill icon-2x" style="color: rgb(182, 179, 179);"></i>
-                                                                    <i class="bi bi-trash-fill icon-2x" style="color: rgb(182, 179, 179);"></i>
+                                                                    <i class="bi bi-person-fill tamanio" style="color: rgb(182, 179, 179);"></i>
+                                                                    <i class="bi bi-trash-fill tamanio" style="color: rgb(182, 179, 179);"></i>
                                                                     <%}else{%>
-                                                                        <i class="bi bi-person-fill icon-2x" data-id="a<%=a.id%>" data-bs-toggle="modal" data-bs-target="#modalAsignacion<%=a.id%>" style="cursor:pointer;color: black;"></i>
-                                                                        <i class="bi bi-trash-fill icon-large" data-id="e<%=a.id%>" data-bs-toggle="modal" data-bs-target="#modalEliminarAviso<%=a.id%>" style="cursor:pointer;color: black;"></i>
+                                                                        <i class="bi bi-person-fill tamanio" data-id="a<%=a.id%>" data-bs-toggle="modal" data-bs-target="#modalAsignacion<%=a.id%>" style="cursor:pointer;color: black;"></i>
+                                                                        <i class="bi bi-trash-fill tamanio" data-id="e<%=a.id%>" data-bs-toggle="modal" data-bs-target="#modalEliminarAviso<%=a.id%>" style="cursor:pointer;color: black;"></i>
                                                                         <%}%>
                                                         </td>
                                                     </tr>
@@ -182,52 +182,173 @@
                             <!-- MIS AVISOS-->
                             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-misAvisos-tab" tabindex="0">
                                 <br>
-                                <table class="table">
-                                    <thead class="table-success">
-                                        <tr>
-                                            <th scope="col">Tipo</th>
-                                            <th scope="col">Fecha</th>
-                                            <th scope="col">Texto</th>
-                                            <th scope="col">Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <% alerts.forEach(a => {%>
-                                        <%if(a.estado == "asignado" && a.activo == 1){%>
 
-                                            <tbody class="table-group-divider">
-                                                <tr>
-                                                    <th scope="row">
-                                                        <%=a.tipo%>
-                                                    </th>
-                                                    <td data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                        <%=a.fecha%>
-                                                    </td>
-                                                    <td>
-                                                        <p class="overflow-ellipsis">
-                                                            <%=a.texto%>
-                                                        </p>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class="table-success">
+                                            <tr>
+                                                <th scope="col">Tipo</th>
+                                                <th scope="col">Fecha</th>
+                                                <th scope="col">Texto</th>
+                                                <th scope="col" class="text-center">Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <% alerts.forEach(a => {%>
+                                            <%if(a.estado == "asignado" && a.activo == 1){%>
+    
+                                                <tbody class="table-group-divider">
+                                                    <tr>
+                                                        <th scope="row">
+                                                            <%=a.tipo%>
+                                                        </th>
+                                                        <td data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                            <%=a.fecha%>
+                                                        </td>
+                                                        <td>
+                                                            <p class="overflow-ellipsis">
+                                                                <%=a.texto%>
+                                                            </p>
+    
+                                                        </td>
+                                                        <td class="text-center"><i class="bi bi-eye-fill tamanio" data-bs-toggle="modal" data-bs-target="#modalVisualizacion<%=a.id%>" style="cursor:pointer;color: black;"></i>
+                                                            <i class="bi bi-trash-fill tamanio" data-bs-toggle="modal" data-bs-target="#modal2EliminarAviso<%=a.id%>" style="cursor:pointer;color: black;"></i></td>
+    
+    
+                                                    </tr>
+                                                </tbody>
+                                                <!-- Modal Visualización -->
+                                                <div class="modal fade" id="modalVisualizacion<%=a.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <form class="d-flex" role="search" action="/updateTerminateAdmin" method="POST">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Aviso
+                                                                        <%= a.id_aviso%>:
+                                                                            <%=a.tipo%>
+                                                                    </h1>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <input type="text" class="form-select" value="<%=a.id_aviso%>" style="display:none;" name="idAviso" id="idAviso">
+                                                                <input type="text" class="form-select" value="<%=a.id_usuario%>" style="display:none;" name="idUsuario" id="idUsuario">
+                                                                <div class="modal-body">
+                                                                    <h4>
+                                                                        <%=a.nombre%>
+                                                                    </h4>
+                                                                    <h6>Fecha:
+                                                                        <%=a.fecha %>
+                                                                    </h6>
+                                                                    <h6>Comunicaciones:
+                                                                        <%=a.subtipo %>
+                                                                    </h6>
+                                                                    <h6>Perfil:
+                                                                        <%=a.tipo_usuario %>
+                                                                    </h6>
+                                                                    <br>
+                                                                    <h6>Observaciones: </h6>
+                                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled><%=a.texto %></textarea>
+                                                                    <br>
+                                                                    <h6>Comentarios del Técnico: </h6>
+                                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="comentarioTecn" id="comentarioTecn"></textarea>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Terminar Aviso</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <!-- Modal 2 Eliminar Aviso -->
+                                                <div class="modal fade" id="modal2EliminarAviso<%=a.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <form class="d-flex" role="search" action="/updateEliminateAdmin" method="POST">
+    
+                                                                <div class="modal-header">
+                                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Aviso
+                                                                        <%=a.id%>:
+                                                                            <%=a.tipo%>
+                                                                    </h1>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <input type="text" class="form-select" value="<%=a.id_aviso%>" style="display:none;" name="idAviso" id="idAviso">
+                                                                    <input type="text" class="form-select" value="<%=a.id_usuario%>" style="display:none;" name="idUsuario" id="idUsuario">
+                                                                    <h4>
+                                                                        <%=a.nombre%>
+                                                                    </h4>
+                                                                    <h6>Fecha:
+                                                                        <%=a.fecha%>
+                                                                    </h6>
+                                                                    <h6>Comunicaciones:
+                                                                        <%=a.subtipo%>
+                                                                    </h6>
+                                                                    <h6>Perfil:
+                                                                        <%=a.tipo_usuario%>
+                                                                    </h6>
+                                                                    <br>
+                                                                    <h6>Observaciones: </h6>
+                                                                    <textarea class="form-control" rows="3" name="comentarioTecn" id="comentarioTecn" disabled><%=a.texto%></textarea>
+                                                                    <br>
+                                                                    <h6>Comentarios del técnico: </h6>
+                                                                    <textarea class="form-control" rows="3" name="comentarioTecn" id="comentarioTecn"></textarea>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Eliminar Aviso</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+    
+                                                    </div>
+                                                </div>
+                                                <%}%>
+                                                    <% }) %>
+                                    </table>
+                                </div>
+                                
+                            </div>
 
-                                                    </td>
-                                                    <td><i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="#modalVisualizacion<%=a.id%>" style="cursor:pointer;color: black;"></i>
-                                                        <i class="bi bi-trash-fill" data-bs-toggle="modal" data-bs-target="#modal2EliminarAviso<%=a.id%>" style="cursor:pointer;color: black;"></i></td>
-
-
-                                                </tr>
-                                            </tbody>
-                                            <!-- Modal Visualización -->
-                                            <div class="modal fade" id="modalVisualizacion<%=a.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <form class="d-flex" role="search" action="/updateTerminateAdmin" method="POST">
+                            <!-- HISTÓRICO DE AVISOS -->
+                            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
+                                <br>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class="table-secondary">
+                                            <tr>
+                                                <th scope="col">Tipo</th>
+                                                <th scope="col">Fecha</th>
+                                                <th scope="col">Texto</th>
+                                                <th scope="col" class="text-center">Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <% alerts.forEach(a => {%>
+                                            <%if(a.estado == "terminado" || a.estado == "eliminado"){%>
+                                                <tbody class="table-group-divider">
+                                                    <tr>
+                                                        <th scope="row">
+                                                            <%=a.tipo%>
+                                                        </th>
+                                                        <td data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                            <%=a.fecha%>
+                                                        </td>
+                                                        <td>
+                                                            <p class="overflow-ellipsis">
+                                                                <%=a.texto%>
+                                                            </p>
+                                                        </td>
+                                                        <td class="text-center"><i class="bi bi-eye-fill tamanio" data-bs-toggle="modal" data-bs-target="#modalVisualizacionCERRARADMIN<%=a.id%>" style="color:black;cursor:pointer;"></i></td>
+                                                    </tr>
+                                                </tbody>
+                                                <!-- Modal Visualización -->
+                                                <div class="modal fade" id="modalVisualizacionCERRARADMIN<%=a.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h1 class="modal-title fs-5" id="exampleModalLabel">Aviso
-                                                                    <%= a.id_aviso%>:
+                                                                    <%=a.id_aviso%>:
                                                                         <%=a.tipo%>
                                                                 </h1>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
-                                                            <input type="text" class="form-select" value="<%=a.id_aviso%>" style="display:none;" name="idAviso" id="idAviso">
-                                                            <input type="text" class="form-select" value="<%=a.id_usuario%>" style="display:none;" name="idUsuario" id="idUsuario">
                                                             <div class="modal-body">
                                                                 <h4>
                                                                     <%=a.nombre%>
@@ -246,216 +367,104 @@
                                                                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled><%=a.texto %></textarea>
                                                                 <br>
                                                                 <h6>Comentarios del Técnico: </h6>
-                                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="comentarioTecn" id="comentarioTecn"></textarea>
+                                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled><%=a.comentarioTecn %></textarea>
                                                             </div>
-                                                            <div class="modal-footer">
-                                                                <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Terminar Aviso</button>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                            <!-- Modal 2 Eliminar Aviso -->
-                                            <div class="modal fade" id="modal2EliminarAviso<%=a.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <form class="d-flex" role="search" action="/updateEliminateAdmin" method="POST">
-
-                                                            <div class="modal-header">
-                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Aviso
-                                                                    <%=a.id%>:
-                                                                        <%=a.tipo%>
-                                                                </h1>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <input type="text" class="form-select" value="<%=a.id_aviso%>" style="display:none;" name="idAviso" id="idAviso">
-                                                                <input type="text" class="form-select" value="<%=a.id_usuario%>" style="display:none;" name="idUsuario" id="idUsuario">
-                                                                <h4>
-                                                                    <%=a.nombre%>
-                                                                </h4>
-                                                                <h6>Fecha:
-                                                                    <%=a.fecha%>
-                                                                </h6>
-                                                                <h6>Comunicaciones:
-                                                                    <%=a.subtipo%>
-                                                                </h6>
-                                                                <h6>Perfil:
-                                                                    <%=a.tipo_usuario%>
-                                                                </h6>
-                                                                <br>
-                                                                <h6>Observaciones: </h6>
-                                                                <textarea class="form-control" rows="3" name="comentarioTecn" id="comentarioTecn" disabled><%=a.texto%></textarea>
-                                                                <br>
-                                                                <h6>Comentarios del técnico: </h6>
-                                                                <textarea class="form-control" rows="3" name="comentarioTecn" id="comentarioTecn"></textarea>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Eliminar Aviso</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                            <%}%>
-                                                <% }) %>
-                                </table>
-                            </div>
-
-                            <!-- HISTÓRICO DE AVISOS -->
-                            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
-                                <br>
-                                <table class="table">
-                                    <thead class="table-secondary">
-                                        <tr>
-                                            <th scope="col">Tipo</th>
-                                            <th scope="col">Fecha</th>
-                                            <th scope="col">Texto</th>
-                                            <th scope="col">Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <% alerts.forEach(a => {%>
-                                        <%if(a.estado == "terminado" || a.estado == "eliminado"){%>
-                                            <tbody class="table-group-divider">
-                                                <tr>
-                                                    <th scope="row">
-                                                        <%=a.tipo%>
-                                                    </th>
-                                                    <td data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                        <%=a.fecha%>
-                                                    </td>
-                                                    <td>
-                                                        <p class="overflow-ellipsis">
-                                                            <%=a.texto%>
-                                                        </p>
-                                                    </td>
-                                                    <td><i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="#modalVisualizacionCERRARADMIN<%=a.id%>" style="color:black;cursor:pointer;"></i></td>
-                                                </tr>
-                                            </tbody>
-                                            <!-- Modal Visualización -->
-                                            <div class="modal fade" id="modalVisualizacionCERRARADMIN<%=a.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Aviso
-                                                                <%=a.id_aviso%>:
-                                                                    <%=a.tipo%>
-                                                            </h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <h4>
-                                                                <%=a.nombre%>
-                                                            </h4>
-                                                            <h6>Fecha:
-                                                                <%=a.fecha %>
-                                                            </h6>
-                                                            <h6>Comunicaciones:
-                                                                <%=a.subtipo %>
-                                                            </h6>
-                                                            <h6>Perfil:
-                                                                <%=a.tipo_usuario %>
-                                                            </h6>
-                                                            <br>
-                                                            <h6>Observaciones: </h6>
-                                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled><%=a.texto %></textarea>
-                                                            <br>
-                                                            <h6>Comentarios del Técnico: </h6>
-                                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled><%=a.comentarioTecn %></textarea>
-                                                        </div>
-                                                        <div class="modal-footer">
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <%}%>
-                                                <% }) %>
-                                </table>
+                                                <%}%>
+                                                    <% }) %>
+                                    </table>
+                                </div>
+                                
                             </div>
 
                             <!-- GESTIÓN DE USUARIOS -->
                             <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">
                                 <br>
-                                <table class="table">
-                                    <thead class="table-info">
-                                        <tr>
-                                            <th scope="col">Fecha</th>
-                                            <th scope="col">Nombre</th>
-                                            <th scope="col">Rol</th>
-                                            <th scope="col">Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <% users.forEach(u => {%>
-                                        <%if(u.activo == 1){%>
-                                            <tbody class="table-group-divider">
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>
-                                                        <%=u.nombre%>
-                                                    </td>
-                                                    <%if(u.tecnico == 1){%>
-                                                        <td>TÉCNICO</td>
-                                                        <%}else{%>
-                                                            <td>USUARIO</td>
-                                                            <%}%>
-                                                                <%if(u.email != email){%>
-                                                                    <td><i class="bi bi-trash-fill" data-bs-toggle="modal" data-bs-target="#modal3EliminarUsuario<%=u.id%>" style="color: black;cursor: pointer;"></i></td>
-                                                                    <%}else{%>
-                                                                        <td><i class="bi bi-trash-fill icon-2x" style="color: rgb(182, 179, 179);"></i></td>
-                                                                        <%}%>
-                                                </tr>
-
-                                            </tbody>
-                                            <!-- Modal Eliminar Usuario -->
-                                            <div class="modal fade" id="modal3EliminarUsuario<%=u.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <form class="d-flex" role="search" action="/updateEliminateUser" method="POST">
-
-                                                            <div class="modal-header">
-                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Usuario
-                                                                    <%=u.id%>
-                                                                </h1>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <input type="text" class="form-select" value="<%=u.id%>" style="display:none;" name="idUsuario" id="idUsuario">
-                                                                <h4>
-                                                                    <%=u.nombre%>
-                                                                </h4>
-                                                                <h6>Fecha:
-
-                                                                </h6>
-                                                                <h6>Email:
-                                                                    <%=u.email%>
-
-                                                                </h6>
-                                                                <h6>Perfil:
-                                                                    <%=u.tipo_usuario%>
-                                                                </h6>
-                                                                <br>
-                                                                <%if(u.num_empleado){%>
-                                                                    <h6>num_Empleado:
-                                                                        <%=u.num_empleado%>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class="table-info">
+                                            <tr>
+                                                <th scope="col">Fecha</th>
+                                                <th scope="col">Nombre</th>
+                                                <th scope="col">Rol</th>
+                                                <th scope="col" class="text-center">Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <% users.forEach(u => {%>
+                                            <%if(u.activo == 1){%>
+                                                <tbody class="table-group-divider">
+                                                    <tr>
+                                                        <th scope="row">1</th>
+                                                        <td>
+                                                            <%=u.nombre%>
+                                                        </td>
+                                                        <%if(u.tecnico == 1){%>
+                                                            <td>TÉCNICO</td>
+                                                            <%}else{%>
+                                                                <td>USUARIO</td>
+                                                                <%}%>
+                                                                    <%if(u.email != email){%>
+                                                                        <td class="text-center"><i class="bi bi-trash-fill tamanio" data-bs-toggle="modal" data-bs-target="#modal3EliminarUsuario<%=u.id%>" style="color: black;cursor: pointer;"></i></td>
+                                                                        <%}else{%>
+                                                                            <td class="text-center"><i class="bi bi-trash-fill tamanio" style="color: rgb(182, 179, 179);"></i></td>
+                                                                            <%}%>
+                                                    </tr>
+    
+                                                </tbody>
+                                                <!-- Modal Eliminar Usuario -->
+                                                <div class="modal fade" id="modal3EliminarUsuario<%=u.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <form class="d-flex" role="search" action="/updateEliminateUser" method="POST">
+    
+                                                                <div class="modal-header">
+                                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Usuario
+                                                                        <%=u.id%>
+                                                                    </h1>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <input type="text" class="form-select" value="<%=u.id%>" style="display:none;" name="idUsuario" id="idUsuario">
+                                                                    <h4>
+                                                                        <%=u.nombre%>
+                                                                    </h4>
+                                                                    <h6>Fecha:
+    
                                                                     </h6>
-                                                                    <%}%>
-
-                                                                        <br>
-                                                            </div>
-
-                                                            <div class="modal-footer">
-                                                                <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Eliminar Usuario</button>
-                                                            </div>
-                                                        </form>
+                                                                    <h6>Email:
+                                                                        <%=u.email%>
+    
+                                                                    </h6>
+                                                                    <h6>Perfil:
+                                                                        <%=u.tipo_usuario%>
+                                                                    </h6>
+                                                                    <br>
+                                                                    <%if(u.num_empleado){%>
+                                                                        <h6>num_Empleado:
+                                                                            <%=u.num_empleado%>
+                                                                        </h6>
+                                                                        <%}%>
+    
+                                                                            <br>
+                                                                </div>
+    
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Eliminar Usuario</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+    
                                                     </div>
-
                                                 </div>
-                                            </div>
-                                            <%}%>
-                                                <%})%>
-
-                                </table>
+                                                <%}%>
+                                                    <%})%>
+    
+                                    </table>
+                                </div>
+                                
                             </div>
                         </div>
                     </div>
