@@ -207,11 +207,11 @@ app.post("/insertAlert", function(request, response) {
     })
 })
 
-app.post("/searchUsers", function(request, response) {
+app.post("/searchAdmin", function(request, response) {
     let text = request.body.search
     if (text == "")
         response.redirect("/indexAdmin")
-    else {
+    else if (request.body.userCheck == "on") {
         text = '%' + text + '%'
         daoU.searchUsersByName(text, function(err, result) {
             if (err) {
@@ -219,37 +219,20 @@ app.post("/searchUsers", function(request, response) {
             } else {
                 console.log("Búsqueda correcta")
                 result = daoU.changeDateFormat(result)
-                response.render("indexAdmin", { nombre: request.session.currentName, pass: request.session.pass, email: request.session.currentUser, allAlerts: request.session.allAlerts, alerts: request.session.alerts, tecnicos: request.session.tecnicos, users: result, perfilUniv: request.session.perfilUniversitario, fecha: request.session.date })
+                response.render("indexAdmin", {
+                    nombre: request.session.currentName,
+                    pass: request.session.pass,
+                    email: request.session.currentUser,
+                    allAlerts: request.session.allAlerts,
+                    alerts: request.session.alerts,
+                    tecnicos: request.session.tecnicos,
+                    users: result,
+                    perfilUniv: request.session.perfilUniversitario,
+                    fecha: request.session.date
+                })
             }
         })
-    }
-})
-
-app.post("/searchAlerts", function(request, response) {
-    let email = request.session.currentUser
-    let text = request.body.search
-    if (text == "")
-        response.redirect("/index")
-    else {
-        text = '%' + text + '%'
-        daoA.searchAlertsByUserAndText(text, email, function(err, result) {
-            if (err)
-                console.log(err)
-            else {
-                console.log("Búsqueda correcta")
-                result = daoU.changeDateFormat(result)
-                response.render("index", { nombre: request.session.currentName, pass: request.session.pass, alerts: result, tecnico: request.session.tecnico, perfilUniv: request.session.perfilUniversitario, fecha: request.session.date });
-            }
-        })
-    }
-})
-
-app.post("/searchAlertsAdmin", function(request, response) {
-    let email = request.session.currentUser
-    let text = request.body.search
-    if (text == "")
-        response.redirect("/indexAdmin")
-    else {
+    } else {
         text = '%' + text + '%'
         daoA.searchAlertsByText(text, function(err, result) {
             if (err)
@@ -270,7 +253,17 @@ app.post("/searchAlertsAdmin", function(request, response) {
                                         console.log("Búsqueda de técnicos, Mis Avisos, Avisos Entrantes correcta")
                                         result = daoU.changeDateFormat(result)
                                         result2 = daoU.changeDateFormat(result2)
-                                        response.render("indexAdmin", { nombre: request.session.currentName, pass: request.session.pass, email: request.session.currentUser, allAlerts: result, alerts: result2, tecnicos: result3, users: result4, perfilUniv: request.session.perfilUniversitario, fecha: request.session.date });
+                                        response.render("indexAdmin", {
+                                            nombre: request.session.currentName,
+                                            pass: request.session.pass,
+                                            email: request.session.currentUser,
+                                            allAlerts: result,
+                                            alerts: result2,
+                                            tecnicos: result3,
+                                            users: result4,
+                                            perfilUniv: request.session.perfilUniversitario,
+                                            fecha: request.session.date
+                                        });
                                     }
                                 })
                             }
@@ -278,6 +271,32 @@ app.post("/searchAlertsAdmin", function(request, response) {
                     }
                 })
 
+            }
+        })
+    }
+})
+
+app.post("/searchAlerts", function(request, response) {
+    let email = request.session.currentUser
+    let text = request.body.search
+    if (text == "")
+        response.redirect("/index")
+    else {
+        text = '%' + text + '%'
+        daoA.searchAlertsByUserAndText(text, email, function(err, result) {
+            if (err)
+                console.log(err)
+            else {
+                console.log("Búsqueda correcta")
+                result = daoU.changeDateFormat(result)
+                response.render("index", {
+                    nombre: request.session.currentName,
+                    pass: request.session.pass,
+                    alerts: result,
+                    tecnico: request.session.tecnico,
+                    perfilUniv: request.session.perfilUniversitario,
+                    fecha: request.session.date
+                });
             }
         })
     }
@@ -314,14 +333,16 @@ app.post("/sign-in", function(request, response) {
                 console.log("Error al comprobar si el usuario está dado de baja")
             else {
                 if (row.length == 0) {
-                    daoU.insertUser(request.body.nombre, request.body.email, request.body.password, request.body.tipo, tecnico, num_empleado, request.body.imagen, function(err, ok) {
-                        if (err) {
-                            console.log("Se ha producido un error al insertar el usuario");
-                        } else {
-                            console.log("Se ha insertado el usuario con éxito");
-                            response.redirect("/sign-in");
-                        }
-                    });
+                    daoU.insertUser(request.body.nombre, request.body.email, request.body.password, request.body.tipo, tecnico,
+                        num_empleado, request.body.imagen,
+                        function(err, ok) {
+                            if (err) {
+                                console.log("Se ha producido un error al insertar el usuario");
+                            } else {
+                                console.log("Se ha insertado el usuario con éxito");
+                                response.redirect("/sign-in");
+                            }
+                        });
                 } else {
                     if (row[0].activo == 1) {
                         console.log("Ya existe un usuario con ese mail");

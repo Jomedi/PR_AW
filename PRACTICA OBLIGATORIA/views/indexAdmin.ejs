@@ -7,18 +7,18 @@
                 <div class="row colorBlanco" id="boxContenido">
                     <div class="row">
                         <div class="contenidoAvisos">
-                            <form class="row g-3 align-items-center" role="search" action="/searchAlertsAdmin" method="post">
+                            <form class="row g-3 align-items-center" role="search" action="/searchAdmin" method="post">
                                 <div class="col-sm-4">
                                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" id="search">
                                 </div>
-                                
+
                                 <div class="col-sm-1">
                                     <button class="btn btn-outline-success" type="submit">Search</button>
                                 </div>
-                                
+
                                 <div class="col-sm">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="checkBoxBusq">
+                                        <input class="form-check-input" type="checkbox" id="checkBoxBusq" name="userCheck">
                                         <label class="form-check-label" for="inlineFormCheck">
                                         Por usuario
                                         </label>
@@ -203,7 +203,7 @@
                                                         <p class="overflow-ellipsis">
                                                             <%=a.texto%>
                                                         </p>
-                                                        
+
                                                     </td>
                                                     <td><i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="#modalVisualizacion<%=a.id%>" style="cursor:pointer;color: black;"></i>
                                                         <i class="bi bi-trash-fill" data-bs-toggle="modal" data-bs-target="#modal2EliminarAviso<%=a.id%>" style="cursor:pointer;color: black;"></i></td>
