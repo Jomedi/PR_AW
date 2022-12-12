@@ -40,7 +40,9 @@
                                                         <%=a.fecha%>
                                                     </th>
                                                     <td data-bs-toggle="modal" data-bs-target="#exampleModal<%=a.id%>" style="cursor:pointer;">
-                                                        <%=a.texto%>
+                                                        <p class="overflow-ellipsis">
+                                                            <%=a.texto%>
+                                                        </p>
                                                     </td>
                                                     <td>
                                                         <%=a.tipo%>
@@ -118,7 +120,9 @@
                                                         <%=h.fecha%>
                                                     </td>
                                                     <td>
-                                                        <%=h.texto%>
+                                                        <p class="overflow-ellipsis">
+                                                            <%=h.texto%>
+                                                        </p>
                                                     </td>
                                                     <td><i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="#modalVisualizacionCERRAR<%=h.id%>" style="cursor:pointer;"></i></i>
                                                     </td>
