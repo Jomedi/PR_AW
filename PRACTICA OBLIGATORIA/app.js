@@ -88,6 +88,7 @@ app.post("/login", function(request, response) {
             request.session.tecnico = row[0].tecnico
             request.session.currentName = row[0].nombre
             request.session.perfilUniversitario = row[0].tipo_usuario
+            request.session.pass = row[0].password
             if (request.session.tecnico === 0) {
                 response.redirect("index")
             } else {
@@ -131,7 +132,7 @@ app.get("/index", function(request, response) {
                     console.log("Se ha producido un error al leer los historicos del usuario");
                 else {
                     console.log("Se ha leido el historial de avisos del usuario con éxito ");
-                    response.render("index", { nombre: request.session.currentName, historical: result1, alerts: result, tecnico: request.session.tecnico, perfilUniv: request.session.perfilUniversitario });
+                    response.render("index", { nombre: request.session.currentName, pass: request.session.pass, historical: result1, alerts: result, tecnico: request.session.tecnico, perfilUniv: request.session.perfilUniversitario });
                 }
 
             });
@@ -160,7 +161,7 @@ app.get("/indexAdmin", function(request, response) {
                                     console.log(err4)
                                 else {
                                     console.log("Obtención de técnicos, Mis Avisos, Avisos Entrantes correcta")
-                                    response.render("indexAdmin", { nombre: request.session.currentName, email: request.session.currentUser, allAlerts: result, alerts: result2, tecnicos: result3, users: result4 });
+                                    response.render("indexAdmin", { nombre: request.session.currentName,pass: request.session.pass, email: request.session.currentUser, allAlerts: result, alerts: result2, tecnicos: result3, users: result4, perfilUniv: request.session.perfilUniversitario });
                                 }
                             })
                         }
