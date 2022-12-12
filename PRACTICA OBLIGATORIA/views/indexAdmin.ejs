@@ -56,9 +56,15 @@
                                             <%if(a.activo == 1 && a.estado != "eliminado"){%>
                                                 <tbody class="table-group-divider">
                                                     <tr>
-                                                        <th scope="row">
-                                                            <%=a.tipo%>
-                                                        </th>
+                                                        <td>
+                                                            <%if(a.tipo == "sugerencia"){%>
+                                                                <i class="bi bi-lightbulb-fill tamanio" style="color: rgb(173, 184, 28);"></i>
+                                                                <%}else if(a.tipo == "felicitacion"){%>
+                                                                    <i class="bi bi-chat-heart-fill tamanio" style="color: rgb(14, 133, 14);"></i>
+                                                                    <%}else{%>
+                                                                        <i class="bi bi-exclamation-circle-fill tamanio" style="color: rgb(121, 15, 15);"></i>
+                                                                        <%}%>
+                                                        </td>
                                                         <td data-bs-toggle="modal" data-bs-target="#exampleModal">
                                                             <%=a.fecha%>
                                                         </td>
@@ -198,9 +204,15 @@
 
                                                 <tbody class="table-group-divider">
                                                     <tr>
-                                                        <th scope="row">
-                                                            <%=a.tipo%>
-                                                        </th>
+                                                        <td>
+                                                            <%if(a.tipo == "sugerencia"){%>
+                                                                <i class="bi bi-lightbulb-fill tamanio" style="color: rgb(173, 184, 28);"></i>
+                                                                <%}else if(a.tipo == "felicitacion"){%>
+                                                                    <i class="bi bi-chat-heart-fill tamanio" style="color: rgb(14, 133, 14);"></i>
+                                                                    <%}else{%>
+                                                                        <i class="bi bi-exclamation-circle-fill tamanio" style="color: rgb(121, 15, 15);"></i>
+                                                                        <%}%>
+                                                        </td>
                                                         <td data-bs-toggle="modal" data-bs-target="#exampleModal">
                                                             <%=a.fecha%>
                                                         </td>
@@ -324,9 +336,15 @@
                                             <%if(a.estado == "terminado" || a.estado == "eliminado"){%>
                                                 <tbody class="table-group-divider">
                                                     <tr>
-                                                        <th scope="row">
-                                                            <%=a.tipo%>
-                                                        </th>
+                                                        <td>
+                                                            <%if(a.tipo == "sugerencia"){%>
+                                                                <i class="bi bi-lightbulb-fill tamanio" style="color: rgb(173, 184, 28);"></i>
+                                                                <%}else if(a.tipo == "felicitacion"){%>
+                                                                    <i class="bi bi-chat-heart-fill tamanio" style="color: rgb(14, 133, 14);"></i>
+                                                                    <%}else{%>
+                                                                        <i class="bi bi-exclamation-circle-fill tamanio" style="color: rgb(121, 15, 15);"></i>
+                                                                        <%}%>
+                                                        </td>
                                                         <td data-bs-toggle="modal" data-bs-target="#exampleModal">
                                                             <%=a.fecha%>
                                                         </td>
@@ -397,7 +415,9 @@
                                             <%if(u.activo == 1){%>
                                                 <tbody class="table-group-divider">
                                                     <tr>
-                                                        <th scope="row">1</th>
+                                                        <th scope="row">
+                                                            <%=u.fecha%>
+                                                        </th>
                                                         <td>
                                                             <%=u.nombre%>
                                                         </td>
