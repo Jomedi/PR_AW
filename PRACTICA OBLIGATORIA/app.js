@@ -154,6 +154,10 @@ app.get("/indexAdmin", function(request, response) {
                                 if (err4)
                                     console.log(err4)
                                 else {
+                                    request.session.allAlerts = result
+                                    request.session.alerts = result2
+                                    request.session.tecnicos = result3
+                                    request.session.users = result4
                                     console.log("Obtención de técnicos, Mis Avisos, Avisos Entrantes correcta")
                                     result = daoU.changeDateFormat(result)
                                     result2 = daoU.changeDateFormat(result2)
@@ -203,6 +207,24 @@ app.post("/insertAlert", function(request, response) {
     })
 })
 
+app.post("/searchUsers", function(request, response) {
+    let text = request.body.search
+    if (text == "")
+        response.redirect("/indexAdmin")
+    else {
+        text = '%' + text + '%'
+        daoU.searchUsersByName(text, function(err, result) {
+            if (err) {
+                console.log(err)
+            } else {
+                console.log("Búsqueda correcta")
+                result = daoU.changeDateFormat(result)
+                response.render("indexAdmin", { nombre: request.session.currentName, pass: request.session.pass, email: request.session.currentUser, allAlerts: request.session.allAlerts, alerts: request.session.alerts, tecnicos: request.session.tecnicos, users: result, perfilUniv: request.session.perfilUniversitario, fecha: request.session.date })
+            }
+        })
+    }
+})
+
 app.post("/searchAlerts", function(request, response) {
     let email = request.session.currentUser
     let text = request.body.search
@@ -245,7 +267,7 @@ app.post("/searchAlertsAdmin", function(request, response) {
                                     if (err4)
                                         console.log(err4)
                                     else {
-                                        console.log("Obtención de técnicos, Mis Avisos, Avisos Entrantes correcta")
+                                        console.log("Búsqueda de técnicos, Mis Avisos, Avisos Entrantes correcta")
                                         result = daoU.changeDateFormat(result)
                                         result2 = daoU.changeDateFormat(result2)
                                         response.render("indexAdmin", { nombre: request.session.currentName, pass: request.session.pass, email: request.session.currentUser, allAlerts: result, alerts: result2, tecnicos: result3, users: result4, perfilUniv: request.session.perfilUniversitario, fecha: request.session.date });
@@ -273,9 +295,6 @@ app.post("/sign-in", function(request, response) {
         tecnico = 1
         num_empleado = request.body.numEmpl
     }
-
-    console.log(request.body)
-    console.log(request.body.nombre, request.body.email, request.body.password, request.body.tipo, tecnico, num_empleado, request.body.imagen)
 
     if (request.body.password.length < 8 || request.body.password.length > 16) {
         response.render("signin", { errorPass: "La contraseña debe tener entre 8 y 16 carácteres" });
