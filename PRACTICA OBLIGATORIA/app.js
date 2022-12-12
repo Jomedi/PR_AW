@@ -338,7 +338,7 @@ app.post("/updateTerminateAdmin", function(request, response) {
 })
 
 app.post("/updateEliminateAdmin", function(request, response) {
-    let comentarioTecn = "Este aviso ha sido eliminado por el técnico " + request.session.currentName + " debido a: \n" + request.body.comentarioTecn;
+    let comentarioTecn = "Este aviso ha sido eliminado por el técnico " + request.session.currentName + " debido a: \n\n" + request.body.comentarioTecn;
     console.log(request.body)
     daoA.updateEliminateAdminAlert(request.session.currentUser, request.body.idUsuario, request.body.idAviso, comentarioTecn, function(err, result) {
         if (err)
