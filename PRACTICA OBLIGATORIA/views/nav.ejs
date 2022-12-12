@@ -24,29 +24,26 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="row">
-                            <div class="col-8 col-sm-6">
-                                <img src="..." class="rounded float-start" alt="...">
-                            </div>
-                            <div class="col-4 col-sm-6">
-                                <h6>Fecha de creación: </h6>
-                                <h6>Perfil: <%= perfilUniv%></h6>
-                                <h6>Contraseña: <%= pass%></h6>
-                                <h6>Nombre para mostrar: <%= nombre %></h6>
-                            </div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="text-center">
+                            <img src="/imagenUsuario" width="25%" class="rounded mx-auto d-block" alt="...">
                         </div>
                     </div>
-
-
-                    <h6>Avisos realizados: </h6>
-                    <h6>Incidencia: </h6>
-                    <h6>Sugerencias: </h6>
-                    <h6>Felicitaciones: </h6>
-                </div>
-                <div class="modal-footer">
+                    <br>
+                    <div class="row">
+                        <h6>Fecha de creación: <input type="text" value="<%= fecha %>" disabled></h6>
+                        <h6>Perfil: <input type="text" value=" <%= perfilUniv%> " disabled></h6>
+                        <h6>Contraseña: <input type="password" value="<%= pass%>" disabled></h6>
+                        <h6>Nombre para mostrar: <input type="text" value=" <%= nombre %>" disabled></h6>
+                    </div>
+                    <hr class="bg-danger border-2 border-top border-danger">
+                    <div class="row">
+                        <h6>Avisos realizados: </h6>
+                        <h6>Incidencia: </h6>
+                        <h6>Sugerencias: </h6>
+                        <h6>Felicitaciones: </h6>
+                    </div>
                 </div>
             </div>
         </div>
