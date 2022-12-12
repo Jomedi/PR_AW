@@ -251,7 +251,7 @@ app.post("/searchAlertsAdmin", function(request, response) {
                                         console.log(err4)
                                     else {
                                         console.log("Obtención de técnicos, Mis Avisos, Avisos Entrantes correcta")
-                                        response.render("indexAdmin", { nombre: request.session.currentName, email: request.session.currentUser, allAlerts: result, alerts: result2, tecnicos: result3, users: result4, fecha: request.session.date, perfilUniv: request.session.perfilUniversitario });
+                                        response.render("indexAdmin", { nombre: request.session.currentName, email: request.session.currentUser, allAlerts: result, alerts: result2, tecnicos: result3, users: result4, fecha: request.session.date, perfilUniv: request.session.perfilUniversitario, pass: request.session.pass });
                                     }
                                 })
                             }
