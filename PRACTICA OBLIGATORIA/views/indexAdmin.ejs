@@ -23,8 +23,9 @@
                             </div>
                         </nav>
 
-                        <!-- AVISOS ENTRANTES -->
+                        
                         <div class="tab-content" id="nav-tabContent">
+                            <!-- AVISOS ENTRANTES -->
                             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-avisosEntr-tab" tabindex="0">
                                 <br>
                                 <table class="table">
@@ -49,7 +50,7 @@
                                                     <%=a.texto%>
                                                 </td>
                                                 <td>
-                                                    <%if(a.estado == "asignado"){%>
+                                                    <%if(a.estado == "asignado" || a.estado == "terminado"){%>
                                                         <i class="bi bi-person-fill icon-2x" style="color: rgb(182, 179, 179);"></i>
                                                         <%}else{%>
                                                             <i class="bi bi-person-fill icon-2x" data-id="a<%=a.id%>" data-bs-toggle="modal" data-bs-target="#modalAsignacion<%=a.id%>" style="cursor:pointer;color: black;"></i>
