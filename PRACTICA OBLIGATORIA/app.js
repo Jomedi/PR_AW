@@ -89,7 +89,8 @@ app.post("/login", function(request, response) {
             request.session.currentName = row[0].nombre
             request.session.perfilUniversitario = row[0].tipo_usuario
             request.session.pass = row[0].password
-            request.session.date = row[0].fecha
+            request.session.date = row[0].fecha.toString().substring(4, 15)
+
             if (request.session.tecnico === 0) {
                 response.redirect("index")
             } else {
@@ -128,18 +129,10 @@ app.get("/index", function(request, response) {
         if (err)
             console.log("Se ha producido un error al leer las alertas del usuario");
         else {
-            daoA.getHistoricalFromUser(request.session.currentUser, function(err, result1) {
-                if (err)
-                    console.log("Se ha producido un error al leer los historicos del usuario");
-                else {
-                    console.log("Se ha leido el historial de avisos del usuario con éxito ");
-                    response.render("index", { nombre: request.session.currentName, pass: request.session.pass, historical: result1, alerts: result, tecnico: request.session.tecnico, perfilUniv: request.session.perfilUniversitario, fecha: request.session.date });
-                }
-
-            });
+            result = daoU.changeDateFormat(result)
+            response.render("index", { nombre: request.session.currentName, pass: request.session.pass, alerts: result, tecnico: request.session.tecnico, perfilUniv: request.session.perfilUniversitario, fecha: request.session.date });
         }
-
-    });
+    })
 }); //{result: es la imagen que le pasas a image de la base de datos}
 
 
@@ -162,6 +155,8 @@ app.get("/indexAdmin", function(request, response) {
                                     console.log(err4)
                                 else {
                                     console.log("Obtención de técnicos, Mis Avisos, Avisos Entrantes correcta")
+                                    result = daoU.changeDateFormat(result)
+                                    result2 = daoU.changeDateFormat(result2)
                                     response.render("indexAdmin", { nombre: request.session.currentName, pass: request.session.pass, email: request.session.currentUser, allAlerts: result, alerts: result2, tecnicos: result3, users: result4, perfilUniv: request.session.perfilUniversitario, fecha: request.session.date });
                                 }
                             })
@@ -214,14 +209,14 @@ app.post("/searchAlerts", function(request, response) {
     if (text == "")
         response.redirect("/index")
     else {
-        console.log(text)
         text = '%' + text + '%'
-        daoA.searchAlertsByUserAndText(text, email, function(err, rows) {
+        daoA.searchAlertsByUserAndText(text, email, function(err, result) {
             if (err)
                 console.log(err)
             else {
                 console.log("Búsqueda correcta")
-                response.render("index", { email: request.session.currentUser, alerts: rows });
+                result = daoU.changeDateFormat(result)
+                response.render("index", { nombre: request.session.currentName, pass: request.session.pass, alerts: result, tecnico: request.session.tecnico, perfilUniv: request.session.perfilUniversitario, fecha: request.session.date });
             }
         })
     }
@@ -251,7 +246,9 @@ app.post("/searchAlertsAdmin", function(request, response) {
                                         console.log(err4)
                                     else {
                                         console.log("Obtención de técnicos, Mis Avisos, Avisos Entrantes correcta")
-                                        response.render("indexAdmin", { nombre: request.session.currentName, email: request.session.currentUser, allAlerts: result, alerts: result2, tecnicos: result3, users: result4, fecha: request.session.date, perfilUniv: request.session.perfilUniversitario });
+                                        result = daoU.changeDateFormat(result)
+                                        result2 = daoU.changeDateFormat(result2)
+                                        response.render("indexAdmin", { nombre: request.session.currentName, pass: request.session.pass, email: request.session.currentUser, allAlerts: result, alerts: result2, tecnicos: result3, users: result4, perfilUniv: request.session.perfilUniversitario, fecha: request.session.date });
                                     }
                                 })
                             }
@@ -283,15 +280,37 @@ app.post("/sign-in", function(request, response) {
     } else if (request.body.password != request.body.passwordConfirm) {
         response.render("signin", { errorPass: "Las contraseñas no coinciden" });
     } else {
-        daoU.insertUser(request.body.nombre, request.body.email, request.body.password, request.body.tipo, function(err, ok) {
-            if (err) {
-                console.log("Se ha producido un error al insertar el usuario");
-            } else {
-                console.log("Se ha insertado el usuario con exito");
-                response.redirect("/sign-in");
-
+        daoU.isUserDeleted(request.body.email, function(err, row) {
+            if (err)
+                console.log("Error al comprobar si el usuario está dado de baja")
+            else {
+                if (row.length == 0) {
+                    daoU.insertUser(request.body.nombre, request.body.email, request.body.password, request.body.tipo, function(err, ok) {
+                        if (err) {
+                            console.log("Se ha producido un error al insertar el usuario");
+                        } else {
+                            console.log("Se ha insertado el usuario con éxito");
+                            response.redirect("/sign-in");
+                        }
+                    });
+                } else {
+                    if (row[0].activo == 1) {
+                        console.log("Ya existe un usuario con ese mail");
+                        response.render("signin", { errorPass: "Ya existe un usuario con ese mail" });
+                    } else {
+                        daoU.updateActivateUser(request.body.nombre, request.body.email, request.body.password, request.body.tipo, function(err, ok) {
+                            if (err)
+                                console.log(err)
+                            else {
+                                console.log("Usuario dado de alta")
+                                response.redirect("/sign-in")
+                            }
+                        })
+                    }
+                }
             }
-        });
+        })
+
     }
 
 });
@@ -326,7 +345,6 @@ app.post("/updateAsignAdmin", function(request, response) {
 })
 
 app.post("/updateTerminateAdmin", function(request, response) {
-    console.log(request.body)
     daoA.updateTerminateAdminAlert(request.session.currentUser, request.body.idUsuario, request.body.idAviso, request.body.comentarioTecn, function(err, result) {
         if (err)
             console.log(err)
@@ -339,7 +357,6 @@ app.post("/updateTerminateAdmin", function(request, response) {
 
 app.post("/updateEliminateAdmin", function(request, response) {
     let comentarioTecn = "Este aviso ha sido eliminado por el técnico " + request.session.currentName + " debido a: \n\n" + request.body.comentarioTecn;
-    console.log(request.body)
     daoA.updateEliminateAdminAlert(request.session.currentUser, request.body.idUsuario, request.body.idAviso, comentarioTecn, function(err, result) {
         if (err)
             console.log(err)

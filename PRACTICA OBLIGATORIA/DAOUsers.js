@@ -7,16 +7,56 @@ class DAOUsers {
         this.pool = pool;
     }
 
+    changeDateFormat(result) {
+        result.forEach(element => {
+            element.fecha = element.fecha.toString().substring(4, 15)
+        })
+        return result
+    }
+
     //INSERTAR USUARIO
     insertUser(nombre, email, password, tipo, callback) {
         this.pool.getConnection(function(err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
             } else {
-                console.log(nombre, email, password, tipo)
                 connection.query("INSERT INTO ucm_aw_cau_usu_usuarios(nombre, email, password, tipo_usuario) VALUES(?,?,?,?)", [nombre, email, password, tipo],
                     function(err) {
-                        console.log("aqui")
+                        connection.release();
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"));
+                        } else {
+                            callback(null);
+                        }
+                    });
+            }
+        });
+    }
+
+    isUserDeleted(email, callback) {
+        this.pool.getConnection(function(err, connection) {
+            if (err)
+                callback(err)
+            else {
+                connection.query("SELECT * FROM ucm_aw_cau_usu_usuarios WHERE email = ?", [email],
+                    function(err, row) {
+                        if (err)
+                            callback(err)
+                        else {
+                            callback(null, row)
+                        }
+                    })
+            }
+        })
+    }
+
+    updateActivateUser(nombre, email, password, tipo, callback) {
+        this.pool.getConnection(function(err, connection) {
+            if (err) {
+                callback(new Error("Error de conexión a la base de datos"));
+            } else {
+                connection.query("UPDATE `ucm_aw_cau_usu_usuarios` SET `nombre`= ?, `password`=?, `tipo_usuario`=?, activo = 1 WHERE email = ?", [nombre, password, tipo, email],
+                    function(err) {
                         connection.release();
                         if (err) {
                             callback(new Error("Error de acceso a la base de datos"));

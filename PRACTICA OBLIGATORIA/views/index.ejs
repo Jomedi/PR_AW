@@ -67,7 +67,7 @@
                                                                 <%=a.nombre%>
                                                             </h4>
                                                             <h6>Fecha:
-                                                                <%=a.fecha %>
+                                                                <%=a.fecha%>
                                                             </h6>
                                                             <h6>Comunicaciones:
                                                                 <%=a.subtipo %>
@@ -107,62 +107,64 @@
                                             <th scope="col">Acciones</th>
                                         </tr>
                                     </thead>
-                                    <% historical.forEach(h => {%>
-                                        <tbody class="table-group-divider">
-                                            <tr>
-                                                <th scope="row">
-                                                    <%=h.tipo%>
-                                                </th>
-                                                <td>
-                                                    <%=h.fecha%>
-                                                </td>
-                                                <td>
-                                                    <%=h.texto%>
-                                                </td>
-                                                <td><i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="#modalVisualizacionCERRAR<%=h.id%>" style="cursor:pointer;"></i></i>
-                                                </td>
-                                            </tr>
+                                    <% alerts.forEach(h => {%>
+                                        <%if(h.estado == "terminado" || h.estado == "eliminado"){%>
+                                            <tbody class="table-group-divider">
+                                                <tr>
+                                                    <th scope="row">
+                                                        <%=h.tipo%>
+                                                    </th>
+                                                    <td>
+                                                        <%=h.fecha%>
+                                                    </td>
+                                                    <td>
+                                                        <%=h.texto%>
+                                                    </td>
+                                                    <td><i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="#modalVisualizacionCERRAR<%=h.id%>" style="cursor:pointer;"></i></i>
+                                                    </td>
+                                                </tr>
 
-                                        </tbody>
+                                            </tbody>
 
-                                        <!-- Modal Visualizar Texto -->
-                                        <div class="modal fade" id="modalVisualizacionCERRAR<%=h.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                                            Aviso
-                                                            <%=h.id_aviso%>:
-                                                                <%=h.tipo%>
-                                                        </h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <h4>
-                                                            <%=h.nombre%>
-                                                        </h4>
-                                                        <h6>Fecha:
-                                                            <%=h.fecha %>
-                                                        </h6>
-                                                        <h6>Comunicaciones:
-                                                            <%=h.subtipo %>
-                                                        </h6>
-                                                        <h6>Perfil:
-                                                            <%=h.tipo_usuario %>
-                                                        </h6>
-                                                        <br>
-                                                        <h6>Observaciones: </h6>
-                                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled><%=h.texto %></textarea>
-                                                        <br>
-                                                        <h6>Comentarios del Técnico: </h6>
-                                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled><%=h.comentarioTecn %></textarea>
-                                                    </div>
-                                                    <div class="modal-footer">
+                                            <!-- Modal Visualizar Texto -->
+                                            <div class="modal fade" id="modalVisualizacionCERRAR<%=h.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                                                Aviso
+                                                                <%=h.id_aviso%>:
+                                                                    <%=h.tipo%>
+                                                            </h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <h4>
+                                                                <%=h.nombre%>
+                                                            </h4>
+                                                            <h6>Fecha:
+                                                                <%=h.fecha %>
+                                                            </h6>
+                                                            <h6>Comunicaciones:
+                                                                <%=h.subtipo %>
+                                                            </h6>
+                                                            <h6>Perfil:
+                                                                <%=h.tipo_usuario %>
+                                                            </h6>
+                                                            <br>
+                                                            <h6>Observaciones: </h6>
+                                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled><%=h.texto %></textarea>
+                                                            <br>
+                                                            <h6>Comentarios del Técnico: </h6>
+                                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled><%=h.comentarioTecn %></textarea>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <% }) %>
+                                            <%}%>
+                                                <% }) %>
                                 </table>
                             </div>
                         </div>
