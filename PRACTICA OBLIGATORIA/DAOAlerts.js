@@ -226,6 +226,23 @@ class DAOAlerts {
         })
     }
 
+    updateEliminateAdminAlert(email, id_usuario, id_aviso, message, callback) {
+        this.pool.getConnection(function(err, connection) {
+            if (err)
+                callback(err)
+            else {
+                connection.query("UPDATE `ucm_aw_cau_avus_avisosusuarios` SET `email_tecnico`= ?, `comentarioTecn`= ?, `estado`='eliminado' WHERE id_usuario = ? AND id_aviso = ?", [email, message, id_usuario, id_aviso],
+                    function(err, row) {
+                        if (err)
+                            callback(err)
+                        else {
+                            callback(null, row)
+                        }
+                    })
+            }
+        })
+    }
+
 }
 
 module.exports = DAOAlerts;

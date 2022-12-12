@@ -52,10 +52,14 @@
                                                 <td>
                                                     <%if(a.estado == "asignado" || a.estado == "terminado"){%>
                                                         <i class="bi bi-person-fill icon-2x" style="color: rgb(182, 179, 179);"></i>
-                                                        <%}else{%>
-                                                            <i class="bi bi-person-fill icon-2x" data-id="a<%=a.id%>" data-bs-toggle="modal" data-bs-target="#modalAsignacion<%=a.id%>" style="cursor:pointer;color: black;"></i>
-                                                            <%}%>
+                                                        <i class="bi bi-trash-fill icon-large" data-id="e<%=a.id%>" data-bs-toggle="modal" data-bs-target="#modalEliminarAviso<%=a.id%>" style="cursor:pointer;color: black;"></i>
+                                                        <%}else if(a.estado == "eliminado"){%>
+                                                            <i class="bi bi-person-fill icon-2x" style="color: rgb(182, 179, 179);"></i>
+                                                            <i class="bi bi-trash-fill icon-2x" style="color: rgb(182, 179, 179);"></i>
+                                                            <%}else{%>
+                                                                <i class="bi bi-person-fill icon-2x" data-id="a<%=a.id%>" data-bs-toggle="modal" data-bs-target="#modalAsignacion<%=a.id%>" style="cursor:pointer;color: black;"></i>
                                                                 <i class="bi bi-trash-fill icon-large" data-id="e<%=a.id%>" data-bs-toggle="modal" data-bs-target="#modalEliminarAviso<%=a.id%>" style="cursor:pointer;color: black;"></i>
+                                                                <%}%>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -100,7 +104,7 @@
                                                         </select>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Asignar Técnico</button>
+                                                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Asignar Técnico</button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -111,7 +115,7 @@
                                         <div class="modal fade" id="modalEliminarAviso<%=a.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
-                                                    <form class="d-flex" role="search" action="/" method="POST">
+                                                    <form class="d-flex" role="search" action="/updateEliminateAdmin" method="POST">
 
                                                         <div class="modal-header">
                                                             <h1 class="modal-title fs-5" id="exampleModalLabel">Aviso
@@ -142,10 +146,10 @@
                                                             </div>
                                                             <br>
                                                             <h6>Comentarios del técnico: </h6>
-                                                            <textarea class="form-control" rows="3" name="ComentarioTecn" id="ComentarioTecn"></textarea>
+                                                            <textarea class="form-control" rows="3" name="comentarioTecn" id="comentarioTecn"></textarea>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Eliminar Aviso</button>
+                                                            <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Eliminar Aviso</button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -220,20 +224,20 @@
                                                                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled><%=a.texto %></textarea>
                                                                 <br>
                                                                 <h6>Comentarios del Técnico: </h6>
-                                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="comentarioTecn" id="comentarioTecn" disabled><%=a.comentarioTecn %></textarea>
+                                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="comentarioTecn" id="comentarioTecn"></textarea>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Terminar Aviso</button>
+                                                                <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Terminar Aviso</button>
                                                             </div>
                                                         </div>
                                                     </form>
                                                 </div>
                                             </div>
-                                            <!-- Modal Eliminar Aviso -->
+                                            <!-- Modal 2 Eliminar Aviso -->
                                             <div class="modal fade" id="modal2EliminarAviso<%=a.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
-                                                        <form class="d-flex" role="search" action="/eliminateAlert" method="POST">
+                                                        <form class="d-flex" role="search" action="/updateEliminateAdmin" method="POST">
 
                                                             <div class="modal-header">
                                                                 <h1 class="modal-title fs-5" id="exampleModalLabel">Aviso
@@ -264,10 +268,10 @@
                                                                 </div>
                                                                 <br>
                                                                 <h6>Comentarios del técnico: </h6>
-                                                                <textarea class="form-control" rows="3" name="ComentarioTecn" id="ComentarioTecn"></textarea>
+                                                                <textarea class="form-control" rows="3" name="comentarioTecn" id="comentarioTecn"></textarea>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Eliminar Aviso</button>
+                                                                <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Eliminar Aviso</button>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -292,7 +296,7 @@
                                         </tr>
                                     </thead>
                                     <% alerts.forEach(a => {%>
-                                        <%if(a.estado == "terminado"){%>
+                                        <%if(a.estado == "terminado" || a.estado == "eliminado"){%>
                                             <tbody class="table-group-divider">
                                                 <tr>
                                                     <th scope="row">
@@ -377,7 +381,7 @@
                                             </tr>
 
                                         </tbody>
-                                        <!-- Modal Eliminar Aviso -->
+                                        <!-- Modal Eliminar Usuario -->
                                         <div class="modal fade" id="modal3EliminarUsuario<%=u.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
@@ -414,7 +418,7 @@
                                                                     <br>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Eliminar Usuario</button>
+                                                            <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Eliminar Usuario</button>
                                                         </div>
                                                     </form>
                                                 </div>

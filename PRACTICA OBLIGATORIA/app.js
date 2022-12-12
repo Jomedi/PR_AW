@@ -326,7 +326,17 @@ app.post("/updateTerminateAdmin", function(request, response) {
             console.log("Se ha terminado el aviso correctamente")
             response.redirect("/indexAdmin")
         }
+    })
+})
 
-
+app.post("/updateEliminateAdmin", function(request, response) {
+    console.log(request.body)
+    daoA.updateEliminateAdminAlert(request.session.currentUser, request.body.idUsuario, request.body.idAviso, request.body.comentarioTecn, function(err, result) {
+        if (err)
+            console.log(err)
+        else {
+            console.log("Se ha eliminado el aviso correctamente")
+            response.redirect("/indexAdmin")
+        }
     })
 })
