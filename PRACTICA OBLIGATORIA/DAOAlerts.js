@@ -13,7 +13,7 @@ class DAOAlerts {
             if (err)
                 callback(new Error("Error de conexión a la base de datos"));
             else {
-                connection.query("SELECT `avi`.*, `avi`.`id` as `id_aviso`, `avus`.`email_tecnico`, `avus`.`comentarioTecn`, `avus`.estado, `usu`.`nombre`, `usu`.`tipo_usuario` FROM `ucm_aw_cau_avi_avisos` AS `avi`, `ucm_aw_cau_avus_avisosusuarios` AS `avus`, `ucm_aw_cau_usu_usuarios` AS `usu`  WHERE `avi`.`id` = `avus`.`id_aviso` AND `usu`.`id` = `avus`.`id_usuario` AND `avus`.`id_usuario` = (SELECT `id` FROM `ucm_aw_cau_usu_usuarios` WHERE `email` = ?)", [email],
+                connection.query("SELECT `avi`.*, `avi`.`id` as `id_aviso`, `avus`.`email_tecnico`, `avus`.`comentarioTecn`, `avus`.estado, `usu`.`nombre`, `usu`.`tipo_usuario`, `usu`.`fecha` FROM `ucm_aw_cau_avi_avisos` AS `avi`, `ucm_aw_cau_avus_avisosusuarios` AS `avus`, `ucm_aw_cau_usu_usuarios` AS `usu`  WHERE `avi`.`id` = `avus`.`id_aviso` AND `usu`.`id` = `avus`.`id_usuario` AND `avus`.`id_usuario` = (SELECT `id` FROM `ucm_aw_cau_usu_usuarios` WHERE `email` = ?)", [email],
                     function(err, rows) {
                         connection.release();
                         if (err) {

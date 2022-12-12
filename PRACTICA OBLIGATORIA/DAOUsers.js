@@ -13,8 +13,10 @@ class DAOUsers {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
             } else {
-                connection.query("INSERT INTO ucm_aw_cau_usu_usuarios(nombre, email, password, tipo) VALUES(?,?,?,?)", [nombre, email, password, tipo],
+                console.log(nombre, email, password, tipo)
+                connection.query("INSERT INTO ucm_aw_cau_usu_usuarios(nombre, email, password, tipo_usuario) VALUES(?,?,?,?)", [nombre, email, password, tipo],
                     function(err) {
+                        console.log("aqui")
                         connection.release();
                         if (err) {
                             callback(new Error("Error de acceso a la base de datos"));
