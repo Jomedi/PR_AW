@@ -7,7 +7,8 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const DAOUsers = require("./DAOUsers");
 const DAOAlerts = require("./DAOAlerts");
-const dateFormater = require("./dateFormater")
+const dateFormater = require("./dateFormater");
+const multer = require("multer");
 const fs = require("fs");
 
 // Crear un servidor Express.js
@@ -24,7 +25,7 @@ const daoU = new DAOUsers(pool);
 
 // Crea una instancia de DAOAlerts
 const daoA = new DAOAlerts(pool);
-
+app.use(express.urlencoded({extended: true}));
 // Arrancar el servidor
 app.listen(config.port, function(err) {
     if (err) {
@@ -33,6 +34,8 @@ app.listen(config.port, function(err) {
         console.log('Servidor arrancado en el puerto ' + config.port);
     }
 });
+
+
 
 //------------------------------------------------------------------------------------para ejs
 // Configurar ejs como motor de plantillas
@@ -203,8 +206,13 @@ app.get("/indexAdmin", function(request, response) {
 //-------------------------------------------------------------------------------------manejador para sign-in
 app.get("/sign-in", function(request, response) {
     response.status(200);
+    response.sendFile(path.join(__dirname, "views", "signin.ejs"));
     response.render("signin", { errorPass: null });
+    
 });
+
+
+
 
 app.post("/insertAlert", function(request, response) {
     let subtipo;
@@ -317,7 +325,36 @@ app.post("/searchAlerts", function(request, response) {
     }
 })
 
-app.post("/sign-in", function(request, response) {
+//------------------------------------------------------------------------------------multer para almacén de imágenes
+var almacen = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, path.join(__dirname, 'public', 'img'));
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname);
+    }
+  });
+const multerFactory = multer({ dest: path.join(__dirname,"public", "img") });
+
+app.post("/sign-in", multerFactory.single('imagen'), function(request, response) {
+
+    console.log(request.file);
+    // let nombreFichero = null;
+    // if (request.file.filename) { // Si se ha subido un fichero
+    //     console.log(`Nombre del fichero: ${request.file.originalname}` );
+    //     console.log(`Nombre del fichero2: ${request.file.filename}` );
+    //     console.log(`Fichero guardado en: ${request.file.path}`);
+    //     console.log(`Tamaño: ${request.file.size}`);
+    //     console.log(`Tipo de fichero: ${request.file.mimetype}`);
+    //     nombreFichero = request.file.originalname;
+    // }
+    // response.render("datosFormulario3", {
+    //     nombre: request.body.nombre ,
+    //     apellidos: request.body.apellidos ,
+    //     fumador: request.body.fumador === "si" ? "Sí" : "No",
+    //     imagen : nombreFichero
+    // });
+
     //DECLARACIÓN REGEX
     var number = /[0-9]/
     var alphaNumeric = /^[a-z0-9]+$/i
@@ -386,7 +423,7 @@ app.post("/sign-in", function(request, response) {
                                 console.log("Se ha producido un error al insertar el usuario");
                             } else {
                                 console.log("Se ha insertado el usuario con éxito");
-                                response.redirect("/sign-in");
+                                response.redirect("/login");
                             }
                         });
                 } else {
@@ -400,7 +437,7 @@ app.post("/sign-in", function(request, response) {
                                 console.log(err)
                             else {
                                 console.log("Usuario dado de alta")
-                                response.redirect("/sign-in")
+                                response.redirect("/login")
                             }
                         })
                     }
@@ -410,6 +447,28 @@ app.post("/sign-in", function(request, response) {
     } else //ENVÍO DE ERRORES
         response.render("signin", { errorPass: errorPassword, errorNumEmpleado: errorNumeroEmpleado, errorEmail: errorEmail });
 });
+
+
+
+
+// app.post("/procesar_formulario.html"
+//         , multerFactory.single('foto'), function(request, response) {
+//     let nombreFichero = null;
+//     if (request.file.filename) { // Si se ha subido un fichero
+//         console.log(`Nombre del fichero: ${request.file.originalname}` );
+//         console.log(`Nombre del fichero2: ${request.file.filename}` );
+//         console.log(`Fichero guardado en: ${request.file.path}`);
+//         console.log(`Tamaño: ${request.file.size}`);
+//         console.log(`Tipo de fichero: ${request.file.mimetype}`);
+//         nombreFichero = request.file.originalname;
+//     }
+//     response.render("datosFormulario3", {
+//         nombre: request.body.nombre ,
+//         apellidos: request.body.apellidos ,
+//         fumador: request.body.fumador === "si" ? "Sí" : "No",
+//         imagen : nombreFichero
+//     });
+// });
 
 //-------------------------------------------------------------------------------------manejador para la imagen del usuario
 
