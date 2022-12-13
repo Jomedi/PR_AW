@@ -440,11 +440,11 @@ app.get("/imagenUsuario", viewLogin, function(request, response) {
 });
 
 app.post("/updateAsignAdmin", function(request, response) {
-    daoA.updateAsignAdminAlert(request.session.currentUser, request.body.idUsuario, request.body.idAviso, function(err, result) {
+    daoA.updateAsignAdminAlert(request.body.tecnico, request.body.idUsuario, request.body.idAviso, function(err, result) {
         if (err)
             console.log(err)
         else {
-            console.log("Se ha asignado el aviso correctamente")
+            console.log("Se ha asignado el aviso correctamente al técnico " + request.body.tecnico)
             response.redirect("/indexAdmin")
         }
 
