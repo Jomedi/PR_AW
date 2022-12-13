@@ -347,8 +347,11 @@ app.post("/sign-in", function(request, response) {
 
     //COMPROBACIÓN EMAIL
     let sufix = "@ucm.es"
-    if (request.body.email.length <= sufix.length || request.body.email.substring(request.body.email.length - sufix.length, request.body.email.length) != sufix)
+    if (request.body.email.length <= sufix.length || request.body.email.substring(request.body.email.length - sufix.length, request.body.email.length) != sufix) {
+        console.log("El email no pertenece al dominio @ucm.es")
         errorEmail = "El email no pertenece al dominio @ucm.es"
+    }
+
 
     //COMPROBACIÓN NUM_EMPLEADO
     if (request.body.ticTec == "on") {
