@@ -7,13 +7,6 @@ class DAOUsers {
         this.pool = pool;
     }
 
-    changeDateFormat(result) {
-        result.forEach(element => {
-            element.fecha = element.fecha.toString().substring(4, 15)
-        })
-        return result
-    }
-
     //INSERTAR USUARIO
     insertUser(nombre, email, password, tipo, tecnico, num_empleado, imagen, callback) {
         this.pool.getConnection(function(err, connection) {
@@ -38,7 +31,7 @@ class DAOUsers {
             if (err)
                 callback(err)
             else {
-                connection.query("SELECT * FROM ucm_aw_cau_usu_usuarios WHERE nombre LIKE ?", [nombre],
+                connection.query("SELECT * FROM ucm_aw_cau_usu_usuarios WHERE nombre LIKE ? ORDER BY fecha DESC, id DESC", [nombre],
                     function(err, row) {
                         if (err)
                             callback(err)
@@ -154,7 +147,7 @@ class DAOUsers {
             if (err)
                 callback(err)
             else {
-                connection.query("SELECT * FROM ucm_aw_cau_usu_usuarios",
+                connection.query("SELECT * FROM ucm_aw_cau_usu_usuarios ORDER BY fecha DESC, id DESC",
                     function(err, rows) {
                         connection.release()
                         if (err)

@@ -53,7 +53,7 @@
                                                         </td>
                                                     </tr>
                                                 </tbody>
-    
+
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="exampleModal<%=a.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
@@ -93,7 +93,7 @@
                                                     <% }) %>
                                     </table>
                                 </div>
-                                
+
 
                                 <div class="row">
                                     <div class="offset-11 col-1 d-grid">
@@ -117,9 +117,15 @@
                                             <%if(h.estado == "terminado" || h.estado == "eliminado"){%>
                                                 <tbody class="table-group-divider">
                                                     <tr>
-                                                        <th scope="row">
-                                                            <%=h.tipo%>
-                                                        </th>
+                                                        <td>
+                                                            <%if(h.tipo == "sugerencia"){%>
+                                                                <i class="bi bi-lightbulb-fill tamanio" style="color: rgb(173, 184, 28);"></i>
+                                                                <%}else if(h.tipo == "felicitacion"){%>
+                                                                    <i class="bi bi-chat-heart-fill tamanio" style="color: rgb(14, 133, 14);"></i>
+                                                                    <%}else{%>
+                                                                        <i class="bi bi-exclamation-circle-fill tamanio" style="color: rgb(121, 15, 15);"></i>
+                                                                        <%}%>
+                                                        </td>
                                                         <td>
                                                             <%=h.fecha%>
                                                         </td>
@@ -131,9 +137,9 @@
                                                         <td class="text-center"><i class="bi bi-eye-fill tamanio" data-bs-toggle="modal" data-bs-target="#modalVisualizacionCERRAR<%=h.id%>" style="cursor:pointer;"></i></i>
                                                         </td>
                                                     </tr>
-    
+
                                                 </tbody>
-    
+
                                                 <!-- Modal Visualizar Texto -->
                                                 <div class="modal fade" id="modalVisualizacionCERRAR<%=h.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
@@ -166,7 +172,7 @@
                                                                 <h6>Comentarios del Técnico: </h6>
                                                                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" disabled><%=h.comentarioTecn %></textarea>
                                                             </div>
-                                                            
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -174,7 +180,7 @@
                                                     <% }) %>
                                     </table>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
