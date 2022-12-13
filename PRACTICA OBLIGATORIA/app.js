@@ -208,7 +208,7 @@ app.get("/sign-in", function(request, response) {
 
 app.post("/insertAlert", function(request, response) {
     let subtipo;
-    if (request.body.tipo == "felicitacion")
+    if (request.body.tipo == "Felicitación")
         subtipo = request.body.subtipoSubtipoFel
     else
         subtipo = request.body.subtipoSubtipo
