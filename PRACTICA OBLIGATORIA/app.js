@@ -209,8 +209,8 @@ app.get("/indexAdmin", function(request, response) {
 //-------------------------------------------------------------------------------------manejador para sign-in
 app.get("/sign-in", function(request, response) {
     response.status(200);
-    response.sendFile(path.join(__dirname, "views", "signin.ejs"));
-    response.render("signin", { errorPass: null });
+    // response.sendFile(path.join(__dirname, "views", "signin.ejs"));
+    response.render("signin", { errorPass: null, errorEmail: null, errorNumEmpleado: null });
 
 });
 
@@ -351,7 +351,7 @@ app.post("/sign-in", multerFactory.single('imagen'), function(request, response)
         //DECLARACIÓN DE ERRORES
     var errorPassword = ""
     var errorNumeroEmpleado = ""
-    var errorEmail = ""
+    var errEmail = ""
         //DECLARACIÓN DE VARIABLES DE TÉCNICO
     let tecnico = 0
     let num_empleado = null
@@ -359,14 +359,14 @@ app.post("/sign-in", multerFactory.single('imagen'), function(request, response)
 
     //OBTENCIÓN DE IMAGEN A TRAVÉS DE MULTER
     let nombreFichero = null;
-    if (request.file.filename) // Si se ha subido un fichero
+    if (request.file != undefined && request.file.filename) // Si se ha subido un fichero
         nombreFichero = request.file.originalname;
 
     //COMPROBACIÓN EMAIL
     let sufix = "@ucm.es"
     if (request.body.email.length <= sufix.length || request.body.email.substring(request.body.email.length - sufix.length, request.body.email.length) != sufix) {
         console.log("El email no pertenece al dominio @ucm.es")
-        errorEmail = "El email no pertenece al dominio @ucm.es"
+        errEmail = "El email no pertenece al dominio @ucm.es"
     }
 
     //COMPROBACIÓN NUM_EMPLEADO
@@ -401,7 +401,7 @@ app.post("/sign-in", multerFactory.single('imagen'), function(request, response)
         errorPassword = "Las contraseñas no coinciden"
 
     //ALTA DE USUARIO
-    if (errorPassword == "" && errorNumeroEmpleado == "" && errorEmail == "") {
+    if (errorPassword == "" && errorNumeroEmpleado == "" && errEmail == "") {
         daoU.getUserByEmail(request.body.email, function(err, row) {
             if (err)
                 console.log("Error al comprobar si el usuario está dado de baja")
@@ -419,7 +419,7 @@ app.post("/sign-in", multerFactory.single('imagen'), function(request, response)
                 } else {
                     if (row[0].activo == 1) {
                         console.log("Ya existe un usuario con ese mail");
-                        response.render("signin", { errorPass: "Ya existe un usuario con ese mail" });
+                        response.render("signin", { errorEmail: "Ya existe un usuario con ese mail", errorPass: null, errorNumEmpleado: null});
                     } else {
                         var dateUpdate = dateFormat.obtainCurrentDate()
                         daoU.updateActivateUser(request.body.nombre, request.body.email, request.body.password, request.body.tipo, dateUpdate, function(err, ok) {
@@ -435,7 +435,7 @@ app.post("/sign-in", multerFactory.single('imagen'), function(request, response)
             }
         })
     } else //ENVÍO DE ERRORES
-        response.render("signin", { errorPass: errorPassword, errorNumEmpleado: errorNumeroEmpleado, errorEmail: errorEmail });
+        response.render("signin", { errorPass: errorPassword, errorNumEmpleado: errorNumeroEmpleado, errorEmail: errEmail });
 });
 
 

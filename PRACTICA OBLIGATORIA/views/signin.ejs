@@ -16,6 +16,15 @@
                             <label for="inputAddress" class="form-label">Nombre para mostrar</label>
                             <input type="text" name="nombre" class="form-control" id="inputAddress">
                         </div>
+                        <% if(errorEmail){ %>
+                            <div class="row">
+                                <p class="text-danger">
+                                    <%= errorEmail %>
+                                </p>
+                            </div>
+                            <% } else{%>
+                            <br>
+                        <%}%>
                         <div class="col-md-6">
                             <label for="inputPassword4" class="form-label">Contraseña</label>
                             <input type="password" name="password" class="form-control" required>
@@ -33,35 +42,45 @@
                             </div>
                             <% } else{%>
                                 <br>
-                                <%}%>
+                            <%}%>
 
-                                    <div class="col-md-6">
-                                        <label for="inputState" class="form-label">Perfil Universitario</label>
-                                        <select name="tipo" id="inputState" class="form-select" onChange="habilitar(this.form)">
-                            <option value="Alumno" selected>Alumno</option>
-                            <option value="PAS">Personal de Administración y Servicios (PAS)</option>
-                            <option value="PDI">Personal Docente e Investigador (PDI)</option>
-                            <option value="Antiguo Alumno">Antiguo Alumno</option>
-                        </select>
-                                    </div>
+                        <div class="col-md-6">
+                            <label for="inputState" class="form-label">Perfil Universitario</label>
+                            <select name="tipo" id="inputState" class="form-select" onChange="habilitar(this.form)">
+                                <option value="Alumno" selected>Alumno</option>
+                                <option value="PAS">Personal de Administración y Servicios (PAS)</option>
+                                <option value="PDI">Personal Docente e Investigador (PDI)</option>
+                                <option value="Antiguo Alumno">Antiguo Alumno</option>
+                            </select>
+                        </div>
 
-                                    <div class="col-md-6">
-                                        <div class="form-switch" id="flexSwitchCheckDiv">
-                                            <input name="ticTec" data-bs-toggle="collapse" data-bs-target="#hrefCollapse" aria-expanded="false" aria-controls="collapseExample" class="form-check-input" type="checkbox" id="flexSwitchCheckDisabled" disabled>
-                                            <label class="form-label" for="PAS">Técnico</label>
-                                            <div class="collapse" id="hrefCollapse">
-                                                <input name="numEmpl" type="text" class="form-control" placeholder="Nº de Empleado" disabled>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="formFile" class="form-label">Imagen de perfil</label>
-                                        <input name="imagen" class="form-control" type="file" id="imagen">
-                                    </div>
+                        <div class="col-md-6">
+                            <div class="form-switch" id="flexSwitchCheckDiv">
+                                <input name="ticTec" data-bs-toggle="collapse" data-bs-target="#hrefCollapse" aria-expanded="false" aria-controls="collapseExample" class="form-check-input" type="checkbox" id="flexSwitchCheckDisabled" disabled>
+                                <label class="form-label" for="PAS">Técnico</label>
+                                <div class="collapse" id="hrefCollapse">
+                                    <input name="numEmpl" type="text" class="form-control" placeholder="Nº de Empleado" disabled>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <% if(errorNumEmpleado){ %>
+                            <div class="row">
+                                <p class="text-danger">
+                                    <%= errorNumEmpleado %>
+                                </p>
+                            </div>
+                            <% } else{%>
+                                <br>
+                        <%}%>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Imagen de perfil</label>
+                            <input name="imagen" class="form-control" type="file" id="imagen">
+                        </div>
 
-                                    <div class="offset-xl-4 col-xl-4 d-grid">
-                                        <button type="submit" class="btn btn-danger">Sign in</button>
-                                    </div>
+                        <div class="offset-xl-4 col-xl-4 d-grid">
+                            <button type="submit" class="btn btn-danger">Sign in</button>
+                        </div>
                     </form>
                 </div>
 
