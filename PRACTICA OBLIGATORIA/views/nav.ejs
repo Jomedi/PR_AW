@@ -35,16 +35,44 @@
                     <br>
                     <div class="row">
                         <h5><i class="bi bi-person-circle"></i> <u>Información de usuario</u></h5>
+                        <br><br>
                         <div style="margin-left:1.5em">
-                            <h6>Fecha de creación: <input type="text" value="<%= fecha %>" disabled></h6>
-                            <h6>Perfil: <input type="text" value=" <%= perfilUniv%> " disabled></h6>
-                            <h6>Contraseña: <input type="password" value="<%= pass%>" disabled></h6>
+                            <div class="table-responsive col-10">
+                                <table class="table">
+                                <tr>
+                                    <td><h6>Fecha de creación: </h6></td>
+                                    <td><%= fecha %></td>
+                                </tr>
+                                <tr>
+                                    <td><h6>Perfil: </h6></td>
+                                    <td><%= perfilUniv%></td>
+                                </tr>
+                                <tr>
+                                    <td><h6>Contraseña: </h6></td>
+                                    <td>
+                                        <%let p = ""%>
+                                        <%for (var i = 0; i < pass.length; i++) {%>
+                                            <%p= p + "*"%>
+                                            <%}%>
+                                        
+                                        <%= p%></td>
+                                </tr>
+                                <tr>
+                                    <td><h6>Email: </h6></td>
+                                    <td><%= email%></td>
+                                </tr>
+                            </table>
+                            </div>
+                            
+                            
+                            
                         </div>
                         <br>
                     </div>
                     <hr class="bg-danger border-2 border-top border-danger">
                     <div class="row">
                         <h5><i class="bi bi-envelope-check"></i> <u>Información de avisos</u></h5>
+                        <br><br>
                         <div style="margin-left:1.5em">
 
                             <% let inc = 0, sug = 0, fel = 0%>
@@ -58,26 +86,35 @@
                                                             <% fel++%>
                                                                 <%}}%>
                                                                     <%})%>
-                                                                        <%if(tecnico == 1){%>
-                                                                            <h6>Avisos gestionados:
-                                                                                <%= inc + sug + fel %>
-                                                                            </h6>
-                                                                            <%}else{%>
-                                                                                <h6>Avisos realizados:
-                                                                                    <%= inc + sug + fel %>
-                                                                                </h6>
-                                                                                <%}%>
-                                                                                    <h6> Incidencias:
-                                                                                        <%=inc%>
-                                                                                    </h6>
-
-                                                                                    <h6> Sugerencias:
-                                                                                        <%=sug%>
-                                                                                    </h6>
-
-                                                                                    <h6> Felicitaciones:
-                                                                                        <%=fel%>
-                                                                                    </h6>
+                                                                    <div class="table-responsive col-10">
+                                                                        <table class="table">
+                                                                            <%if(tecnico == 1){%>
+                                                                                <tr>
+                                                                                    <td><h6>Avisos gestionados:</h6></td>
+                                                                                    <td><%= inc + sug + fel %></td>
+                                                                                </tr>
+                                                                                <%}else{%>
+                                                                                    <tr>
+                                                                                        <td><h6>Avisos realizados:</h6></td>
+                                                                                        <td><%= inc + sug + fel %></td>
+                                                                                    </tr>
+                                                                                    <%}%>
+                                                                                    <tr>
+                                                                                        <td><h6> Incidencias:</h6></td>
+                                                                                        <td><%=inc%></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td><h6> Sugerencias: </h6></td>
+                                                                                        <td>  <%=sug%></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td><h6> Felicitaciones:</h6></td>
+                                                                                        <td><%=fel%></td>
+                                                                                    </tr>
+                                                                                        
+                                                                        </table>
+                                                                    </div>
+                                                                    
                         </div>
                         <br>
                     </div>

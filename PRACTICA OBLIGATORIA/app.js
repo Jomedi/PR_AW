@@ -97,7 +97,9 @@ app.post("/login", function(request, response) {
             request.session.perfilUniversitario = row[0].tipo_usuario
             request.session.pass = row[0].password
             request.session.date = row[0].fecha.toString().substring(4, 15)
-
+            // request.session.pass.array.forEach(p => {
+            //     p ="*"
+            // });
             if (request.session.tecnico === 0) {
                 response.redirect("index")
             } else {
@@ -139,6 +141,7 @@ app.get("/index", function(request, response) {
             result = dateFormat.changeDateFormat(result)
             response.render("index", {
                 nombre: request.session.currentName,
+                email: request.session.currentUser,
                 pass: request.session.pass,
                 alerts: result,
                 tecnico: request.session.tecnico,
@@ -313,6 +316,7 @@ app.post("/searchAlerts", function(request, response) {
                 result = dateFormat.changeDateFormat(result)
                 response.render("index", {
                     nombre: request.session.currentName,
+                    email:email,
                     pass: request.session.pass,
                     alerts: result,
                     tecnico: request.session.tecnico,
@@ -434,27 +438,6 @@ app.post("/sign-in", multerFactory.single('imagen'), function(request, response)
         response.render("signin", { errorPass: errorPassword, errorNumEmpleado: errorNumeroEmpleado, errorEmail: errorEmail });
 });
 
-
-
-
-// app.post("/procesar_formulario.html"
-//         , multerFactory.single('foto'), function(request, response) {
-//     let nombreFichero = null;
-//     if (request.file.filename) { // Si se ha subido un fichero
-//         console.log(`Nombre del fichero: ${request.file.originalname}` );
-//         console.log(`Nombre del fichero2: ${request.file.filename}` );
-//         console.log(`Fichero guardado en: ${request.file.path}`);
-//         console.log(`Tamaño: ${request.file.size}`);
-//         console.log(`Tipo de fichero: ${request.file.mimetype}`);
-//         nombreFichero = request.file.originalname;
-//     }
-//     response.render("datosFormulario3", {
-//         nombre: request.body.nombre ,
-//         apellidos: request.body.apellidos ,
-//         fumador: request.body.fumador === "si" ? "Sí" : "No",
-//         imagen : nombreFichero
-//     });
-// });
 
 //-------------------------------------------------------------------------------------manejador para la imagen del usuario
 
