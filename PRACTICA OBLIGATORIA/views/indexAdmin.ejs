@@ -128,7 +128,7 @@
                                                                     <br>
                                                                     <h6>Técnico asignado: </h6>
                                                                     <select class="form-select" aria-label="Default select example" name="tecnico" id="tecnico">
-                                                                        <option selected>Seleccione un técnico</option>
+                                                                        <option selected disabled>Seleccione un técnico</option>
                                                                         <% tecnicos.forEach(t => {%>
                                                                             <option value="<%=t.email%>"><%=t.nombre%></option>
                                                                         <%})%>
