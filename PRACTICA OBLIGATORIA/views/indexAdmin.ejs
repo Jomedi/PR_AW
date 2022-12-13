@@ -56,16 +56,10 @@
                                             <%if(a.activo == 1 && a.estado != "eliminado" && a.estado != "terminado"){%>
                                                 <tbody class="table-group-divider">
                                                     <tr>
-                                                        <td>
-                                                            <%if(a.tipo == "sugerencia"){%>
-                                                                <i class="bi bi-lightbulb-fill tamanio" style="color: rgb(173, 184, 28);" title="Sugerencia"></i>
-                                                                <%}else if(a.tipo == "felicitacion"){%>
-=======
                                                         <td class="text-center">
                                                             <%if(a.tipo == "Sugerencia"){%>
-                                                                <i class="bi bi-lightbulb-fill tamanio" style="color: rgb(173, 184, 28);"></i>
+                                                                <i class="bi bi-lightbulb-fill tamanio" style="color: rgb(173, 184, 28);" title="Sugerencia"></i>
                                                                 <%}else if(a.tipo == "Felicitación"){%>
->>>>>>> f2d28aff2f6a09f5d8dfd832e149b8b42e675df9
                                                                     <i class="bi bi-chat-heart-fill tamanio" style="color: rgb(14, 133, 14);"></i>
                                                                     <%}else{%>
                                                                         <i class="bi bi-exclamation-circle-fill tamanio" style="color: rgb(121, 15, 15);"></i>
@@ -372,11 +366,11 @@
                                                     <tr>
                                                         <td class="text-center">
                                                             <%if(a.tipo == "Sugerencia"){%>
-                                                                <i class="bi bi-lightbulb-fill tamanio" style="color: rgb(173, 184, 28);"></i>
+                                                                <i class="bi bi-lightbulb-fill tamanio" style="color: rgb(173, 184, 28);" title="Sugerencia"></i>
                                                                 <%}else if(a.tipo == "Felicitación"){%>
-                                                                    <i class="bi bi-chat-heart-fill tamanio" style="color: rgb(14, 133, 14);"></i>
+                                                                    <i class="bi bi-chat-heart-fill tamanio" style="color: rgb(14, 133, 14);" title="Felicitación"></i>
                                                                     <%}else{%>
-                                                                        <i class="bi bi-exclamation-circle-fill tamanio" style="color: rgb(121, 15, 15);"></i>
+                                                                        <i class="bi bi-exclamation-circle-fill tamanio" style="color: rgb(121, 15, 15);" title="Incidencia"></i>
                                                                         <%}%>
                                                         </td>
                                                         <td data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -399,11 +393,11 @@
                                                                     <%=a.id_aviso%>:
                                                                         <%=a.tipo%>
                                                                             <%if(a.tipo == "Sugerencia"){%>
-                                                                                <i class="bi bi-lightbulb-fill tamanio" style="color: rgb(173, 184, 28);"></i>
+                                                                                <i class="bi bi-lightbulb-fill tamanio" style="color: rgb(173, 184, 28);" title="Sugerencia"></i>
                                                                                 <%}else if(a.tipo == "Felicitación"){%>
-                                                                                    <i class="bi bi-chat-heart-fill tamanio" style="color: rgb(14, 133, 14);"></i>
+                                                                                    <i class="bi bi-chat-heart-fill tamanio" style="color: rgb(14, 133, 14);" title="Felicitación"></i>
                                                                                     <%}else{%>
-                                                                                        <i class="bi bi-exclamation-circle-fill tamanio" style="color: rgb(121, 15, 15);"></i>
+                                                                                        <i class="bi bi-exclamation-circle-fill tamanio" style="color: rgb(121, 15, 15);" title="Incidencia"></i>
                                                                                         <%}%>
                                                                 </h1>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

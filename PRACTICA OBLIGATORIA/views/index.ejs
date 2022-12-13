@@ -40,7 +40,7 @@
                                                         <th scope="row">
                                                             <%=a.fecha%>
                                                         </th>
-                                                        <td data-bs-toggle="modal" data-bs-target="#exampleModal<%=a.id%>" style="cursor:pointer;" >
+                                                        <td data-bs-toggle="modal" data-bs-target="#exampleModal<%=a.id%>" style="cursor:pointer;">
                                                             <span data-title="Visualizar aviso">
                                                                 <p class="overflow-ellipsis" >
                                                                     <%=a.texto%>
@@ -49,11 +49,11 @@
                                                         </td>
                                                         <td class="text-center">
                                                             <%if(a.tipo == "Sugerencia"){%>
-                                                                <i class="bi bi-lightbulb-fill tamanio" style="color: rgb(173, 184, 28);"></i>
+                                                                <i class="bi bi-lightbulb-fill tamanio" style="color: rgb(173, 184, 28);" title="Sugerencia"></i>
                                                                 <%}else if(a.tipo == "Felicitación"){%>
-                                                                    <i class="bi bi-chat-heart-fill tamanio" style="color: rgb(14, 133, 14);"></i>
+                                                                    <i class="bi bi-chat-heart-fill tamanio" style="color: rgb(14, 133, 14);" title="Felicitación"></i>
                                                                     <%}else{%>
-                                                                        <i class="bi bi-exclamation-circle-fill tamanio" style="color: rgb(121, 15, 15);"></i>
+                                                                        <i class="bi bi-exclamation-circle-fill tamanio" style="color: rgb(121, 15, 15);" title="Incidencia"></i>
                                                                         <%}%>
                                                         </td>
                                                         <td>
@@ -71,11 +71,11 @@
                                                                     <%= a.id_aviso%>:
                                                                         <%=a.tipo%>
                                                                             <%if(a.tipo == "Sugerencia"){%>
-                                                                                <i class="bi bi-lightbulb-fill tamanio" style="color: rgb(173, 184, 28);"></i>
+                                                                                <i class="bi bi-lightbulb-fill tamanio" style="color: rgb(173, 184, 28);" title="Sugerencia"></i>
                                                                                 <%}else if(a.tipo == "Felicitación"){%>
-                                                                                    <i class="bi bi-chat-heart-fill tamanio" style="color: rgb(14, 133, 14);"></i>
+                                                                                    <i class="bi bi-chat-heart-fill tamanio" style="color: rgb(14, 133, 14);" title="Felicitiación"></i>
                                                                                     <%}else{%>
-                                                                                        <i class="bi bi-exclamation-circle-fill tamanio" style="color: rgb(121, 15, 15);"></i>
+                                                                                        <i class="bi bi-exclamation-circle-fill tamanio" style="color: rgb(121, 15, 15);" title="Incidencia"></i>
                                                                                         <%}%>
                                                                 </h1>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -165,11 +165,11 @@
                                                                     <%=h.id_aviso%>:
                                                                         <%=h.tipo%>
                                                                             <%if(h.tipo == "Sugerencia"){%>
-                                                                                <i class="bi bi-lightbulb-fill tamanio" style="color: rgb(173, 184, 28);"></i>
+                                                                                <i class="bi bi-lightbulb-fill tamanio" style="color: rgb(173, 184, 28);" title="Sugerencia"></i>
                                                                                 <%}else if(h.tipo == "Felicitación"){%>
-                                                                                    <i class="bi bi-chat-heart-fill tamanio" style="color: rgb(14, 133, 14);"></i>
+                                                                                    <i class="bi bi-chat-heart-fill tamanio" style="color: rgb(14, 133, 14);" title="Felicitación"></i>
                                                                                     <%}else{%>
-                                                                                        <i class="bi bi-exclamation-circle-fill tamanio" style="color: rgb(121, 15, 15);"></i>
+                                                                                        <i class="bi bi-exclamation-circle-fill tamanio" style="color: rgb(121, 15, 15);" title="Incidencia"></i>
                                                                                         <%}%>
                                                                 </h1>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
