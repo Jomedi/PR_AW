@@ -36,11 +36,11 @@
                                         <% alerts.forEach(a => {%>
                                             <%if(a.estado == "asignado" || a.estado == "por asignar"){%>
                                                 <tbody class="table-group-divider">
-                                                    <tr>
+                                                    <tr data-bs-toggle="modal" data-bs-target="#exampleModal<%=a.id%>" class="Cursor">
                                                         <td>
                                                             <%=a.fecha%>
                                                         </td>
-                                                        <td data-bs-toggle="modal" data-bs-target="#exampleModal<%=a.id%>" style="cursor:pointer;">
+                                                        <td>
                                                             <span data-title="Visualizar aviso">
                                                                 <p class="overflow-ellipsis" >
                                                                     <%=a.texto%>
