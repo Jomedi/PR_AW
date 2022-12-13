@@ -330,31 +330,59 @@ app.post("/searchAlerts", function(request, response) {
 })
 
 app.post("/sign-in", function(request, response) {
+    //DECLARACIÓN REGEX
     var number = /[0-9]/
     var alphaNumeric = /^[a-z0-9]+$/i
     var upper = /[A-Z]/
     var lower = /[a-z]/
-
+    var letter = /^[A-Z]+$/i
+    var onlyNumbers = /^([0-9])*$/
+        //DECLARACIÓN DE ERRORES
+    var errorPassword = ""
+    var errorNumeroEmpleado = ""
+    var errorEmail = ""
+        //DECLARACIÓN DE VARIABLES DE TÉCNICO
     let tecnico = 0
     let num_empleado = null
+
+    //COMPROBACIÓN EMAIL
+    let sufix = "@ucm.es"
+    if (request.body.email.length <= sufix.length || request.body.email.substring(request.body.email.length - sufix.length, request.body.email.length) != sufix)
+        errorEmail = "El email no pertenece al dominio @ucm.es"
+
+    //COMPROBACIÓN NUM_EMPLEADO
     if (request.body.ticTec == "on") {
         tecnico = 1
         num_empleado = request.body.numEmpl
+        console.log("Número de empleado: ", num_empleado)
+        console.log(num_empleado.length, num_empleado[4], num_empleado.substring(0, 4), num_empleado.substring(5, 8))
+        if (num_empleado.length != 8 || num_empleado[4] != '-') {
+            console.log("Número no válido")
+            errorNumeroEmpleado = "Formato del número de empleado incorrecto: dddd-lll -> Ejemplo: 1234-abc"
+        } else if (onlyNumbers.test(num_empleado.substring(0, 4)) && letter.test(num_empleado.substring(5, 8)))
+            console.log("Número válido")
+        else {
+            console.log("Número no válido")
+            errorNumeroEmpleado = "Formato del número de empleado incorrecto: dddd-lll -> Ejemplo: 1234-abc"
+        }
     }
 
-    if (request.body.password.length < 8 || request.body.password.length > 16) {
-        response.render("signin", { errorPass: "La contraseña debe tener entre 8 y 16 carácteres" });
-    } else if (!number.test(request.body.password)) {
-        response.render("signin", { errorPass: "La contraseña debe tener al menos un dígito" });
-    } else if (!upper.test(request.body.password)) {
-        response.render("signin", { errorPass: "La contraseña debe tener al menos una letra mayúscula" });
-    } else if (!lower.test(request.body.password)) {
-        response.render("signin", { errorPass: "La contraseña debe tener al menos una letra minúscula" });
-    } else if (alphaNumeric.test(request.body.password)) {
-        response.render("signin", { errorPass: "La contraseña debe contener al menos un carácter no alfanumérico" })
-    } else if (request.body.password != request.body.passwordConfirm) {
-        response.render("signin", { errorPass: "Las contraseñas no coinciden" });
-    } else {
+    //COMPROBACIÓN CONTRASEÑA
+    if (request.body.password.length < 8 || request.body.password.length > 16)
+        errorPassword = "La contraseña debe tener entre 8 y 16 carácteres"
+    else if (!number.test(request.body.password))
+        errorPassword = "La contraseña debe tener al menos un dígito"
+    else if (!upper.test(request.body.password))
+        errorPassword = "La contraseña debe tener al menos una letra mayúscula"
+    else if (!lower.test(request.body.password))
+        errorPassword = "La contraseña debe tener al menos una letra minúscula"
+    else if (alphaNumeric.test(request.body.password))
+        errorPassword = "La contraseña debe contener al menos un carácter no alfanumérico"
+    else if (request.body.password != request.body.passwordConfirm)
+        errorPassword = "Las contraseñas no coinciden"
+
+    //ALTA DE USUARIO
+    if (errorPassword == "" && errorNumeroEmpleado == "" && errorEmail == "") {
         daoU.isUserDeleted(request.body.email, function(err, row) {
             if (err)
                 console.log("Error al comprobar si el usuario está dado de baja")
@@ -387,9 +415,8 @@ app.post("/sign-in", function(request, response) {
                 }
             }
         })
-
-    }
-
+    } else //ENVÍO DE ERRORES
+        response.render("signin", { errorPass: errorPassword, errorNumEmpleado: errorNumeroEmpleado, errorEmail: errorEmail });
 });
 
 //-------------------------------------------------------------------------------------manejador para la imagen del usuario
