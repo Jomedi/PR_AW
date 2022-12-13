@@ -77,3 +77,32 @@ p {
 .tamanio{
 font-size: 20px;
 }
+
+/*-------------------------------------------popovers*/
+[data-title]:hover:after {
+    opacity:0.9;
+    transition: all 0.5s ease 0.1s;
+    visibility: visible;
+}
+[data-title]:after {
+    content: attr(data-title);
+    background-color: white;
+    color: #222268;
+    font-size: 14px;
+    position: absolute;
+    padding: 3px 20px;
+    bottom: -2em;
+    right: 50%;
+    white-space: nowrap;
+    box-shadow: 0px 0px 3px white;
+    opacity: 0;
+    border: 1px solid white;
+    z-index: 99999;
+    visibility: hidden;
+    border-radius: 6px;
+    
+}
+[data-title] {
+    position: relative;
+}
+/*--------------------------------------------------------*/

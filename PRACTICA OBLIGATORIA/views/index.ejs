@@ -40,10 +40,12 @@
                                                         <th scope="row">
                                                             <%=a.fecha%>
                                                         </th>
-                                                        <td data-bs-toggle="modal" data-bs-target="#exampleModal<%=a.id%>" style="cursor:pointer;">
-                                                            <p class="overflow-ellipsis">
-                                                                <%=a.texto%>
-                                                            </p>
+                                                        <td data-bs-toggle="modal" data-bs-target="#exampleModal<%=a.id%>" style="cursor:pointer;" >
+                                                            <span data-title="Visualizar aviso">
+                                                                <p class="overflow-ellipsis" >
+                                                                    <%=a.texto%>
+                                                                </p>
+                                                            </span>
                                                         </td>
                                                         <td class="text-center">
                                                             <%if(a.tipo == "Sugerencia"){%>
@@ -110,7 +112,7 @@
 
                                 <div class="row">
                                     <div class="offset-11 col-1 d-grid">
-                                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalNuevoAviso"><i class="bi bi-envelope-plus tamanio"></i></button>
+                                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalNuevoAviso" data-title="Añadir un nuevo aviso"><i class="bi bi-envelope-plus tamanio"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -136,7 +138,7 @@
                                                                 <%}else if(h.tipo == "Felicitación"){%>
                                                                     <i class="bi bi-chat-heart-fill tamanio" style="color: rgb(14, 133, 14);"></i>
                                                                     <%}else{%>
-                                                                        <i class="bi bi-exclamation-circle-fill tamanio" style="color: rgb(121, 15, 15);"></i>
+                                                                        <span title="Sugerencia"><i class="bi bi-exclamation-circle-fill tamanio" style="color: rgb(121, 15, 15);"></i></span>
                                                                         <%}%>
                                                         </td>
                                                         <td>
@@ -147,7 +149,7 @@
                                                                 <%=h.texto%>
                                                             </p>
                                                         </td>
-                                                        <td class="text-center"><i class="bi bi-eye-fill tamanio" data-bs-toggle="modal" data-bs-target="#modalVisualizacionCERRAR<%=h.id%>" style="cursor:pointer;"></i></i>
+                                                        <td class="text-center"><span data-title="Visualizar aviso"><i class="bi bi-eye-fill tamanio" data-bs-toggle="modal" data-bs-target="#modalVisualizacionCERRAR<%=h.id%>" style="cursor:pointer;"></i></span>
                                                         </td>
                                                     </tr>
 

@@ -6,8 +6,11 @@
                 <h2>UCM - CAU</h2> <h5>Centro de atención al usuario</h5>
             </span>
             <div>
-                <img src="/imagenUsuario" id="imgUser" class="img-thumbnail" alt="foto de perfil" data-bs-toggle="modal" data-bs-target="#modalUsuario" />
-                <span id="labelident" class="navbar-text" data-bs-toggle="modal" data-bs-target="#modalUsuario"><%= nombre %></span>
+                <span data-title="Info de usuario">
+                    <img src="/imagenUsuario" id="imgUser" class="img-thumbnail tooltip-content" alt="foto de perfil" data-bs-toggle="modal" data-bs-target="#modalUsuario" style="cursor:pointer;"/>
+                    <span id="labelident" class="navbar-text" data-bs-toggle="modal" data-bs-target="#modalUsuario" style="cursor:pointer;" ><%= nombre %></span>
+                    
+                </span>
                 <a href="/logout" class="btn btn-sm btn-outline-light" data-title="desconectar"><i class="bi bi-box-arrow-right"></i></a>
             </div>
         </div>
