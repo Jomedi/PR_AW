@@ -53,7 +53,7 @@
                                             </tr>
                                         </thead>
                                         <% allAlerts.forEach(a => {%>
-                                            <%if(a.activo == 1 && a.estado != "eliminado"){%>
+                                            <%if(a.activo == 1 && a.estado != "eliminado" && a.estado != "terminado"){%>
                                                 <tbody class="table-group-divider">
                                                     <tr>
                                                         <td>
