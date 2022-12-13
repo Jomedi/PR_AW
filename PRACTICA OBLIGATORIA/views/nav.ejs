@@ -34,46 +34,52 @@
                     </div>
                     <br>
                     <div class="row">
-                        <h6>Fecha de creación: <input type="text" value="<%= fecha %>" disabled></h6>
-                        <h6>Perfil: <input type="text" value=" <%= perfilUniv%> " disabled></h6>
-                        <h6>Contraseña: <input type="password" value="<%= pass%>" disabled></h6>
-                        <h6>Nombre para mostrar: <input type="text" value=" <%= nombre %>" disabled></h6>
+                        <h5><i class="bi bi-person-circle"></i> <u>Información de usuario</u></h5>
+                        <div style="margin-left:1.5em">
+                            <h6>Fecha de creación: <input type="text" value="<%= fecha %>" disabled></h6>
+                            <h6>Perfil: <input type="text" value=" <%= perfilUniv%> " disabled></h6>
+                            <h6>Contraseña: <input type="password" value="<%= pass%>" disabled></h6>
+                        </div>
+                        <br>
                     </div>
                     <hr class="bg-danger border-2 border-top border-danger">
                     <div class="row">
+                        <h5><i class="bi bi-envelope-check"></i> <u>Información de avisos</u></h5>
+                        <div style="margin-left:1.5em">
 
-                        <% let inc = 0, sug = 0, fel = 0%>
-                            <%alerts.forEach(a=>{%>
-                                <%if(a.estado == "terminado" || a.estado == "eliminado"){%>
-                                    <%if(a.tipo == "Incidencia"){%>
-                                        <% inc++ %>
-                                            <%}else if(a.tipo == "Sugerencia"){%>
-                                                <% sug++ %>
-                                                    <%}else{%>
-                                                        <% fel++%>
-                                                            <%}}%>
-                                                                <%})%>
-                                                                    <%if(tecnico == 1){%>
-                                                                        <h6>Avisos gestionados:
-                                                                            <%= inc + sug + fel %>
-                                                                        </h6>
-                                                                        <%}else{%>
-                                                                            <h6>Avisos realizados:
+                            <% let inc = 0, sug = 0, fel = 0%>
+                                <%alerts.forEach(a=>{%>
+                                    <%if(a.estado == "terminado" || a.estado == "eliminado"){%>
+                                        <%if(a.tipo == "Incidencia"){%>
+                                            <% inc++ %>
+                                                <%}else if(a.tipo == "Sugerencia"){%>
+                                                    <% sug++ %>
+                                                        <%}else{%>
+                                                            <% fel++%>
+                                                                <%}}%>
+                                                                    <%})%>
+                                                                        <%if(tecnico == 1){%>
+                                                                            <h6>Avisos gestionados:
                                                                                 <%= inc + sug + fel %>
                                                                             </h6>
-                                                                            <%}%>
-                                                                                <h6> Incidencias:
-                                                                                    <%=inc%>
+                                                                            <%}else{%>
+                                                                                <h6>Avisos realizados:
+                                                                                    <%= inc + sug + fel %>
                                                                                 </h6>
+                                                                                <%}%>
+                                                                                    <h6> Incidencias:
+                                                                                        <%=inc%>
+                                                                                    </h6>
 
-                                                                                <h6> Sugerencias:
-                                                                                    <%=sug%>
-                                                                                </h6>
+                                                                                    <h6> Sugerencias:
+                                                                                        <%=sug%>
+                                                                                    </h6>
 
-                                                                                <h6> Felicitaciones:
-                                                                                    <%=fel%>
-                                                                                </h6>
-
+                                                                                    <h6> Felicitaciones:
+                                                                                        <%=fel%>
+                                                                                    </h6>
+                        </div>
+                        <br>
                     </div>
                 </div>
             </div>
