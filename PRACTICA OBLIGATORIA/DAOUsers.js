@@ -59,12 +59,12 @@ class DAOUsers {
         })
     }
 
-    updateActivateUser(nombre, email, password, tipo, callback) {
+    updateActivateUser(nombre, email, password, tipo, date, callback) {
         this.pool.getConnection(function(err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
             } else {
-                connection.query("UPDATE `ucm_aw_cau_usu_usuarios` SET `nombre`= ?, `password`=?, `tipo_usuario`=?, activo = 1 WHERE email = ?", [nombre, password, tipo, email],
+                connection.query("UPDATE `ucm_aw_cau_usu_usuarios` SET `nombre`= ?, `password`=?, `tipo_usuario`=?, fecha = ?, activo = 1 WHERE email = ?", [nombre, password, tipo,date, email],
                     function(err) {
                         connection.release();
                         if (err) {

@@ -394,7 +394,8 @@ app.post("/sign-in", function(request, response) {
                         console.log("Ya existe un usuario con ese mail");
                         response.render("signin", { errorPass: "Ya existe un usuario con ese mail" });
                     } else {
-                        daoU.updateActivateUser(request.body.nombre, request.body.email, request.body.password, request.body.tipo, function(err, ok) {
+                        var dateUpdate = dateFormat.obtainCurrentDate()
+                        daoU.updateActivateUser(request.body.nombre, request.body.email, request.body.password, request.body.tipo, dateUpdate, function(err, ok) {
                             if (err)
                                 console.log(err)
                             else {

@@ -45,9 +45,9 @@
                         <% let inc = 0, sug = 0, fel = 0%>
                             <%alerts.forEach(a=>{%>
                                 <%if(a.estado == "terminado" || a.estado == "eliminado"){%>
-                                    <%if(a.tipo == "incidencia"){%>
+                                    <%if(a.tipo == "Incidencia"){%>
                                         <% inc++ %>
-                                            <%}else if(a.tipo == "sugerencia"){%>
+                                            <%}else if(a.tipo == "Sugerencia"){%>
                                                 <% sug++ %>
                                                     <%}else{%>
                                                         <% fel++%>
