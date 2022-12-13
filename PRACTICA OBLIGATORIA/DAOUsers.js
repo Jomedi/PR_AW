@@ -31,7 +31,7 @@ class DAOUsers {
             if (err)
                 callback(err)
             else {
-                connection.query("SELECT * FROM ucm_aw_cau_usu_usuarios WHERE nombre LIKE ? ORDER BY fecha DESC, id DESC", [nombre],
+                connection.query("SELECT * FROM ucm_aw_cau_usu_usuarios WHERE nombre LIKE ? AND activo = 1 ORDER BY fecha DESC, id DESC", [nombre],
                     function(err, row) {
                         if (err)
                             callback(err)
@@ -42,7 +42,7 @@ class DAOUsers {
         })
     }
 
-    isUserDeleted(email, callback) {
+    getUserByEmail(email, callback) {
         this.pool.getConnection(function(err, connection) {
             if (err)
                 callback(err)
@@ -130,7 +130,7 @@ class DAOUsers {
             if (err)
                 callback(err)
             else {
-                connection.query("SELECT * FROM ucm_aw_cau_usu_usuarios WHERE tecnico = 1",
+                connection.query("SELECT * FROM ucm_aw_cau_usu_usuarios WHERE tecnico = 1 AND activo = 1",
                     function(err, rows) {
                         connection.release()
                         if (err)
@@ -147,7 +147,7 @@ class DAOUsers {
             if (err)
                 callback(err)
             else {
-                connection.query("SELECT * FROM ucm_aw_cau_usu_usuarios ORDER BY fecha DESC, id DESC",
+                connection.query("SELECT * FROM ucm_aw_cau_usu_usuarios WHERE activo = 1 ORDER BY fecha DESC, id DESC",
                     function(err, rows) {
                         connection.release()
                         if (err)

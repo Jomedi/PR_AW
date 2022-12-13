@@ -179,12 +179,13 @@
                                                                     </h6>
                                                                     <br>
                                                                     <h6>Observaciones: </h6>
-                                                                    <textarea class="form-control" rows="5" name="comentarioTecn" id="comentarioTecn" disabled><%=a.texto%></textarea>
+                                                                    <textarea class="form-control" rows="5" name="comentarioTecn" id="comentarioTecn" disabled required><%=a.texto%></textarea>
                                                                     <br>
                                                                     <h6>Comentarios del técnico: </h6>
-                                                                    <textarea class="form-control" rows="5" name="comentarioTecn" id="comentarioTecn"></textarea>
+                                                                    <textarea class="form-control" rows="5" name="comentarioTecn" id="comentarioTecn" required></textarea>
                                                                 </div>
                                                                 <div class="modal-footer">
+                                                                    <h6 class="text-danger">Es obligatorio poner un comentario</h6> <i class="bi bi-arrow-bar-right tamanio"></i>
                                                                     <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Eliminar Aviso</button>
                                                                 </div>
                                                             </form>

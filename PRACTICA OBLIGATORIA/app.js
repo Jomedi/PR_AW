@@ -267,33 +267,21 @@ app.post("/searchAdmin", function(request, response) {
                     if (err2)
                         console.log(err2)
                     else {
-                        daoU.getUsersAdmin(function(err3, result3) {
-                            if (err3)
-                                console.log(err3)
-                            else {
-                                daoU.getAllUsers(function(err4, result4) {
-                                    if (err4)
-                                        console.log(err4)
-                                    else {
-                                        console.log("Búsqueda de técnicos, Mis Avisos, Avisos Entrantes correcta")
-                                        result = dateFormat.changeDateFormat(result)
-                                        result2 = dateFormat.changeDateFormat(result2)
-                                        response.render("indexAdmin", {
-                                            nombre: request.session.currentName,
-                                            pass: request.session.pass,
-                                            email: request.session.currentUser,
-                                            allAlerts: result,
-                                            alerts: result2,
-                                            tecnicos: result3,
-                                            users: result4,
-                                            perfilUniv: request.session.perfilUniversitario,
-                                            fecha: request.session.date,
-                                            tecnico: request.session.tecnico
-                                        });
-                                    }
-                                })
-                            }
-                        })
+                        console.log("Búsqueda de Mis Avisos, Avisos Entrantes correcta")
+                        result = dateFormat.changeDateFormat(result)
+                        result2 = dateFormat.changeDateFormat(result2)
+                        response.render("indexAdmin", {
+                            nombre: request.session.currentName,
+                            pass: request.session.pass,
+                            email: request.session.currentUser,
+                            allAlerts: result,
+                            alerts: result2,
+                            tecnicos: request.session.tecnicos,
+                            users: request.session.users,
+                            perfilUniv: request.session.perfilUniversitario,
+                            fecha: request.session.date,
+                            tecnico: request.session.tecnico
+                        });
                     }
                 })
 
@@ -386,7 +374,7 @@ app.post("/sign-in", function(request, response) {
 
     //ALTA DE USUARIO
     if (errorPassword == "" && errorNumeroEmpleado == "" && errorEmail == "") {
-        daoU.isUserDeleted(request.body.email, function(err, row) {
+        daoU.getUserByEmail(request.body.email, function(err, row) {
             if (err)
                 console.log("Error al comprobar si el usuario está dado de baja")
             else {
