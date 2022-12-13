@@ -25,7 +25,7 @@ const daoU = new DAOUsers(pool);
 
 // Crea una instancia de DAOAlerts
 const daoA = new DAOAlerts(pool);
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 // Arrancar el servidor
 app.listen(config.port, function(err) {
     if (err) {
@@ -208,7 +208,7 @@ app.get("/sign-in", function(request, response) {
     response.status(200);
     response.sendFile(path.join(__dirname, "views", "signin.ejs"));
     response.render("signin", { errorPass: null });
-    
+
 });
 
 
@@ -327,34 +327,16 @@ app.post("/searchAlerts", function(request, response) {
 
 //------------------------------------------------------------------------------------multer para almacén de imágenes
 var almacen = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, path.join(__dirname, 'public', 'img'));
+    destination: function(req, file, cb) {
+        cb(null, path.join(__dirname, 'public', 'img'));
     },
-    filename: function (req, file, cb) {
+    filename: function(req, file, cb) {
         cb(null, file.originalname);
     }
-  });
-const multerFactory = multer({ dest: path.join(__dirname,"public", "img") });
+});
+const multerFactory = multer({ storage: almacen });
 
 app.post("/sign-in", multerFactory.single('imagen'), function(request, response) {
-
-    console.log(request.file);
-    // let nombreFichero = null;
-    // if (request.file.filename) { // Si se ha subido un fichero
-    //     console.log(`Nombre del fichero: ${request.file.originalname}` );
-    //     console.log(`Nombre del fichero2: ${request.file.filename}` );
-    //     console.log(`Fichero guardado en: ${request.file.path}`);
-    //     console.log(`Tamaño: ${request.file.size}`);
-    //     console.log(`Tipo de fichero: ${request.file.mimetype}`);
-    //     nombreFichero = request.file.originalname;
-    // }
-    // response.render("datosFormulario3", {
-    //     nombre: request.body.nombre ,
-    //     apellidos: request.body.apellidos ,
-    //     fumador: request.body.fumador === "si" ? "Sí" : "No",
-    //     imagen : nombreFichero
-    // });
-
     //DECLARACIÓN REGEX
     var number = /[0-9]/
     var alphaNumeric = /^[a-z0-9]+$/i
@@ -370,13 +352,18 @@ app.post("/sign-in", multerFactory.single('imagen'), function(request, response)
     let tecnico = 0
     let num_empleado = null
 
+
+    //OBTENCIÓN DE IMAGEN A TRAVÉS DE MULTER
+    let nombreFichero = null;
+    if (request.file.filename) // Si se ha subido un fichero
+        nombreFichero = request.file.originalname;
+
     //COMPROBACIÓN EMAIL
     let sufix = "@ucm.es"
     if (request.body.email.length <= sufix.length || request.body.email.substring(request.body.email.length - sufix.length, request.body.email.length) != sufix) {
         console.log("El email no pertenece al dominio @ucm.es")
         errorEmail = "El email no pertenece al dominio @ucm.es"
     }
-
 
     //COMPROBACIÓN NUM_EMPLEADO
     if (request.body.ticTec == "on") {
@@ -416,8 +403,7 @@ app.post("/sign-in", multerFactory.single('imagen'), function(request, response)
                 console.log("Error al comprobar si el usuario está dado de baja")
             else {
                 if (row.length == 0) {
-                    daoU.insertUser(request.body.nombre, request.body.email, request.body.password, request.body.tipo, tecnico,
-                        num_empleado, request.body.imagen,
+                    daoU.insertUser(request.body.nombre, request.body.email, request.body.password, request.body.tipo, tecnico, num_empleado, nombreFichero,
                         function(err, ok) {
                             if (err) {
                                 console.log("Se ha producido un error al insertar el usuario");
