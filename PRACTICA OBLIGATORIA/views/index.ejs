@@ -219,21 +219,22 @@
                             </div>
                             <form action="/insertAlert" method="POST">
                                 <div class="modal-body">
-                                    <h6>Tipo: </h6>
+                                    <h6>Categoría: </h6>
 
-                                    <select name="tipo" class="form-select" aria-label="Default select example" id="tipo" onChange="activar(this.form)">
-                                        <option selected disabled>Seleccione un tipo</option>
+                                    <select name="tipo" class="form-select" aria-label="Default select example" id="tipo" onChange="activar(this.form)" required>
+                                        <option selected disabled>Seleccione una opción</option>
                                         <option value="Sugerencia">Sugerencia </option>
                                         <option value="Incidencia">Incidencia </option>
                                         <option value="Felicitación">Felicitación </option>
                                     </select>
                                     <br>
-                                    <h6>Subtipo: </h6>
+                                    <h6>Tipo: </h6>
 
                                     <div id="suginc" style="display:none;">
-                                        <%if(perfilUniv == "alumno"){%>
-                                            <select class="form-select form-control item" aria-label="Default select example" name="subtipoSubtipo" id="subtipo">
-                                                <option selected value="Certificado digital de persona física">Certificado digital de persona física</option>
+                                        <%if(perfilUniv == "Alumno"){%>
+                                            <select class="form-select form-control item" aria-label="Default select example" name="subtipoSubtipo" id="subtipo" required>
+                                                <option selected disabled>Seleccione una opción</option>
+                                                <option value="Certificado digital de persona física">Certificado digital de persona física</option>
                                                 <option value="Registro electrónico">Registro electrónico</option>
                                                 <option value="Sede electrónica">Sede electrónica</option>
                                                 <option value="Correo electrónico">Correo electrónico</option>
@@ -243,67 +244,70 @@
                                                 <option value="VPN Acceso remoto">VPN Acceso remoto</option>
                                                 <option value="Wifi Eduroam (ssid: eduroam)">Wifi Eduroam (ssid: eduroam)</option>
                                                 <option value="Aula Virtual">Aula Virtual</option>
-                                                <option value="Moodle: Aula global">Moodle: Aula global: Aula global</option>
+                                                <option value="Moodle: Aula global">Moodle: Aula global</option>
                                                 <option value="Plataforma de cursos online Privados">Plataforma de cursos online Privados</option>
                                                 <option value="Portal de Eventos">Portal de Eventos</option>
                                             </select>
-                                            <%}else if(perfilUniv == "pas" && tecnico == "0"){%>
-                                                <select class="form-select form-control item" aria-label="Default select example" name="subtipoSubtipo" id="subtipo">
-                                                <option selected value="Certificado digital de persona física">Certificado digital de persona física</option>
-                                                <option  value="Certificado electrónico de empleado público">Certificado electrónico de empleado público</option>
+                                            <%}else if(perfilUniv == "PAS"){%>
+                                                <select class="form-select form-control item" aria-label="Default select example" name="subtipoSubtipo" id="subtipo" required>
+                                                <option selected disabled>Seleccione una opción</option>
+                                                <option value="Certificado digital de persona física">Certificado digital de persona física</option>
+                                                <option value="Certificado electrónico de empleado público">Certificado electrónico de empleado público</option>
                                                 <option value="Registro electrónico">Registro electrónico</option>
                                                 <option value="Sede electrónica">Sede electrónica</option>
                                                 <option value="Portafirmas">Portafirmas</option>
                                                 <option value="Correo electrónico">Correo electrónico</option>
                                                 <option value="Google Meet">Google Meet</option>
-                                                <option value="Cuenta de Personal">Cuenta de Personal</option>
-                                                <option value="Cuenta Genérica">Cuenta Genérica</option>
+                                                <option value="Cuenta de personal">Cuenta de personal</option>
+                                                <option value="Cuenta genérica">Cuenta genérica</option>
                                                 <option value="Cuenta as la Red SARA">Cuenta as la Red SARA</option>
                                                 <option value="Conexión por cable en despachos">Conexión por cable en despachos</option>
                                                 <option value="Cortafuegos corporativo">Cortafuegos corporativo</option>
                                                 <option value="Resolución de nombres de dominio DNS">Resolución de nombres de dominio DNS</option>
                                                 <option value="VPN Acceso remoto">VPN Acceso remoto</option>
                                                 <option value="Wifi Eduroam (ssid: eduroam)">Wifi Eduroam (ssid: eduroam)</option>
-                                                <option value="Wifi para visitantes(ssid: UCM-Visitantes)">Wifi para visitantes(ssid: UCM-Visitantes)</option>
-                                                <option value="Blackboard Collaborate">Blackboard Blackboard Collaborate</option>
+                                                <option value="Wifi para visitantes (ssid: UCM-Visitantes)">Wifi para visitantes (ssid: UCM-Visitantes)</option>
+                                                <option value="Blackboard Collaborate">Blackboard Collaborate</option>
                                                 <option value="Listados de Clase">Listados de Clase</option>
-                                                <option value="Moodle: Aula global">Moodle: Aula global: Aula global</option>
+                                                <option value="Moodle: Aula global">Moodle: Aula global</option>
                                                 <option value="Analítica Web">Analítica Web</option>
                                                 <option value="Emisión de certificados SSL">Emisión de certificados SSL</option>
-                                                <option value="Hosting: alojamiento de páginas web">Hosting: alojamiento de páginas web: alojamiento de páginas web</option>
+                                                <option value="Hosting: alojamiento de páginas web">Hosting: alojamiento de páginas web</option>
                                                 <option value="Portal de Eventos">Portal de Eventos</option>
                                                 <option value="Redirecciones web">Redirecciones web</option>
                                             </select>
-                                                <%}else if(perfilUniv == "pdi"){%>
-                                                    <select class="form-select form-control item" aria-label="Default select example" name="subtipoSubtipo" id="subtipo">
-                                                <option selected value="Certificado digital de persona física">Certificado digital de persona física</option>
-                                                <option  value="Certificado electrónico de empleado público">Certificado electrónico de empleado público</option>
+                                                <%}else if(perfilUniv == "PDI"){%>
+                                                    <select class="form-select form-control item" aria-label="Default select example" name="subtipoSubtipo" id="subtipo" required>
+                                                <option selected disabled>Seleccione una opción</option>
+                                                <option value="Certificado digital de persona física">Certificado digital de persona física</option>
+                                                <option value="Certificado electrónico de empleado público">Certificado electrónico de empleado público</option>
                                                 <option value="Registro electrónico">Registro electrónico</option>
                                                 <option value="Sede electrónica">Sede electrónica</option>
                                                 <option value="Portafirmas">Portafirmas</option>
                                                 <option value="Correo electrónico">Correo electrónico</option>
                                                 <option value="Google Meet">Google Meet</option>
-                                                <option value="Cuenta de Personal">Cuenta de Personal</option>
-                                                <option value="Cuenta Genérica">Cuenta Genérica</option>
+                                                <option value="Cuenta de personal">Cuenta de personal</option>
+                                                <option value="Cuenta genérica">Cuenta genérica</option>
                                                 <option value="Conexión por cable en despachos">Conexión por cable en despachos</option>
                                                 <option value="Cortafuegos corporativo">Cortafuegos corporativo</option>
                                                 <option value="VPN Acceso remoto">VPN Acceso remoto</option>
                                                 <option value="Wifi Eduroam (ssid: eduroam)">Wifi Eduroam (ssid: eduroam)</option>
-                                                <option value="Wifi para visitantes(ssid: UCM-Visitantes)">Wifi para visitantes(ssid: UCM-Visitantes)</option>
+                                                <option value="Wifi para visitantes (ssid: UCM-Visitantes)">Wifi para visitantes (ssid: UCM-Visitantes)</option>
                                                 <option value="Aula Virtual">Aula Virtual</option>
-                                                <option value="Blackboard Collaborate">Blackboard Blackboard Collaborate</option>
+                                                <option value="Blackboard Collaborate">Blackboard Collaborate</option>
                                                 <option value="Listados de Clase">Listados de Clase</option>
-                                                <option value="Moodle: Aula global">Moodle: Aula global: Aula global</option>
+                                                <option value="Moodle: Aula global">Moodle: Aula global</option>
                                                 <option value="Plataforma de cursos online Privados">Plataforma de cursos online Privados</option>
                                                 <option value="Analítica Web">Analítica Web</option>
                                                 <option value="Emisión de certificados SSL">Emisión de certificados SSL</option>
-                                                <option value="Hosting: alojamiento de páginas web">Hosting: alojamiento de páginas web: alojamiento de páginas web</option>
+                                                <option value="Hosting: alojamiento de páginas web">Hosting: alojamiento de páginas web</option>
                                                 <option value="Portal de Eventos">Portal de Eventos</option>
                                                 <option value="Redirecciones web">Redirecciones web</option>
                                             </select>
                                                     <%}else{%>
-                                                        <select class="form-select form-control item" aria-label="Default select example" name="subtipoSubtipo" id="subtipo">
-                                                <option value="Registro electrónico">Registro electrónico</option>
+                                                        <select class="form-select form-control item" aria-label="Default select example" name="subtipoSubtipo" id="subtipo" required>
+                                                            <option selected disabled>Seleccione una opción</option>
+                                                            <option value="Registro electrónico">Registro electrónico</option>
                                                 <option value="Sede electrónica">Sede electrónica</option>
                                                 <option value="Correo electrónico">Correo electrónico</option>
                                                 <option value="Google Meet">Google Meet</option>
@@ -313,8 +317,9 @@
                                                         <%}%>
                                     </div>
                                     <div id="felic" style="display:none;">
-                                        <select class="form-select form-control item" aria-label="Default select example" name="subtipoSubtipoFel" id="subtipoFel">
-                                            <option selected value="Archivo Universitario">Archivo Universitario</option>
+                                        <select class="form-select form-control item" aria-label="Default select example" name="subtipoSubtipoFel" id="subtipoFel" required>
+                                            <option selected disabled>Seleccione una opción</option>
+                                            <option value="Archivo Universitario">Archivo Universitario</option>
                                             <option value="Asesoría Jurídica">Asesoría Jurídica</option>
                                             <option value="Biblioteca">Biblioteca</option>
                                             <option value="Centro de Info">Centro de información</option>
@@ -336,11 +341,12 @@
 
                                     <br>
 
-                                    <h6>Observaciones: </h6>
-                                    <textarea class="form-control item" rows="5" id="texto" name="texto"></textarea>
+                                    <h6>Comentario: </h6>
+                                    <textarea class="form-control item" rows="5" id="texto" name="texto" required></textarea>
 
                                 </div>
                                 <div class="modal-footer">
+                                    <h6 class="text-danger">Es obligatorio rellenar todos los campos</h6> <i class="bi bi-arrow-bar-right tamanio"></i>
                                     <button type="submit" class="btn btn-dark" data-bs-dismiss="modal">Enviar Aviso</button>
                                 </div>
                             </form>
